@@ -13,15 +13,16 @@
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
 
-    ./networking/openvpn-work.nix
+    # ./networking/openvpn-work.nix
+    ./networking/networkSetup.nix
 
     ./programs.nix
-    # ./modules/python.nix
+    ./modules/python.nix
     ./modules/nodejs.nix
     ./modules/vr.nix
     ./modules/steam.nix
     ./modules/spotify.nix
-    # ./modules/freecad.nix
+    #    ./modules/freecad.nix
 
     ./modules/fishShell.nix
 
@@ -35,7 +36,26 @@
   nix.settings = {
     download-attempts = 1;
     connect-timeout = 1;
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+      "https://cache.deprived.dev"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
+    ];
   };
+
+  # nix.settings.post-build-hook = pkgs.writeScript "upload-to-cache" ''
+  #   #!/bin/sh
+  #   set -eu
+  #   export IFS=' '
+  #   echo "Uploading paths" $OUT_PATHS
+  #   exec ${pkgs.nix}/bin/nix copy --to https://cache.deprived.dev $OUT_PATHS
+  # '';
+
   environment.variables.EDITOR = "nvim";
 
   # Bootloader.

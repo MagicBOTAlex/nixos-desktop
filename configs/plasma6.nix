@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   programs.plasma = {
     enable = true;
+    # overrideConfig = true;
     workspace.colorScheme = "BreezeDark";
 
     # Shortcuts =====================================
@@ -26,7 +27,25 @@
       key = "Ctrl+Shift+Esc";
       command = "missioncenter";
     };
+
+    # input.mice.* = {
+    #     enable = true;
+    #     acceleration = 0;
+    #     accelerationProfile = "none";
+    #   };
   };
+
+  # Doesn't work because NixOS bad
+  home.file.".config/dolphinrc".text = ''
+    [General]
+    ShowHiddenFiles=true
+
+    [DetailsMode]
+    PreviewSize=16
+
+    [PreviewSettings]
+    Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,pothumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
+  '';
 
   programs.konsole = {
     enable = true;

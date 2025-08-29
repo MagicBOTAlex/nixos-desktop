@@ -23,11 +23,12 @@
     mission-center
     ungoogled-chromium
     megasync
+    dotnet-sdk_8
+    nuget-to-json
 
     libreoffice-fresh
     hunspell
     hunspellDicts.da-dk
-    # orca-slicer
   ];
 
   programs.starship.enable = true;
