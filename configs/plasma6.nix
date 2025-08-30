@@ -10,23 +10,33 @@
 
     };
 
-    hotkeys.commands."launch-konsole" = {
-      name = "Launch Konsole";
-      key = "Meta+Return";
-      command = "konsole";
+    hotkeys.commands = {
+      "launch-konsole" = {
+        name = "Launch Konsole";
+        key = "Meta+Return";
+        command = "konsole";
+      };
+
+      "launch-konsole2" = {
+        name = "Launch Konsole";
+        key = "Meta+F1";
+        command = "konsole";
+      };
+
+      "launch-missioncenter" = {
+        name = "Launches the windows task manager alternative";
+        key = "Ctrl+Shift+Esc";
+        command = "missioncenter";
+      };
+
+      "screenshot-to-clipboard" = {
+        name = "Region screenshot to clipboard";
+        key = "Meta+Shift+S";
+        command = "spectacle -brc";
+      };
     };
 
-    hotkeys.commands."launch-konsole2" = {
-      name = "Launch Konsole";
-      key = "Meta+F1";
-      command = "konsole";
-    };
-
-    hotkeys.commands."launch-missioncenter" = {
-      name = "Launches the windows task manager alternative";
-      key = "Ctrl+Shift+Esc";
-      command = "missioncenter";
-    };
+    spectacle.shortcuts.launch = "";
 
     # input.mice.* = {
     #     enable = true;
@@ -47,17 +57,19 @@
     Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,pothumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
   '';
 
-  programs.konsole = {
-    enable = true;
-    defaultProfile = "main";
+  programs = {
+    konsole = {
+      enable = true;
+      defaultProfile = "main";
 
-    profiles."main" = {
-      font = {
-        name = "CozetteVector-nerd";
-        size = 14;
+      profiles."main" = {
+        font = {
+          name = "CozetteVector-nerd";
+          size = 14;
+        };
+
+        # extraConfig = { Keyboard = { "Control+V" = "paste"; }; };
       };
-
-      extraConfig = { Keyboard = { "Control+V" = "paste"; }; };
     };
   };
 }

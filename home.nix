@@ -16,13 +16,13 @@
 
   home.stateVersion = "25.11";
 
-  home.file.".local/share/fonts/CozetteVector-nerd.ttf".source =
-    builtins.fetchurl "https://deprived.dev/assets/CozetteVector-nerd.ttf";
+  # home.file.".local/share/fonts/CozetteVector-nerd.ttf".source =
+  #   builtins.fetchurl "https://deprived.dev/assets/CozetteVector-nerd.ttf";
 
-  # home.file.".local/share/fonts/CozetteVector-nerd.ttf".source = pkgs.fetchurl {
-  #   url = "https://deprived.dev/assets/CozetteVector-nerd.ttf";
-  #   sha256 = "0qj4zkhy3f6gqimfr2zflq21f83c509v5y9b433i98l287kpl5y3";
-  # };
+  home.file.".local/share/fonts/CozetteVector-nerd.ttf".source = pkgs.fetchurl {
+    url = "https://deprived.dev/assets/CozetteVector-nerd.ttf";
+    sha256 = "1xd5yn6czgym6ayp5bb9mj409a4d78839c6cjkky2l2264hc04q1";
+  };
 
   fonts.fontconfig.enable = true;
 }

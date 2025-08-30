@@ -3,7 +3,10 @@
     enable = true;
 
     shellAliases = {
-      nrb = "sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback";
+      nrb =
+        "sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
+      nrbs =
+        "sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
       nrbr = "nrb && sudo reboot now";
       ni = "nvim /etc/nixos/configuration.nix";
       bat =
@@ -17,8 +20,9 @@
       up = "docker compose up -d";
       down = "docker compose down";
       server = "ssh botserver@192.168.50.82";
+      lap = "ssh botlap@192.168.50.144";
       vpnup = "systemctl start openvpn-work.service";
-      vpndown = "systemctl down openvpn-work.service";
+      vpndown = "systemctl stop openvpn-work.service";
       inspect = "nix edit nixpkgs#$1";
     };
 

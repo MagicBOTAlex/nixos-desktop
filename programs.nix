@@ -25,6 +25,8 @@
     megasync
     dotnet-sdk_8
     nuget-to-json
+    vlc
+    filezilla
 
     libreoffice-fresh
     hunspell

@@ -13,7 +13,7 @@
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
 
-    # ./networking/openvpn-work.nix
+    ./networking/openvpn-work.nix
     ./networking/networkSetup.nix
 
     ./programs.nix
@@ -22,7 +22,7 @@
     ./modules/vr.nix
     ./modules/steam.nix
     ./modules/spotify.nix
-    #    ./modules/freecad.nix
+    ./modules/freecad.nix
 
     ./modules/fishShell.nix
 
@@ -34,8 +34,8 @@
   ];
 
   nix.settings = {
-    download-attempts = 1;
-    connect-timeout = 1;
+    # download-attempts = 1;
+    # connect-timeout = 1;
     substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
