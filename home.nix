@@ -4,6 +4,8 @@
     ./configs/plasma6.nix
     ./homeModules/btop.nix
 
+    # Do not disable under here =========================== Disable in toggles.nix
+    ./homeModules/vr.nix
   ];
 
   # packages only for this user

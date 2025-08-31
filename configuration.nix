@@ -19,7 +19,6 @@
     ./programs.nix
     ./modules/python.nix
     ./modules/nodejs.nix
-    ./modules/vr.nix
     ./modules/steam.nix
     ./modules/spotify.nix
     ./modules/freecad.nix
@@ -32,6 +31,10 @@
     ./modules/de.nix
 
     # ./modules/displayOff.nix
+
+    # Do not disable under here =========================== Disable in toggles.nix
+    ./modules/vr.nix
+
   ];
 
   nix.settings = {
@@ -113,6 +116,7 @@
   };
 
   home-manager = {
+    useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };
     users = { "botmain" = import ./home.nix; };
   };
