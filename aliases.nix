@@ -24,6 +24,9 @@
       vpnup = "systemctl start openvpn-work.service";
       vpndown = "systemctl stop openvpn-work.service";
       inspect = "nix edit nixpkgs#$1";
+      fe = "nix develop";
+      fed = "nvim flake.nix";
+      cdn = "cd /etc/nixos";
     };
 
     interactiveShellInit = ''

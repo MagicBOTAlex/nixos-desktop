@@ -1,10 +1,21 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, inputs, ... }:
+let
+  modded-oscavmgr = pkgs.oscavmgr.overrideAttrs (old: {
+    src = pkgs.fetchFromGitHub {
+      owner = "MagicBOTAlex";
+      repo = "oscavmgr";
+      rev = "7353e837d5d40076199a0b5ce8f5b8bcfafa21bb";
+      hash = "sha256-QP9JOpb2l6yF9jA+RJgAyyE2RxxpoP7XvDeSoGaZc2c=";
+    };
+  });
+in {
   environment.systemPackages = with pkgs; [
     motoc # Quest to PC tracking calibration
     wlx-overlay-s # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
     # wayvr-dashboard
     # (pkgs.callPackage ./submodules/vrcft.nix { })
-    oscavmgr
+    modded-oscavmgr
+    vrcadvert
     # inputs.avalonia.packages.x86_64-linux.default
 
   ];

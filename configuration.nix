@@ -23,6 +23,7 @@
     ./modules/steam.nix
     ./modules/spotify.nix
     ./modules/freecad.nix
+    ./modules/customPackages/oscd.nix
 
     ./modules/fishShell.nix
 
