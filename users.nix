@@ -2,7 +2,8 @@
   users.users.botmain = {
     isNormalUser = true;
     description = "botmain";
-    extraGroups = [ "networkmanager" "wheel" "docker" "udev" ];
+    extraGroups =
+      [ "networkmanager" "wheel" "docker" "udev" "dialout" "wheel" ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhiPhFbCi64NduuV794omgS8mctBLXtqxbaEJyUo6lg botalex@DESKTOPSKTOP-ENDVV0V"

@@ -27,6 +27,10 @@
     nuget-to-json
     vlc
     filezilla
+    arduino-ide
+    krita
+    jq
+    sublime
 
     libreoffice-fresh
     hunspell

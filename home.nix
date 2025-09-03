@@ -1,4 +1,6 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+let toggles = import ./toggles.nix;
+in {
   imports = [
     ./modules/nvim.nix
     ./configs/plasma6.nix
@@ -6,7 +8,7 @@
 
     # Do not disable under here =========================== Disable in toggles.nix
     ./homeModules/vr.nix
-  ];
+  ] ++ lib.optional (toggles.vscode.enable) ./homeModules/vscode.nix;
 
   # packages only for this user
   home.packages = [ ];
