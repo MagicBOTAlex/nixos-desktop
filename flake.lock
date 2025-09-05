@@ -1,45 +1,5 @@
 {
   "nodes": {
-    "avalonia": {
-      "inputs": {
-        "desktopNotifications": "desktopNotifications",
-        "hyperText": "hyperText",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "vrcft": "vrcft"
-      },
-      "locked": {
-        "lastModified": 1755473711,
-        "narHash": "sha256-l7avf+VQ8q0YmYm3GEtj0SFgvdDAggL6CPUyTYeBMoo=",
-        "owner": "dfgHiatus",
-        "repo": "VRCFaceTracking.Avalonia",
-        "rev": "999f5f6dc4e159cf7341c0999da46669aebe63ff",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dfgHiatus",
-        "repo": "VRCFaceTracking.Avalonia",
-        "type": "github"
-      }
-    },
-    "desktopNotifications": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739938590,
-        "narHash": "sha256-ChAvgsigShVsVdW07BBCObODHQGLoHBkyCCPXFnpZCk=",
-        "owner": "dfgHiatus",
-        "repo": "DesktopNotifications",
-        "rev": "e69ae5bdc3144d47bfdbf47c962954406aeb0c92",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dfgHiatus",
-        "repo": "DesktopNotifications",
-        "rev": "e69ae5bdc3144d47bfdbf47c962954406aeb0c92",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -89,23 +49,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "hyperText": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1739808982,
-        "narHash": "sha256-qBo6B00x+bzfMWKb8pyX8/HlOxqgOvrnrWvE8JSj2QY=",
-        "owner": "dfgHiatus",
-        "repo": "HyperText.Avalonia",
-        "rev": "8c511c818c8936eb575e6fad224279746cd102da",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dfgHiatus",
-        "repo": "HyperText.Avalonia",
-        "rev": "8c511c818c8936eb575e6fad224279746cd102da",
         "type": "github"
       }
     },
@@ -223,7 +166,6 @@
     },
     "root": {
       "inputs": {
-        "avalonia": "avalonia",
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
@@ -299,23 +241,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "vrcft": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741130719,
-        "narHash": "sha256-TG+yRVjEEGvHaPzDXbPIhvXzgEfwfo+5TfW8/fa75uw=",
-        "owner": "dfgHiatus",
-        "repo": "VRCFaceTracking",
-        "rev": "13d051a24743717c5eb9b14b39f149fe82bc1073",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dfgHiatus",
-        "repo": "VRCFaceTracking",
-        "rev": "13d051a24743717c5eb9b14b39f149fe82bc1073",
         "type": "github"
       }
     }

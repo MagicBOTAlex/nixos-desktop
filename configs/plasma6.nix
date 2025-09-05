@@ -1,8 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  ruskWallpaper = pkgs.fetchurl {
+    url = "https://deprived.dev/assets/zhen/nixos/RuskBackground-nix.png";
+    hash = "sha256-bvwUuWclgAo3aBmG2H65YRUIFgh2xjiHMsICcZQOQf8=";
+  };
+in {
   programs.plasma = {
     enable = true;
     # overrideConfig = true;
-    workspace.colorScheme = "BreezeDark";
+    workspace = {
+      wallpaper = ruskWallpaper;
+      colorScheme = "BreezeDark";
+      #
+    };
 
     # Shortcuts =====================================
     shortcuts = {
@@ -45,17 +55,17 @@
     #   };
   };
 
-  # Doesn't work because NixOS bad
-  home.file.".config/dolphinrc".text = ''
-    [General]
-    ShowHiddenFiles=true
-
-    [DetailsMode]
-    PreviewSize=16
-
-    [PreviewSettings]
-    Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,pothumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
-  '';
+  # # Doesn't work because NixOS bad
+  # home.file.".config/dolphinrc".text = ''
+  #   [General]
+  #   ShowHiddenFiles=true
+  #
+  #   [DetailsMode]
+  #   PreviewSize=16
+  #
+  #   [PreviewSettings]
+  #   Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,pothumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
+  # '';
 
   programs = {
     konsole = {

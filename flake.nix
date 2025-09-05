@@ -21,15 +21,10 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    avalonia = {
-      url = "github:dfgHiatus/VRCFaceTracking.Avalonia";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self, nixpkgs-xr, spicetify-nix, nixpkgs, avalonia, ... }@inputs: {
+    { self, nixpkgs-xr, spicetify-nix, nixpkgs,  ... }@inputs: {
       # configuration name matches hostname, so this system is chosen by default
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         # pass along all the inputs and stuff to the system function

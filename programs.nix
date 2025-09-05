@@ -30,7 +30,9 @@
     arduino-ide
     krita
     jq
-    sublime
+    sublime-merge
+    blender
+    rustdesk
 
     libreoffice-fresh
     hunspell

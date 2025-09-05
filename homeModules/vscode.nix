@@ -7,5 +7,6 @@ in {
       extensions = [ ];
     };
 
+    home.packages = with pkgs; [ texliveFull];
   };
 }

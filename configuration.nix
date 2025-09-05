@@ -12,6 +12,7 @@
     ./docker.nix
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
+    ./modules/drivers/amdcpu.nix
 
     ./networking/openvpn-work.nix
     ./networking/networkSetup.nix
