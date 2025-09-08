@@ -14,9 +14,13 @@ in {
       #
     };
 
+    session.sessionRestore.restoreOpenApplicationsOnLogin =
+      "startWithEmptySession";
+
     # Shortcuts =====================================
     shortcuts = {
       plasmashell."activate application launcher" = "Meta+S";
+      plasmashell."kill window" = "Shift+Alt+F4";
 
     };
 
@@ -44,6 +48,12 @@ in {
         key = "Meta+Shift+S";
         command = "spectacle -brc";
       };
+
+      "qalculate" = {
+        name = "Windows like quick calculate";
+        key = "Alt+Space";
+        command = "qalculate-qt";
+      };
     };
 
     spectacle.shortcuts.launch = "";
@@ -53,6 +63,38 @@ in {
     #     acceleration = 0;
     #     accelerationProfile = "none";
     #   };
+  };
+
+  home.packages = with pkgs; [ qalculate-qt ];
+
+  #   home.file.".xbindkeysrc".text ="
+  # \"xvkbd -xsendevent -text \"{\"\"
+  # m:0xc + c:16
+  # Control+Alt + 7
+  #
+  # \"xvkbd -xsendevent -text \"[\"\"
+  # m:0xc + c:16
+  # Control+Alt + 8
+  #
+  # \"xvkbd -xsendevent -text \"]\"\"
+  # m:0xc + c:16
+  # Control+Alt + 9
+  #
+  # \"xvkbd -xsendevent -text \"}\"\"
+  # m:0xc + c:16
+  # Control+Alt + 0";
+
+  systemd.user.services.xbindkeys = {
+    Unit = {
+      Description = "xbindkeys daemon";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Service = {
+      ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys -n";
+      Restart = "on-failure";
+    };
   };
 
   # # Doesn't work because NixOS bad

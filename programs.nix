@@ -33,6 +33,9 @@
     sublime-merge
     blender
     rustdesk
+    inkscape
+    immich-cli
+    drawio
 
     libreoffice-fresh
     hunspell
