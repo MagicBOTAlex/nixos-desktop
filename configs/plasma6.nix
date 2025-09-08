@@ -1,5 +1,9 @@
+# https://nix-community.github.io/plasma-manager/options.xhtml
+
 { pkgs, ... }:
 let
+  toggles = import ./../toggles.nix;
+  term = if (toggles.wezterm.enable or false) then "wezterm" else "konsole";
   ruskWallpaper = pkgs.fetchurl {
     url = "https://deprived.dev/assets/zhen/nixos/RuskBackground-nix.png";
     hash = "sha256-bvwUuWclgAo3aBmG2H65YRUIFgh2xjiHMsICcZQOQf8=";
@@ -21,6 +25,7 @@ in {
     shortcuts = {
       plasmashell."activate application launcher" = "Meta+S";
       plasmashell."kill window" = "Shift+Alt+F4";
+      kwin = { "Window Maximize" = "Meta+Up"; };
 
     };
 
@@ -28,13 +33,13 @@ in {
       "launch-konsole" = {
         name = "Launch Konsole";
         key = "Meta+Return";
-        command = "konsole";
+        command = term;
       };
 
       "launch-konsole2" = {
         name = "Launch Konsole";
         key = "Meta+F1";
-        command = "konsole";
+        command = term;
       };
 
       "launch-missioncenter" = {
