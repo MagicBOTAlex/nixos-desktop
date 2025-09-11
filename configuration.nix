@@ -2,6 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+# All overlays given by flakes
+flake-overlays:
+
 { config, pkgs, lib, inputs, ... }:
 
 {
@@ -52,6 +55,14 @@
       "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
     ];
   };
+
+  nixpkgs.overlays = [
+    (final: prev:
+      {
+        # Your own overlays...
+      })
+  ] ++ flake-overlays;
+  environment.systemPackages = with pkgs; [ matlab ];
 
   # nix.settings.post-build-hook = pkgs.writeScript "upload-to-cache" ''
   #   #!/bin/sh

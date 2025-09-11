@@ -36,6 +36,9 @@
     inkscape
     immich-cli
     drawio
+    wine-wayland
+    sg3_utils
+    linuxKernel.packages.linux_6_12.turbostat
 
     libreoffice-fresh
     hunspell

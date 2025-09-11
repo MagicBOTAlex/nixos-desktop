@@ -27,6 +27,8 @@
       fe = "nix develop";
       fed = "nvim flake.nix";
       cdn = "cd /etc/nixos";
+      cpu =
+        "sudo turbostat --quiet --show PkgWatt --interval 5 --num_iterations 1 | awk 'NR==2{print $1}'";
     };
 
     interactiveShellInit = ''

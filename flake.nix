@@ -21,32 +21,47 @@
       inputs.home-manager.follows = "home-manager";
     };
 
+    nix-matlab = {
+      # nix-matlab's Nixpkgs input follows Nixpkgs' nixos-unstable branch. However
+      # your Nixpkgs revision might not follow the same branch. You'd want to
+      # match your Nixpkgs and nix-matlab to ensure fontconfig related
+      # compatibility.
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-matlab";
+    };
+
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
-  outputs = { self, nixpkgs-xr, spicetify-nix, nixpkgs, ... }@inputs: {
-    # configuration name matches hostname, so this system is chosen by default
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      # pass along all the inputs and stuff to the system function
-      specialArgs = { inherit inputs; };
-      modules = [
-        # import configuration
-        ./configuration.nix
-        spicetify-nix.nixosModules.default
+  outputs =
+    { self, nixpkgs-xr, spicetify-nix, nixpkgs, nix-matlab, ... }@inputs:
+    let flake-overlays = [ nix-matlab.overlay ];
+    in {
 
-        # home manager part 2
-        inputs.home-manager.nixosModules.default
+      # configuration name matches hostname, so this system is chosen by default
+      nixosConfigurations = {
+        nixos = nixpkgs.lib.nixosSystem {
+          # pass along all the inputs and stuff to the system function
+          specialArgs = { inherit inputs; };
+          modules = [
+            # import configuration
+            (import ./configuration.nix flake-overlays)
+            spicetify-nix.nixosModules.default
 
-        {
-          home-manager.sharedModules =
-            [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
-        }
+            # home manager part 2
+            inputs.home-manager.nixosModules.default
 
-        inputs.nix-index-database.nixosModules.nix-index
+            {
+              home-manager.sharedModules =
+                [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+            }
 
-        nixpkgs-xr.nixosModules.nixpkgs-xr
+            inputs.nix-index-database.nixosModules.nix-index
 
-        { programs.nix-index-database.comma.enable = true; }
-      ];
+            nixpkgs-xr.nixosModules.nixpkgs-xr
+
+            { programs.nix-index-database.comma.enable = true; }
+          ];
+        };
+      };
     };
-  };
 }
