@@ -13,7 +13,6 @@
   powerManagement.cpuFreqGovernor = "ondemand";
 
   # Graphics
-  services.xserver.videoDrivers = [ "amdgpu" ];
   hardware.opengl = { enable = true; };
 
   # Monitoring tools

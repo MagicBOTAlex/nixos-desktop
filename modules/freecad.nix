@@ -62,12 +62,13 @@ let
 
 in {
   environment.systemPackages = [
-    pkgs.freecad-wayland
+    pkgs.freecad
     # (pkgs.callPackage ./submodules/orca.nix { })
     # pkgs.orca-slicer
     orcaSlicerDesktopItem
 
   ];
+  environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 
   nixpkgs.config.permittedInsecurePackages = [ "libsoup-2.74.3" ];
   environment.etc."xdg/mimeapps.list".source = orcaSlicerMimeappsList;

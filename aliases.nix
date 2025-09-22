@@ -21,14 +21,15 @@
       down = "docker compose down";
       server = "ssh botserver@192.168.50.82";
       lap = "ssh botlap@192.168.50.144";
-      vpnup = "systemctl start openvpn-work.service";
-      vpndown = "systemctl stop openvpn-work.service";
+      vpnup = "sudo systemctl start openvpn-work.service";
+      vpndown = "sudo systemctl stop openvpn-work.service";
       inspect = "nix edit nixpkgs#$1";
       fe = "nix develop";
       fed = "nvim flake.nix";
       cdn = "cd /etc/nixos";
       cpu =
-        "sudo turbostat --quiet --show PkgWatt --interval 5 --num_iterations 1 | awk 'NR==2{print $1}'";
+        "sudo turbostat --quiet --show PkgWatt --interval 1 --num_iterations 1 | awk 'NR==2{print $1}'";
+      vr = "~/Desktop/startvr.sh";
     };
 
     interactiveShellInit = ''

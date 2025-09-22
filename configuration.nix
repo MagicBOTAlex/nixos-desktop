@@ -12,7 +12,7 @@ flake-overlays:
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./aliases.nix
-    ./docker.nix
+    # ./docker.nix
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
     ./modules/drivers/amdcpu.nix
@@ -25,7 +25,7 @@ flake-overlays:
     ./modules/nodejs.nix
     ./modules/steam.nix
     ./modules/spotify.nix
-    ./modules/freecad.nix
+    # ./modules/freecad.nix
     ./modules/customPackages/oscd.nix
 
     ./modules/fishShell.nix

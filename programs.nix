@@ -32,18 +32,33 @@
     jq
     sublime-merge
     blender
-    rustdesk
+    # rustdesk
+    (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     inkscape
     immich-cli
     drawio
-    wine-wayland
     sg3_utils
     linuxKernel.packages.linux_6_12.turbostat
+    unityhub
+    cheese
+    legendary-gl
+
+    wineWowPackages.waylandFull
+    winetricks
+    vulkan-loader
+    vulkan-validation-layers
+    (pkgs.wine.override { wineBuild = "wine64"; })
+    conky
 
     libreoffice-fresh
     hunspell
     hunspellDicts.da-dk
   ];
 
+  programs.noisetorch.enable = true;
   programs.starship.enable = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "libxml2-2.13.8" # For unityhub
+    "libsoup-2.74.3" # Unityhub
+  ];
 }

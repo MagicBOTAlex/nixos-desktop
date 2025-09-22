@@ -11,10 +11,11 @@ let
 in {
   programs.plasma = {
     enable = true;
-    # overrideConfig = true;
+    overrideConfig = true;
     workspace = {
       wallpaper = ruskWallpaper;
       colorScheme = "BreezeDark";
+      theme = "breeze_cursors";
       #
     };
 
@@ -72,22 +73,22 @@ in {
 
   home.packages = with pkgs; [ qalculate-qt ];
 
-  #   home.file.".xbindkeysrc".text ="
-  # \"xvkbd -xsendevent -text \"{\"\"
-  # m:0xc + c:16
-  # Control+Alt + 7
-  #
-  # \"xvkbd -xsendevent -text \"[\"\"
-  # m:0xc + c:16
-  # Control+Alt + 8
-  #
-  # \"xvkbd -xsendevent -text \"]\"\"
-  # m:0xc + c:16
-  # Control+Alt + 9
-  #
-  # \"xvkbd -xsendevent -text \"}\"\"
-  # m:0xc + c:16
-  # Control+Alt + 0";
+  home.file.".config/kwalletrc".text = ''
+    [Wallet]
+    Close When Idle=false
+    Close on Screensaver=false
+    Enabled=false
+    First Use=false
+    Idle Timeout=10
+    Launch Manager=false
+    Leave Manager Open=false
+    Leave Open=true
+    Prompt on Open=false
+    Use One Wallet=true
+
+    [org.freedesktop.secrets]
+    apiEnabled=true
+  '';
 
   systemd.user.services.xbindkeys = {
     Unit = {

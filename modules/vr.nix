@@ -20,8 +20,12 @@ in {
       modded-oscavmgr
       vrcadvert
       # inputs.avalonia.packages.x86_64-linux.default
+      eepyxr
+      bs-manager
 
     ];
+
+    programs.adb.enable = true;
 
     services.wivrn = {
       enable = true;
