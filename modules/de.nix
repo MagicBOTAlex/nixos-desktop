@@ -36,37 +36,37 @@
     };
   };
 
-  # services.evremap = {
-  #   enable = true;
-  #   settings = {
-  #     device_name = "Corsair CORSAIR K65 PLUS WIRELESS Keyboard";
-  #     remap = [{
-  #       input = [ "KEY_LEFTALT" "KEY_LEFTCTRL" ];
-  #       output = [ "KEY_RIGHTALT" ];
-  #     }];
-  #   };
-  # };
-  #
-  # systemd.services.evremap-external = {
-  #   description = "evremap for external keyboard";
-  #   wantedBy = [ "multi-user.target" ];
-  #
-  #   serviceConfig = {
-  #     ExecStart =
-  #       "${pkgs.evremap}/bin/evremap remap /etc/evremap-external.toml";
-  #     DynamicUser = true;
-  #     SupplementaryGroups = [ "input" "uinput" ];
-  #     Restart = "on-failure";
-  #   };
-  # };
-  #
-  # environment.etc."evremap-external.toml".text = ''
-  #   device_name = "Corsair K65 PLUS Wireless Receiver Keyboard"
-  #
-  #   [[remap]]
-  #   input = ["KEY_LEFTALT", "KEY_LEFTCTRL"]
-  #   output = ["KEY_RIGHTALT"]
-  # '';
+  services.evremap = {
+    enable = true;
+    settings = {
+      device_name = "Corsair CORSAIR K65 PLUS WIRELESS Keyboard";
+      remap = [{
+        input = [ "KEY_LEFTALT" "KEY_LEFTCTRL" ];
+        output = [ "KEY_RIGHTALT" ];
+      }];
+    };
+  };
+
+  systemd.services.evremap-external = {
+    description = "evremap for external keyboard";
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart =
+        "${pkgs.evremap}/bin/evremap remap /etc/evremap-external.toml";
+      DynamicUser = true;
+      SupplementaryGroups = [ "input" "uinput" ];
+      Restart = "on-failure";
+    };
+  };
+
+  environment.etc."evremap-external.toml".text = ''
+    device_name = "Corsair K65 PLUS Wireless Receiver Keyboard"
+
+    [[remap]]
+    input = ["KEY_LEFTALT", "KEY_LEFTCTRL"]
+    output = ["KEY_RIGHTALT"]
+  '';
 
   # environment.systemPackages = with pkgs; [ xremap ];
 

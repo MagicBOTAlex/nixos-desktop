@@ -22,6 +22,8 @@ in {
     session.sessionRestore.restoreOpenApplicationsOnLogin =
       "startWithEmptySession";
 
+    kscreenlocker.lockOnResume = false;
+
     # Shortcuts =====================================
     shortcuts = {
       plasmashell."activate application launcher" = "Meta+S";
