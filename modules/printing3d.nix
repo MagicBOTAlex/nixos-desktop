@@ -62,8 +62,8 @@ let
 
 in {
   environment.systemPackages = [
-    pkgs.freecad
-    # (pkgs.callPackage ./submodules/orca.nix { })
+    # pkgs.freecad
+    (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
     # pkgs.orca-slicer
     # orcaSlicerDesktopItem
 

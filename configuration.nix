@@ -25,7 +25,7 @@ flake-overlays:
     ./modules/nodejs.nix
     ./modules/steam.nix
     ./modules/spotify.nix
-    # ./modules/freecad.nix
+    ./modules/printing3d.nix
     ./modules/customPackages/oscd.nix
 
     ./modules/fishShell.nix

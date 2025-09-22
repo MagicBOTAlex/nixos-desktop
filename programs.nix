@@ -53,6 +53,7 @@
     libreoffice-fresh
     hunspell
     hunspellDicts.da-dk
+    appimage-run
   ];
 
   programs.noisetorch.enable = true;
