@@ -13,9 +13,8 @@
     ffmpeg-full
 
     ### Desktop programs
-    firefox
     wl-clipboard
-    discord
+    # discord
     killall
     # fontforge
     gparted
@@ -34,6 +33,8 @@
     blender
     # rustdesk
     (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
+    (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })
+
     inkscape
     immich-cli
     drawio
@@ -42,6 +43,7 @@
     unityhub
     cheese
     legendary-gl
+    yt-dlp
 
     wineWowPackages.waylandFull
     winetricks
@@ -49,6 +51,7 @@
     vulkan-validation-layers
     (pkgs.wine.override { wineBuild = "wine64"; })
     conky
+    gitoxide
 
     libreoffice-fresh
     hunspell

@@ -22,7 +22,11 @@ in {
     session.sessionRestore.restoreOpenApplicationsOnLogin =
       "startWithEmptySession";
 
-    kscreenlocker.lockOnResume = false;
+    kscreenlocker = {
+      #         lockOnStartup = false;
+      # lockOnResume = false;
+      passwordRequired = false;
+    };
 
     # Shortcuts =====================================
     shortcuts = {
@@ -71,9 +75,68 @@ in {
     #     acceleration = 0;
     #     accelerationProfile = "none";
     #   };
+
+    window-rules = [{
+      description = "Keep Qalculate on top";
+      match = {
+        window-class = {
+          value = ".*Qalculate.*";
+          type = "regex";
+          match-whole = false;
+        };
+      };
+      apply = {
+        above = {
+          value = true;
+          apply = "force";
+        };
+      };
+    }];
+    configFile = {
+      # Naw, screw the volume change sound notification
+      "plasmaparc"."General"."AudioFeedback" = false;
+      # Screw this advertizement for firefox extension
+      "kded5rc"."Module-browserintegrationreminder"."autoload" = false;
+      # Fuck the hot corner thingy that makes overview
+      "kwinrc"."Effect-overview"."BorderActivate" = 9;
+      "kdeglobals"."General"."fixed" =
+        "CozetteVector-nerd,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,nerd";
+
+      # # Dolphin shit
+      # "dolphinrc"."General"."GlobalViewProps" = false;
+      # "dolphinrc"."General"."ViewPropsTimestamp" = "2025,9,25,0,13,56.194";
+      # "dolphinrc"."KFileDialog Settings"."Places Icons Auto-resize" = false;
+      # "dolphinrc"."KFileDialog Settings"."Places Icons Static Size" = 22;
+      # "dolphinrc"."PreviewSettings"."Plugins" =
+      #   "cursorthumbnail,windowsexethumbnail,ebookthumbnail,appimagethumbnail,djvuthumbnail,audiothumbnail,windowsimagethumbnail,opendocumentthumbnail,directorythumbnail,exrthumbnail,jpegthumbnail,imagethumbnail,comicbookthumbnail,svgthumbnail,kraorathumbnail,fontthumbnail,calligrathumbnail,blenderthumbnail,mobithumbnail,gsthumbnail,pothumbnail,calligraimagethumbnail,rawthumbnail,ffmpegthumbs";
+    };
   };
 
-  home.packages = with pkgs; [ qalculate-qt ];
+  home.packages = with pkgs; [
+    qalculate-qt
+
+    kdePackages.kio
+    kdePackages.kio-extras
+    kdePackages.breeze-icons
+    kdePackages.dolphin-plugins
+    kdePackages.kdesdk-thumbnailers # new
+    kdePackages.kdegraphics-thumbnailers # new
+    kdePackages.kdegraphics-mobipocket # new
+    kdePackages.kimageformats # new
+    kdePackages.calligra # new
+    kdePackages.qtimageformats # new
+    kdePackages.ffmpegthumbs # new
+    kdePackages.taglib # new
+    kdePackages.baloo # new
+    kdePackages.baloo-widgets # new
+    resvg # new
+    kdePackages.dolphin
+    kdePackages.kio-extras
+    kdePackages.kimageformats
+    kdePackages.ffmpegthumbs
+    kdePackages.kdegraphics-thumbnailers
+    qt6.qtimageformats
+  ];
 
   home.file.".config/kwalletrc".text = ''
     [Wallet]
@@ -104,18 +167,6 @@ in {
       Restart = "on-failure";
     };
   };
-
-  # # Doesn't work because NixOS bad
-  # home.file.".config/dolphinrc".text = ''
-  #   [General]
-  #   ShowHiddenFiles=true
-  #
-  #   [DetailsMode]
-  #   PreviewSize=16
-  #
-  #   [PreviewSettings]
-  #   Plugins=appimagethumbnail,audiothumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,pothumbnail,imagethumbnail,jpegthumbnail,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,textthumbnail,ffmpegthumbnail
-  # '';
 
   programs = {
     konsole = {

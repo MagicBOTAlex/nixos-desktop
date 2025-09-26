@@ -2,10 +2,10 @@
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6 = { enable = true; };
-  environment.plasma6.excludePackages = with pkgs.kdePackages;
-    [
-      bluedevil # baller
-    ];
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    bluedevil # baller
+    dolphin
+  ];
   services.blueman.enable =
     true; # fuck KDE's default bluetooth. blueman can auto connect
 

@@ -64,11 +64,12 @@ in {
   environment.systemPackages = [
     # pkgs.freecad
     (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
+    # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { })
     # pkgs.orca-slicer
-    # orcaSlicerDesktopItem
+    orcaSlicerDesktopItem
 
   ];
-  environment.variables = { QT_QPA_PLATFORM = "xcb"; };
+  # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 
   # nixpkgs.config.permittedInsecurePackages = [ "libsoup-2.74.3" ];
   # environment.etc."xdg/mimeapps.list".source = orcaSlicerMimeappsList;

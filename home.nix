@@ -5,6 +5,7 @@ in {
     ./modules/nvim.nix
     ./configs/plasma6.nix
     ./homeModules/btop.nix
+    ./homeModules/firefox.nix
 
     # Do not disable under here =========================== Disable in toggles.nix
     ./homeModules/vr.nix
