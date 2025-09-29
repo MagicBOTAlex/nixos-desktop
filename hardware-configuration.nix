@@ -33,18 +33,24 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/E7C3-8CF7";
+    device = "/dev/disk/by-partuuid/42fea704-ae86-4a29-905c-4bc7eaa62da0";
     fsType = "vfat";
     options = [ "fmask=0077" "dmask=0077" ];
   };
 
+  fileSystems."/gaming/fast" = {
+    device = "/dev/disk/by-partuuid/9de2fd24-e057-473d-8f66-be0740a15a79";
+    fsType = "ext4";
+  };
+
+  fileSystems."/gaming/slow" = {
+    device = "/dev/disk/by-partuuid/878e9a01-a640-440a-952c-7b343c76fddf";
+    fsType = "ext4";
+  };
+
   swapDevices = [
     {
-      device = "/dev/disk/by-partuuid/a55885d7-5c6c-462b-82fc-a560455ce9d2";
-      randomEncryption.enable = true;
-    }
-    {
-      device = "/dev/disk/by-partuuid/47a5b7d6-dde8-4dd9-83db-7dcc26f61a77";
+      device = "/dev/disk/by-partuuid/e8d8085f-af3f-49fb-87f8-c3edbd33ea58";
       randomEncryption.enable = true;
     }
   ];

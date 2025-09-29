@@ -1,0 +1,5 @@
+--- a/src/things/comment.rs
++++ b/src/things/comment.rs
+@@ -1,6 +1,6 @@
+-    let uri = format!("https://reddit.com/user/{username}/comments.json{query_params}");
++    let uri = format!("https://reddit.com/user/{username}/overview.json");

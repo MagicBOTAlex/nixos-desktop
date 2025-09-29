@@ -8,7 +8,8 @@ let
     url = "https://deprived.dev/assets/zhen/nixos/RuskBackground-nix.png";
     hash = "sha256-bvwUuWclgAo3aBmG2H65YRUIFgh2xjiHMsICcZQOQf8=";
   };
-in {
+in
+{
   programs.plasma = {
     enable = true;
     overrideConfig = true;
@@ -17,6 +18,11 @@ in {
       colorScheme = "BreezeDark";
       theme = "breeze_cursors";
       #
+    };
+
+    powerdevil.AC = {
+      autoSuspend.action = "nothing";
+      powerButtonAction = "shutDown";
     };
 
     session.sessionRestore.restoreOpenApplicationsOnLogin =
@@ -115,27 +121,6 @@ in {
   home.packages = with pkgs; [
     qalculate-qt
 
-    kdePackages.kio
-    kdePackages.kio-extras
-    kdePackages.breeze-icons
-    kdePackages.dolphin-plugins
-    kdePackages.kdesdk-thumbnailers # new
-    kdePackages.kdegraphics-thumbnailers # new
-    kdePackages.kdegraphics-mobipocket # new
-    kdePackages.kimageformats # new
-    kdePackages.calligra # new
-    kdePackages.qtimageformats # new
-    kdePackages.ffmpegthumbs # new
-    kdePackages.taglib # new
-    kdePackages.baloo # new
-    kdePackages.baloo-widgets # new
-    resvg # new
-    kdePackages.dolphin
-    kdePackages.kio-extras
-    kdePackages.kimageformats
-    kdePackages.ffmpegthumbs
-    kdePackages.kdegraphics-thumbnailers
-    qt6.qtimageformats
   ];
 
   home.file.".config/kwalletrc".text = ''

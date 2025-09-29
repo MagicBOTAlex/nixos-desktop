@@ -9,7 +9,11 @@ let
     };
   });
   toggles = import ./../toggles.nix;
-in {
+
+  steamUser = "botmain"; # Target linux user
+  vrPath = "/home/${steamUser}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
+in
+{
 
   config = lib.mkIf toggles.vr.enable {
     environment.systemPackages = with pkgs; [
@@ -22,7 +26,7 @@ in {
       # inputs.avalonia.packages.x86_64-linux.default
       eepyxr
       bs-manager
-
+      # wivrn
     ];
 
     programs.adb.enable = true;
@@ -30,7 +34,9 @@ in {
     services.wivrn = {
       enable = true;
       openFirewall = true;
-      # autoStart = true;
+      highPriority = true;
+      autoStart = true;
+      # package = (pkgs.callPackage ./customPackages/wivrn/wivrn.nix { }).overrideAttrs (oldAttrs: {
       package = pkgs.wivrn.overrideAttrs (oldAttrs: {
         cmakeFlags = oldAttrs.cmakeFlags ++ [
           (lib.cmakeBool "WIVRN_FEATURE_DEBUG_GUI" true)
@@ -58,5 +64,25 @@ in {
 
       defaultRuntime = true;
     };
+
+    # # Root oneshot that grants CAP_SYS_NICE to vrcompositor-launcher
+    # systemd.services.steamvr-cap-sys-nice = {
+    #   description = "Grant CAP_SYS_NICE to SteamVR vrcompositor-launcher";
+    #   after = [ "local-fs.target" ];
+    #   serviceConfig = {
+    #     Type = "oneshot";
+    #     ExecStart = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${vrPath}";
+    #   };
+    #   wantedBy = [ "multi-user.target" ];
+    # };
+    #
+    # # Re-run the service whenever the binary appears/changes
+    # systemd.paths.steamvr-cap-sys-nice = {
+    #   wantedBy = [ "multi-user.target" ];
+    #   pathConfig = {
+    #     PathExists = vrPath;
+    #     PathChanged = vrPath;
+    #   };
+    # };
   };
 }

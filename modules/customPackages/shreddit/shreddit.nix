@@ -13,6 +13,17 @@ rustPlatform.buildRustPackage rec {
   cargoHash =
     "sha256-9s6wmB4YqKmyHKDS2b5keEYFDBerpdQxtNY1wVqGDxg="; # fill after first build
 
+  postPatch = ''
+    substituteInPlace src/things/comment.rs \
+      --replace 'comments.json{query_params}' 'overview.json'
+
+    # assert patch applied
+    if ! grep -q 'overview.json' src/things/comment.rs; then
+      echo "patch DID NOT apply"; exit 1
+    fi
+  '';
+  preBuild = "grep -n 'overview.json' src/things/comment.rs || true";
+
   nativeBuildInputs = [ pkgs.pkg-config ];
   buildInputs = [ pkgs.openssl ];
 

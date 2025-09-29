@@ -60,7 +60,8 @@ let
   orcaSlicerMimeappsList =
     pkgs.writeText "orca-slicer-mimeapps.list" mimeappsListContent;
 
-in {
+in
+{
   environment.systemPackages = [
     # pkgs.freecad
     (pkgs.callPackage ./customPackages/freecad/freecad.nix { })

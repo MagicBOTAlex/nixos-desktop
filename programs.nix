@@ -14,7 +14,6 @@
 
     ### Desktop programs
     wl-clipboard
-    # discord
     killall
     # fontforge
     gparted
@@ -32,7 +31,7 @@
     sublime-merge
     blender
     # rustdesk
-    (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
+    # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })
 
     inkscape
@@ -42,11 +41,14 @@
     linuxKernel.packages.linux_6_12.turbostat
     unityhub
     cheese
-    legendary-gl
+    legendary-gl # Epic games
     yt-dlp
+    pigz
+    heroic
+    unzip
 
     wineWowPackages.waylandFull
-    winetricks
+    # winetricks
     vulkan-loader
     vulkan-validation-layers
     (pkgs.wine.override { wineBuild = "wine64"; })
@@ -57,9 +59,35 @@
     hunspell
     hunspellDicts.da-dk
     appimage-run
+    go
+    bruno
+
+    kdePackages.kio
+    kdePackages.kio-extras
+    kdePackages.breeze-icons
+    kdePackages.dolphin-plugins
+    kdePackages.kdesdk-thumbnailers # new
+    kdePackages.kdegraphics-thumbnailers # new
+    kdePackages.kdegraphics-mobipocket # new
+    kdePackages.kimageformats # new
+    kdePackages.calligra # new
+    kdePackages.qtimageformats # new
+    kdePackages.ffmpegthumbs # new
+    kdePackages.taglib # new
+    kdePackages.baloo # new
+    kdePackages.baloo-widgets # new
+    resvg # new
+    kdePackages.dolphin
+    kdePackages.kio-extras
+    kdePackages.kimageformats
+    kdePackages.ffmpegthumbs
+    kdePackages.kdegraphics-thumbnailers
+    qt6.qtimageformats
+
   ];
 
   programs.noisetorch.enable = true;
+  programs.nix-ld.enable = true;
   programs.starship.enable = true;
   nixpkgs.config.permittedInsecurePackages = [
     "libxml2-2.13.8" # For unityhub

@@ -12,13 +12,17 @@ flake-overlays:
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./aliases.nix
-    # ./docker.nix
+    ./docker.nix
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
     ./modules/drivers/amdcpu.nix
 
+    ./modules/crypto/xmr/mining.nix
+
     ./networking/openvpn-work.nix
     ./networking/networkSetup.nix
+
+    ./modules/limitedDiscord.nix
 
     ./programs.nix
     ./modules/python.nix
