@@ -4,7 +4,7 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "MagicBOTAlex";
       repo = "oscavmgr";
-      rev = "7353e837d5d40076199a0b5ce8f5b8bcfafa21bb";
+      rev = "7ecd8fb";
       hash = "sha256-QP9JOpb2l6yF9jA+RJgAyyE2RxxpoP7XvDeSoGaZc2c=";
     };
   });

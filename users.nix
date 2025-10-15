@@ -3,7 +3,7 @@
     isNormalUser = true;
     description = "botmain";
     extraGroups =
-      [ "networkmanager" "wheel" "docker" "udev" "dialout" "wheel" ];
+      [ "networkmanager" "wheel" "docker" "udev" "dialout" "wheel" "sensors" ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhiPhFbCi64NduuV794omgS8mctBLXtqxbaEJyUo6lg botalex@DESKTOPSKTOP-ENDVV0V"
@@ -30,6 +30,16 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKyZOZlcQBmqSPxjaGgE2tP+K7LYziqjFUo3EX12rGtf botlap@nixos"
     ];
   };
+
+  # Group for read-only sensor access
+  users.groups.sensors = { };
+
+  # Relax permissions on powercap + hwmon power files
+  services.udev.extraRules = ''
+    SUBSYSTEM=="powercap", KERNEL=="intel-rapl:*", MODE="0444", GROUP="sensors"
+    SUBSYSTEM=="powercap", KERNEL=="amd-rapl:*",   MODE="0444", GROUP="sensors"
+    SUBSYSTEM=="hwmon",    KERNEL=="hwmon*", ATTR{power*_input}=="*", MODE="0444", GROUP="sensors"
+  '';
 
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=300

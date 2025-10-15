@@ -1,23 +1,63 @@
-{ stdenv, lib, binutils, fetchFromGitHub, fetchpatch, cmake, pkg-config
-, wrapGAppsHook3, boost186, cereal, cgal, curl, dbus, eigen, expat, ffmpeg
-, gcc-unwrapped, glew, glfw, glib, glib-networking, gmp, gst_all_1, gtest, gtk3
-, hicolor-icon-theme, ilmbase, libpng, mpfr, nlopt, opencascade-occt_7_6
-, openvdb, opencv, pcre, systemd, tbb_2021, webkitgtk_4_0, wxGTK31, xorg
-, libnoise, withSystemd ? stdenv.hostPlatform.isLinux, }:
+{ stdenv
+, lib
+, binutils
+, fetchFromGitHub
+, fetchpatch
+, cmake
+, pkg-config
+, wrapGAppsHook3
+, boost186
+, cereal
+, cgal_5
+, curl
+, dbus
+, eigen
+, expat
+, ffmpeg
+, gcc-unwrapped
+, glew
+, glfw
+, glib
+, glib-networking
+, gmp
+, gst_all_1
+, gtest
+, gtk3
+, hicolor-icon-theme
+, ilmbase
+, libpng
+, mpfr
+, nlopt
+, opencascade-occt_7_6
+, openvdb
+, opencv
+, pcre
+, systemd
+, tbb_2022
+, webkitgtk_4_1
+, wxGTK31
+, xorg
+, libnoise
+, withSystemd ? stdenv.hostPlatform.isLinux
+,
+}:
 let
-  wxGTK' = (wxGTK31.override {
-    withCurl = true;
-    withPrivateFonts = true;
-    withWebKit = true;
-  }).overrideAttrs (old: {
-    configureFlags = old.configureFlags ++ [
-      # Disable noisy debug dialogs
-      "--enable-debug=no"
-    ];
-  });
-in stdenv.mkDerivation (finalAttrs: {
+  wxGTK' =
+    (wxGTK31.override {
+      withCurl = true;
+      withPrivateFonts = true;
+      withWebKit = true;
+    }).overrideAttrs
+      (old: {
+        configureFlags = old.configureFlags ++ [
+          # Disable noisy debug dialogs
+          "--enable-debug=no"
+        ];
+      });
+in
+stdenv.mkDerivation (finalAttrs: {
   pname = "orca-slicer";
-  version = "v2.3.1-beta";
+  version = "nightly-builds";
 
   src = fetchFromGitHub {
     owner = "SoftFever";
@@ -26,18 +66,27 @@ in stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-MEa57jFBJkqwoAkqI7wXOn1X1zxgLQt3SNeanfD88kU=";
   };
 
-  nativeBuildInputs = [ cmake pkg-config wrapGAppsHook3 wxGTK' ];
+  nativeBuildInputs = [
+    cmake
+    pkg-config
+    wrapGAppsHook3
+    wxGTK'
+  ];
 
   buildInputs = [
     binutils
     (boost186.override {
       enableShared = true;
       enableStatic = false;
-      extraFeatures = [ "log" "thread" "filesystem" ];
+      extraFeatures = [
+        "log"
+        "thread"
+        "filesystem"
+      ];
     })
     boost186.dev
     cereal
-    cgal
+    cgal_5
     curl
     dbus
     eigen
@@ -62,13 +111,15 @@ in stdenv.mkDerivation (finalAttrs: {
     opencascade-occt_7_6
     openvdb
     pcre
-    tbb_2021
-    webkitgtk_4_0
+    tbb_2022
+    webkitgtk_4_1
     wxGTK'
     xorg.libX11
     opencv.cxxdev
     libnoise
-  ] ++ lib.optionals withSystemd [ systemd ] ++ finalAttrs.checkInputs;
+  ]
+  ++ lib.optionals withSystemd [ systemd ]
+  ++ finalAttrs.checkInputs;
 
   patches = [
     # Fix for webkitgtk linking
@@ -81,8 +132,7 @@ in stdenv.mkDerivation (finalAttrs: {
     # Allows disabling the update nag screen
     (fetchpatch {
       name = "pr-7650-configurable-update-check.patch";
-      url =
-        "https://github.com/SoftFever/OrcaSlicer/commit/d10a06ae11089cd1f63705e87f558e9392f7a167.patch";
+      url = "https://github.com/SoftFever/OrcaSlicer/commit/d10a06ae11089cd1f63705e87f558e9392f7a167.patch";
       hash = "sha256-t4own5AwPsLYBsGA15id5IH1ngM0NSuWdFsrxMRXmTk=";
     })
   ];
@@ -94,30 +144,32 @@ in stdenv.mkDerivation (finalAttrs: {
 
   NLOPT = nlopt;
 
-  NIX_CFLAGS_COMPILE = toString ([
-    "-Wno-ignored-attributes"
-    "-I${opencv.out}/include/opencv4"
-    "-Wno-error=incompatible-pointer-types"
-    "-Wno-template-id-cdtor"
-    "-Wno-uninitialized"
-    "-Wno-unused-result"
-    "-Wno-deprecated-declarations"
-    "-Wno-use-after-free"
-    "-Wno-format-overflow"
-    "-Wno-stringop-overflow"
-    "-DBOOST_ALLOW_DEPRECATED_HEADERS"
-    "-DBOOST_MATH_DISABLE_STD_FPCLASSIFY"
-    "-DBOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS"
-    "-DBOOST_MATH_DISABLE_FLOAT128"
-    "-DBOOST_MATH_NO_QUAD_SUPPORT"
-    "-DBOOST_MATH_MAX_FLOAT128_DIGITS=0"
-    "-DBOOST_CSTDFLOAT_NO_LIBQUADMATH_SUPPORT"
-    "-DBOOST_MATH_DISABLE_FLOAT128_BUILTIN_FPCLASSIFY"
-  ]
-  # Making it compatible with GCC 14+, see https://github.com/SoftFever/OrcaSlicer/pull/7710
-    ++ lib.optionals
-    (stdenv.cc.isGNU && lib.versionAtLeast stdenv.cc.version "14")
-    [ "-Wno-error=template-id-cdtor" ]);
+  NIX_CFLAGS_COMPILE = toString (
+    [
+      "-Wno-ignored-attributes"
+      "-I${opencv.out}/include/opencv4"
+      "-Wno-error=incompatible-pointer-types"
+      "-Wno-template-id-cdtor"
+      "-Wno-uninitialized"
+      "-Wno-unused-result"
+      "-Wno-deprecated-declarations"
+      "-Wno-use-after-free"
+      "-Wno-format-overflow"
+      "-Wno-stringop-overflow"
+      "-DBOOST_ALLOW_DEPRECATED_HEADERS"
+      "-DBOOST_MATH_DISABLE_STD_FPCLASSIFY"
+      "-DBOOST_MATH_NO_LONG_DOUBLE_MATH_FUNCTIONS"
+      "-DBOOST_MATH_DISABLE_FLOAT128"
+      "-DBOOST_MATH_NO_QUAD_SUPPORT"
+      "-DBOOST_MATH_MAX_FLOAT128_DIGITS=0"
+      "-DBOOST_CSTDFLOAT_NO_LIBQUADMATH_SUPPORT"
+      "-DBOOST_MATH_DISABLE_FLOAT128_BUILTIN_FPCLASSIFY"
+    ]
+    # Making it compatible with GCC 14+, see https://github.com/SoftFever/OrcaSlicer/pull/7710
+    ++ lib.optionals (stdenv.cc.isGNU && lib.versionAtLeast stdenv.cc.version "14") [
+      "-Wno-error=template-id-cdtor"
+    ]
+  );
 
   NIX_LDFLAGS = toString [
     (lib.optionalString withSystemd "-ludev")
@@ -151,19 +203,30 @@ in stdenv.mkDerivation (finalAttrs: {
 
   preFixup = ''
     gappsWrapperArgs+=(
-      --prefix LD_LIBRARY_PATH : "$out/lib:${lib.makeLibraryPath [ glew ]}"
+      --prefix LD_LIBRARY_PATH : "$out/lib:${
+        lib.makeLibraryPath [
+          glew
+        ]
+      }"
       --set WEBKIT_DISABLE_COMPOSITING_MODE 1
     )
   '';
 
+  postInstall = ''
+    rm $out/LICENSE.txt
+  '';
+
   meta = {
-    description =
-      "G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.)";
+    description = "G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.)";
     homepage = "https://github.com/SoftFever/OrcaSlicer";
-    changelog =
-      "https://github.com/SoftFever/OrcaSlicer/releases/tag/v${finalAttrs.version}";
+    changelog = "https://github.com/SoftFever/OrcaSlicer/releases/tag/v${finalAttrs.version}";
     license = lib.licenses.agpl3Only;
-    maintainers = with lib.maintainers; [ zhaofengli ovlach pinpox liberodark ];
+    maintainers = with lib.maintainers; [
+      zhaofengli
+      ovlach
+      pinpox
+      liberodark
+    ];
     mainProgram = "orca-slicer";
     platforms = lib.platforms.linux;
   };

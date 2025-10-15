@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
+  toggles = import ./../toggles.nix;
   limitedDiscordBin = pkgs.writeShellScriptBin "limited-discord" ''
-    ( sleep 120; ${pkgs.psmisc}/bin/killall -q .Discord-wrappe || true ) &
+    ( sleep ${toString toggles.discord.allowedTime}; ${pkgs.psmisc}/bin/killall -q .Discord-wrappe || true ) &
     exec ${pkgs.discord}/bin/discord "$@"
   '';
 
@@ -17,11 +18,14 @@ let
     keywords = [ "discord" "chat" ];
     startupNotify = false;
   };
+
+
 in
 {
-  environment.systemPackages = [
-    limitedDiscordBin
-    limitedDiscord
-  ];
+  environment.systemPackages =
+    [ ]
+    ++ lib.optional (!(toggles.discord.limit or false)) pkgs.discord
+    ++ lib.optionals (toggles.discord.limit or false) [ limitedDiscord limitedDiscordBin ];
+
 }
 

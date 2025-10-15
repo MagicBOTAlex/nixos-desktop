@@ -17,7 +17,7 @@
       ng = "cd /etc/nginx/ && sudo nvim .";
       copy = "xclip -sel clip";
       pubkey = "cat ~/.ssh/id_ed25519.pub | wl-copy";
-      up = "docker compose up -d";
+      up = "docker compose up -d -t 2";
       down = "docker compose down";
       server = "ssh botserver@192.168.50.82";
       lap = "ssh botlap@192.168.50.144";
@@ -26,10 +26,13 @@
       inspect = "nix edit nixpkgs#$1";
       fe = "nix develop";
       fed = "nvim flake.nix";
+      r = "nix run";
       cdn = "cd /etc/nixos";
       cpu =
         "sudo turbostat --quiet --show PkgWatt --interval 1 --num_iterations 1 | awk 'NR==2{print $1}'";
       vr = "~/Desktop/startvr.sh";
+      dm = "sudo systemctl start display-manager.service";
+      tty = "powerprofilesctl set power-saver && sudo systemctl stop display-manager.service";
     };
 
     interactiveShellInit = ''
@@ -80,6 +83,21 @@
         end
 
         rm -f $before $after
+      end
+
+      function boost
+        powerprofilesctl set performance
+        sudo cpupower frequency-set -u 5.0GHz
+        sudo systemctl stop xmrig
+        sudo systemctl stop monero
+        sudo systemctl stop p2pool
+      end
+      function mine
+        sudo systemctl start monero
+        sudo systemctl start p2pool
+        sudo systemctl start xmrig
+        powerprofilesctl set power-saver
+        sudo cpupower frequency-set -u 3.0GHz
       end
     '';
   };

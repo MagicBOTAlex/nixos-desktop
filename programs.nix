@@ -33,6 +33,10 @@
     # rustdesk
     # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })
+    borgbackup
+    pinta
+    kdePackages.kdenlive
+    kicad-unstable
 
     inkscape
     immich-cli

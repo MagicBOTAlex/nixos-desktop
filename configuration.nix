@@ -22,7 +22,6 @@ flake-overlays:
     ./networking/openvpn-work.nix
     ./networking/networkSetup.nix
 
-    ./modules/limitedDiscord.nix
 
     ./programs.nix
     ./modules/python.nix
@@ -42,6 +41,7 @@ flake-overlays:
 
     # Do not disable under here =========================== Disable in toggles.nix
     ./modules/vr.nix
+    ./modules/limitedDiscord.nix
 
   ];
 

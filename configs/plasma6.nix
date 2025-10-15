@@ -82,22 +82,24 @@ in
     #     accelerationProfile = "none";
     #   };
 
-    window-rules = [{
-      description = "Keep Qalculate on top";
-      match = {
-        window-class = {
-          value = ".*Qalculate.*";
-          type = "regex";
-          match-whole = false;
+    window-rules = [
+      {
+        description = "Keep Qalculate on top";
+        match = {
+          window-class = {
+            value = ".*Qalculate.*";
+            type = "regex";
+            match-whole = false;
+          };
         };
-      };
-      apply = {
-        above = {
-          value = true;
-          apply = "force";
+        apply = {
+          above = {
+            value = true;
+            apply = "force";
+          };
         };
-      };
-    }];
+      }
+    ];
     configFile = {
       # Naw, screw the volume change sound notification
       "plasmaparc"."General"."AudioFeedback" = false;

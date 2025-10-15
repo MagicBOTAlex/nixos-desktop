@@ -13,8 +13,17 @@
   };
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs
+      (old:
+        let
+          version = "575.57.08";
+        in
+        {
+          src = pkgs.fetchurl {
+            urls = [ "https://download.nvidia.com/XFree86/Linux-x86_64/${version}/NVIDIA-Linux-x86_64-${version}.run" ];
+            sha256 = "sha256-KqcB2sGAp7IKbleMzNkB3tjUTlfWBYDwj50o3R//xvI=";
+          };
+        });
     open = false;
     nvidiaSettings = true;
     dynamicBoost.enable = false;
