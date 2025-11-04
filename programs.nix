@@ -87,6 +87,8 @@
     kdePackages.ffmpegthumbs
     kdePackages.kdegraphics-thumbnailers
     qt6.qtimageformats
+    busybox
+    libqalculate
 
   ];
 

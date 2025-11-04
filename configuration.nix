@@ -30,10 +30,12 @@ flake-overlays:
     ./modules/spotify.nix
     ./modules/printing3d.nix
     ./modules/customPackages/oscd.nix
+    ./modules/roblox.nix
 
     ./modules/fishShell.nix
 
     ./users.nix
+    ./modules/ollama.nix
 
     ./modules/de.nix
 
@@ -41,7 +43,7 @@ flake-overlays:
 
     # Do not disable under here =========================== Disable in toggles.nix
     ./modules/vr.nix
-    ./modules/limitedDiscord.nix
+    ./modules/extendedDiscord.nix
 
   ];
 

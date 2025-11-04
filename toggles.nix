@@ -5,6 +5,7 @@
 
   discord = {
     limit = false;
+    extended = false;
     allowedTime = 60 * 2;
   };
 }

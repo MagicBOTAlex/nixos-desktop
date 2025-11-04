@@ -48,6 +48,18 @@
     fsType = "ext4";
   };
 
+  fileSystems."/server" = {
+    device = "botserver@192.168.50.82:/home/botserver";
+    fsType = "sshfs";
+    options = [
+      "nodev"
+      "noatime"
+      "allow_other"
+      "IdentityFile=/root/.ssh/id_ed25519"
+    ];
+  };
+
+
   swapDevices = [
     {
       device = "/dev/disk/by-partuuid/e8d8085f-af3f-49fb-87f8-c3edbd33ea58";

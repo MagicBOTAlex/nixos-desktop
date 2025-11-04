@@ -1,6 +1,6 @@
 # https://nix-community.github.io/plasma-manager/options.xhtml
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   toggles = import ./../toggles.nix;
   term = if (toggles.wezterm.enable or false) then "wezterm" else "konsole";
@@ -8,6 +8,22 @@ let
     url = "https://deprived.dev/assets/zhen/nixos/RuskBackground-nix.png";
     hash = "sha256-bvwUuWclgAo3aBmG2H65YRUIFgh2xjiHMsICcZQOQf8=";
   };
+
+
+  # wrapper that reads /etc/nixos/.env at runtime (impure) ChatGPT, because i don't care if it works
+  haScene = pkgs.writeShellScriptBin "ha-scene" ''
+    set -euo pipefail
+    # Load secrets (impure)
+    if [ -f /etc/nixos/.env ]; then set -a; . /etc/nixos/.env; set +a; fi
+
+    scene=${"\${1:?usage: ha-scene <scene.entity_id>}"}   # <-- no backslash before {
+    data='{"entity_id":"'"$scene"'"}'
+
+    exec ${pkgs.curl}/bin/curl -sS -X POST https://ha.deprived.dev/api/services/scene/turn_on \
+      -H "Authorization: Bearer ${"\${HA_TOKEN}"}" \
+      -H "Content-Type: application/json" \
+      -d "$data"
+  '';
 in
 {
   programs.plasma = {
@@ -72,6 +88,27 @@ in
         key = "Alt+Space";
         command = "qalculate-qt";
       };
+
+      "ha-concentrate" = {
+        name = "Set bedroom lights to concentrate";
+        key = "Meta+F12";
+        command = "ha-scene scene.concentrate";
+      };
+      "ha-minimal" = {
+        name = "Set bedroom lights to minimal";
+        key = "Meta+F11";
+        command = "ha-scene scene.normal";
+      };
+      "ha-normal" = {
+        name = "Turn bedroom lights to normal";
+        key = "Meta+F10";
+        command = "ha-scene scene.minimal";
+      };
+      "ha-off" = {
+        name = "Turn off bedroom lights";
+        key = "Meta+F9";
+        command = "ha-scene scene.off_lights";
+      };
     };
 
     spectacle.shortcuts.launch = "";
@@ -109,6 +146,11 @@ in
       "kwinrc"."Effect-overview"."BorderActivate" = 9;
       "kdeglobals"."General"."fixed" =
         "CozetteVector-nerd,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,nerd";
+      "kdeglobals"."General"."TerminalApplication" = "wezterm start --cwd .";
+      "kdeglobals"."General"."TerminalService" = "org.wezfurlong.wezterm.desktop";
+      "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
+      "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
+      "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;
@@ -122,7 +164,7 @@ in
 
   home.packages = with pkgs; [
     qalculate-qt
-
+    haScene
   ];
 
   home.file.".config/kwalletrc".text = ''

@@ -1,16 +1,27 @@
 { pkgs, lib, ... }:
 let
   toggles = import ./../toggles.nix;
+
+
+  limit = toggles.discord.limit or false;
+  extended = toggles.discord.extended or false;
+  discord =
+    if limit then [ limitedDiscord limitedDiscordBin ]
+    else if extended then [ pkgs.legcord ]
+    else [ pkgs.discord ];
+
+
   limitedDiscordBin = pkgs.writeShellScriptBin "limited-discord" ''
     ( sleep ${toString toggles.discord.allowedTime}; ${pkgs.psmisc}/bin/killall -q .Discord-wrappe || true ) &
-    exec ${pkgs.discord}/bin/discord "$@"
+    exec ${discord}/bin/discord "$@"
   '';
+
 
   limitedDiscord = pkgs.makeDesktopItem {
     name = "limited-discord";
     desktopName = "Discord (Limited)";
     genericName = "Custom Discord";
-    icon = "discord"; # uses system icon theme
+    icon = "discord";
     exec = "limited-discord %U";
     terminal = false;
     type = "Application";
@@ -22,10 +33,6 @@ let
 
 in
 {
-  environment.systemPackages =
-    [ ]
-    ++ lib.optional (!(toggles.discord.limit or false)) pkgs.discord
-    ++ lib.optionals (toggles.discord.limit or false) [ limitedDiscord limitedDiscordBin ];
-
+  environment.systemPackages = [ ] ++ discord;
 }
 

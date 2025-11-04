@@ -3,6 +3,7 @@
     # get pinned version of nixpkgs. update with `nix flake update nixpkgs` or `nix flake update` for all inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     # home manager
     home-manager = {
@@ -33,9 +34,10 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self, nixpkgs-xr, spicetify-nix, nixpkgs, nix-matlab, ... }@inputs:
+    { self, nixpkgs-xr, spicetify-nix, nixpkgs, nix-matlab, nix-flatpak, ... }@inputs:
     let flake-overlays = [ nix-matlab.overlay ];
-    in {
+    in
+    {
 
       # configuration name matches hostname, so this system is chosen by default
       nixosConfigurations = {
@@ -58,6 +60,7 @@
             inputs.nix-index-database.nixosModules.nix-index
 
             nixpkgs-xr.nixosModules.nixpkgs-xr
+            nix-flatpak.nixosModules.nix-flatpak
 
             { programs.nix-index-database.comma.enable = true; }
           ];

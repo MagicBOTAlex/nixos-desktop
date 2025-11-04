@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    nodejs_22
+    nodejs_24
     nodePackages.live-server
     nodePackages.serve
   ];
