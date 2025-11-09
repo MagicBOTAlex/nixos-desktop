@@ -33,6 +33,8 @@
       vr = "~/Desktop/startvr.sh";
       dm = "sudo systemctl start display-manager.service";
       tty = "powerprofilesctl set power-saver && sudo systemctl stop display-manager.service";
+      btop = "sudo /home/botmain/.nix-profile/bin/btop";
+      yaaumma-server = "ssh zhen@188.245.106.241";
     };
 
     interactiveShellInit = ''
@@ -101,4 +103,26 @@
       end
     '';
   };
+
+
+  security.sudo.extraRules = [
+    {
+      users = [ "botmain" ];
+      commands = [
+        {
+          command = "/home/botmain/.nix-profile/bin/btop";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/systemctl";
+          options = [ "NOPASSWD" ];
+        }
+        {
+          command = "/run/current-system/sw/bin/cpupower";
+          options = [ "NOPASSWD" ];
+        }
+
+      ];
+    }
+  ];
 }

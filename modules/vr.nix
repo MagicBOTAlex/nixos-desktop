@@ -4,8 +4,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "MagicBOTAlex";
       repo = "oscavmgr";
-      rev = "7ecd8fb";
-      hash = "sha256-QP9JOpb2l6yF9jA+RJgAyyE2RxxpoP7XvDeSoGaZc2c=";
+      rev = "b455883";
+      hash = "sha256-mY2CPtEGktmIlVto/UaNLtRyT9A88cS+KcRYKVlV394=";
     };
   });
   toggles = import ./../toggles.nix;

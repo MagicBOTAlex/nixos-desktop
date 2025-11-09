@@ -89,6 +89,7 @@
     qt6.qtimageformats
     busybox
     libqalculate
+    coppwr
 
   ];
 

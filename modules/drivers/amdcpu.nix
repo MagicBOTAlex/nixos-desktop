@@ -7,7 +7,7 @@
 
   boot = {
     kernelModules = [ "kvm-amd" "amdgpu" "k10temp" ];
-    kernelParams = [ "amd_iommu=on" "iommu=pt" "amd_pstate=active" ];
+    kernelParams = [ "amd_iommu=on" "iommu=pt" "amd_pstate=disactive" ];
   };
 
   powerManagement.cpuFreqGovernor = "ondemand";

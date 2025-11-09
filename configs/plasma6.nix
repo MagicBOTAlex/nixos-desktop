@@ -165,6 +165,7 @@ in
   home.packages = with pkgs; [
     qalculate-qt
     haScene
+    cups-brother-dcpl3550cdw
   ];
 
   home.file.".config/kwalletrc".text = ''

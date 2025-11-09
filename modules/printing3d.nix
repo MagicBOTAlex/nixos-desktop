@@ -63,15 +63,28 @@ let
   orcaSlicerMimeappsList =
     pkgs.writeText "orca-slicer-mimeapps.list" mimeappsListContent;
 
+
+  # freecad-nightly = pkgs.freecad.overrideAttrs
+  #   (fina: prev: {
+  #
+  #     patches = [ ];
+  #     version = "9e7b5f6";
+  #     src = pkgs.fetchFromGitHub {
+  #       owner = "FreeCAD";
+  #       repo = "FreeCAD";
+  #       rev = "9e7b5f6";
+  #       hash = "sha256-fkdRbIT6pITetwHK54t2dWAAVtxOzJH0z+EVlcPc3iQ=";
+  #     };
+  #   });
 in
 {
   environment.systemPackages = [
     # pkgs.freecad
-    (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
+    # (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
     # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { })
     # pkgs.orca-slicer
     orcaSlicerDesktopItem
-
+    freecad-nightly
   ];
   # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 
