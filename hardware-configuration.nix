@@ -62,10 +62,15 @@
 
   swapDevices = [
     {
-      device = "/dev/disk/by-partuuid/e8d8085f-af3f-49fb-87f8-c3edbd33ea58";
-      randomEncryption.enable = true;
+      device = "/dev/disk/by-partuuid/5cf85b3a-ea07-47a3-a0f7-0c3cb939467b";
+      # randomEncryption.enable = true;
     }
+    # {
+    #   device = "/swapfile";
+    #   size = 64 * 1024;
+    # }
   ];
+  zramSwap.enable = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

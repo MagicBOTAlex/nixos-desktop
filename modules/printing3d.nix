@@ -76,15 +76,53 @@ let
   #       hash = "sha256-fkdRbIT6pITetwHK54t2dWAAVtxOzJH0z+EVlcPc3iQ=";
   #     };
   #   });
+
+  freecadAppImageSrc = pkgs.fetchurl {
+    url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.11.05/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage";
+    sha256 = "sha256-aYL4PVKqklGun/53uBoZ/txcg4KqCHTCEFd0aVR6vAE=";
+  };
+
+  freecadAppImage = pkgs.stdenvNoCC.mkDerivation {
+    pname = "freecad-weekly-appimage";
+    version = "2025.11.05";
+    src = freecadAppImageSrc;
+    dontUnpack = true;
+
+    installPhase = ''
+      mkdir -p $out/opt/freecad-weekly
+      cp "$src" "$out/opt/freecad-weekly/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage"
+      chmod +x "$out/opt/freecad-weekly/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage"
+    '';
+  };
+
+  freecadWrapper = pkgs.writeShellScriptBin "freecad-weekly" ''
+    exec ${pkgs.appimage-run}/bin/appimage-run \
+      ${freecadAppImage}/opt/freecad-weekly/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage "$@"
+  '';
+
+  freecadDesktop = pkgs.makeDesktopItem {
+    name = "freecad-weekly";
+    desktopName = "FreeCAD";
+    comment = "FreeCAD 1.1 weekly preview (2025-11-05)";
+    exec = "freecad-weekly";
+    icon = "freecad";
+    categories = [ "Graphics" "3DGraphics" "Engineering" ];
+    terminal = false;
+  };
 in
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     # pkgs.freecad
     # (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
     # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { })
     # pkgs.orca-slicer
     orcaSlicerDesktopItem
-    freecad-nightly
+    orcaPkg
+    freecadAppImage
+    freecadWrapper
+    freecadDesktop
+    nanum
+    nanum-gothic-coding
   ];
   # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 

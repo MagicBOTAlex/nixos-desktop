@@ -3,6 +3,7 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.cudaSupport = true;
+  nixpkgs.config.cudaVersion = "12.0";
 
   boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
@@ -13,17 +14,18 @@
   };
 
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs
-      (old:
-        let
-          version = "575.57.08";
-        in
-        {
-          src = pkgs.fetchurl {
-            urls = [ "https://download.nvidia.com/XFree86/Linux-x86_64/${version}/NVIDIA-Linux-x86_64-${version}.run" ];
-            sha256 = "sha256-KqcB2sGAp7IKbleMzNkB3tjUTlfWBYDwj50o3R//xvI=";
-          };
-        });
+    # package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs
+    #   (old:
+    #     let
+    #       version = "575.57.08";
+    #     in
+    #     {
+    #       src = pkgs.fetchurl {
+    #         urls = [ "https://download.nvidia.com/XFree86/Linux-x86_64/${version}/NVIDIA-Linux-x86_64-${version}.run" ];
+    #         sha256 = "sha256-KqcB2sGAp7IKbleMzNkB3tjUTlfWBYDwj50o3R//xvI=";
+    #       };
+    #     });
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     open = false;
     nvidiaSettings = true;
     dynamicBoost.enable = false;

@@ -44,6 +44,7 @@ flake-overlays:
     # Do not disable under here =========================== Disable in toggles.nix
     ./modules/vr.nix
     ./modules/extendedDiscord.nix
+    ./modules/bootOptions.nix
 
   ];
 
@@ -68,7 +69,8 @@ flake-overlays:
         # Your own overlays...
       })
   ] ++ flake-overlays;
-  environment.systemPackages = with pkgs; [ matlab ];
+  environment.systemPackages = with pkgs; [ ];
+  nixpkgs.config.allowBroken = true;
 
   # nix.settings.post-build-hook = pkgs.writeScript "upload-to-cache" ''
   #   #!/bin/sh
@@ -80,10 +82,6 @@ flake-overlays:
 
   environment.variables.EDITOR = "nvim";
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 2;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

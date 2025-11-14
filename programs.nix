@@ -17,7 +17,7 @@
     killall
     # fontforge
     gparted
-    prismlauncher
+    # prismlauncher
     mission-center
     ungoogled-chromium
     megasync
@@ -42,7 +42,7 @@
     immich-cli
     drawio
     sg3_utils
-    linuxKernel.packages.linux_6_12.turbostat
+    # linuxKernel.packages.linux_6_12.turbostat
     unityhub
     cheese
     legendary-gl # Epic games

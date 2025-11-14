@@ -8,4 +8,9 @@
     extended = false;
     allowedTime = 60 * 2;
   };
+
+  kernel.useCachyOS = true;
+  boot = {
+    mineboot.enable = true;
+  };
 }

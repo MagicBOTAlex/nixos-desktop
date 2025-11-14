@@ -31,35 +31,47 @@ let
   #     cp updated-fixed.ovpn $out/updated.ovpn
   #   '';
   # };
+
+  # openvpn = pkgs.openvpn.override {
+  #   openssl = pkgs.openssl_legacy;
+  # };
+
 in
 {
   nixpkgs.overlays = [
     (final: prev: {
-      openvpn = prev.openvpn.override { openssl = prev.openssl_legacy; };
+      openvpn = prev.openvpn.override {
+        openssl = prev.openssl_legacy;
+      };
     })
   ];
 
-  # services.openvpn.servers = {
-  #   work = {
-  #     updateResolvConf = true;
-  #     # Use 'config' with builtins.readFile to read the fixed config
-  #     config = builtins.readFile "${vpnConfig}/updated.ovpn";
-  #     autoStart = false;
-  #   };
-  #   };
-
-  systemd.services.openvpn-work = {
-    description = "OpenVPN – work";
-    wants = [ "network-online.target" ];
-    after = [ "network-online.target" ];
-
-    # no wantedBy => it won't autostart (matches autoStart = false)
-    wantedBy = [ ];
-
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.openvpn}/bin/openvpn --config /mnt/win/Users/BOTAlex/OpenVPN/config/updated.ovpn";
-      Restart = "on-failure";
+  services.openvpn.servers = {
+    work = {
+      updateResolvConf = true;
+      # Use 'config' with builtins.readFile to read the fixed config
+      config = ''
+        cd /mnt/win/Users/BOTAlex/OpenVPN/config
+        config updated.ovpn
+      '';
+      autoStart = false;
     };
   };
+
+  # environment.systemPackages = with pkgs; [ openvpn ];
+  # systemd.services.openvpn-work = {
+  #   description = "OpenVPN – work";
+  #   wants = [ "network-online.target" ];
+  #   after = [ "network-online.target" ];
+  #
+  #   # empty => no autostart
+  #   wantedBy = [ ];
+  #
+  #   serviceConfig = {
+  #     WorkingDirectory = "/mnt/win/Users/BOTAlex/OpenVPN/config";
+  #     Type = "simple";
+  #     ExecStart = "${openvpn}/bin/openvpn --config updated.ovpn";
+  #     Restart = "on-failure";
+  #   };
+  # };
 }
