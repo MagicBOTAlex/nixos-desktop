@@ -37,6 +37,7 @@
     pinta
     kdePackages.kdenlive
     kicad-unstable
+    gcc
 
     inkscape
     immich-cli

@@ -4,9 +4,9 @@
 
     shellAliases = {
       nrb =
-        "sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
+        "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
       nrbs =
-        "sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
+        "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
       nrbr = "nrb && sudo reboot now";
       ni = "nvim /etc/nixos/configuration.nix";
       bat =

@@ -6,23 +6,22 @@ let
   limit = toggles.discord.limit or false;
   extended = toggles.discord.extended or false;
   discord =
-    if limit then [ limitedDiscord limitedDiscordBin ]
+    if limit then [ modDiscord limitedDiscordBin ]
     else if extended then [ pkgs.legcord ]
     else [ pkgs.discord ];
 
 
   limitedDiscordBin = pkgs.writeShellScriptBin "limited-discord" ''
     ( sleep ${toString toggles.discord.allowedTime}; ${pkgs.psmisc}/bin/killall -q .Discord-wrappe || true ) &
-    exec ${discord}/bin/discord "$@"
+    exec ${pkgs.discord}/bin/discord "$@"
   '';
 
 
-  limitedDiscord = pkgs.makeDesktopItem {
-    name = "limited-discord";
-    desktopName = "Discord (Limited)";
-    genericName = "Custom Discord";
+  modDiscord = pkgs.makeDesktopItem {
+    name = "discord";
+    desktopName = "Discord";
     icon = "discord";
-    exec = "limited-discord %U";
+    exec = if limit then "${limitedDiscordBin}/bin/limited-discord %U" else ''exec ${discord}/bin/discord "$@"'';
     terminal = false;
     type = "Application";
     categories = [ "Network" "InstantMessaging" ];
