@@ -3,10 +3,13 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6 = { enable = true; };
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
-    bluedevil # baller
+    bluedevil
+    bluez-qt
+    pkgs.openobex
+    pkgs.obexftp
   ];
   services.blueman.enable =
-    true; # fuck KDE's default bluetooth. blueman can auto connect
+    true;
 
   imports = [ ./../chinese-keyboard.nix ];
 

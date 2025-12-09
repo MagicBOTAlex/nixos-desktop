@@ -55,6 +55,7 @@ in
       plasmashell."activate application launcher" = "Meta+S";
       plasmashell."kill window" = "Shift+Alt+F4";
       kwin = { "Window Maximize" = "Meta+Up"; };
+      "kaccess"."Toggle Screen Reader On and Off" = "none,Meta+Alt+S,Toggle Screen Reader On and Off";
 
     };
 

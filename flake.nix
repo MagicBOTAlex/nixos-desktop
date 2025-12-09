@@ -3,7 +3,7 @@
     # get pinned version of nixpkgs. update with `nix flake update nixpkgs` or `nix flake update` for all inputs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     nix-meshroom.url = "github:hesiod/nixpkgs/meshroom";
     nix-alice.url = "github:hesiod/nixpkgs/alice-vision";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -35,7 +35,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self, nixpkgs-xr, spicetify-nix, nixpkgs, nix-flatpak, minemouth, nix-meshroom, nix-alice, chaotic, ... }@inputs:
+    { self, nixpkgs-xr, spicetify-nix, nixpkgs, flatpaks, minemouth, nix-meshroom, nix-alice, chaotic, ... }@inputs:
     let flake-overlays = [
       (final: prev: {
         libsForQt5 = (prev.libsForQt5 or { }) // {
@@ -49,6 +49,7 @@
       # configuration name matches hostname, so this system is chosen by default
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
+
           # pass along all the inputs and stuff to the system function
           specialArgs = { inherit inputs; };
           modules = [
@@ -72,7 +73,7 @@
             inputs.nix-index-database.nixosModules.nix-index
 
             nixpkgs-xr.nixosModules.nixpkgs-xr
-            nix-flatpak.nixosModules.nix-flatpak
+            inputs.flatpaks.nixosModules.default
 
             { programs.nix-index-database.comma.enable = true; }
           ];

@@ -16,7 +16,7 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "p2pool";
-  version = "4.11";
+  version = "4.12";
 
   src = fetchFromGitHub {
     owner = "SChernykh";

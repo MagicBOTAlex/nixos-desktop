@@ -12,6 +12,15 @@
   services.monero = {
     enable = true;
 
+    prune = true;
+    dataDir = "/var/lib/monero";
+
+    rpc = {
+      address = "0.0.0.0";
+      user = "alex";
+      password = "alexalexalex";
+    };
+
     # your priority peers
     priorityNodes = [
       "p2pmd.xmrvsbeast.com:18080"
@@ -21,11 +30,13 @@
     # pass raw monerod flags (same names as CLI without the --)
     extraConfig = ''
       zmq-pub=tcp://127.0.0.1:18083
+
       out-peers=32
       in-peers=64
       enforce-dns-checkpointing=1
       enable-dns-blocklist=1
-      prune-blockchain=1
+
+      confirm-external-bind=1
     '';
   };
 
@@ -45,7 +56,7 @@
       SendSIGKILL = true; # make sure SIGKILL is sent
 
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
-      ExecStart = "${ (pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }) }/bin/p2pool --host 0.0.0.0 --stratum 0.0.0.0:3333 --wallet ${"$"}{XMR_WALLET}";
+      ExecStart = "${ (pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }) }/bin/p2pool --rpc-login alex:alexalexalex --host 0.0.0.0 --stratum 0.0.0.0:3333 --wallet ${"$"}{XMR_WALLET}";
       Restart = "always";
       RestartSec = 5;
       EnvironmentFile = "/etc/nixos/.env";

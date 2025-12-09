@@ -27,6 +27,15 @@ in
             mods = 'CTRL',
           }),
         },
+        -- Ctrl+Shift+V -> send Ctrl+V to the app (e.g. Neovim)
+        {
+          key = 'v',
+          mods = 'CTRL|SHIFT',
+          action = act.SendKey {
+            key = 'v',
+            mods = 'CTRL',
+          },
+        },
       }
 
       config.enable_wayland = false

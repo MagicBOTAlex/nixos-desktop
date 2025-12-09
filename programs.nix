@@ -6,7 +6,6 @@
     curl
     fastfetch
     tree
-    pigz
     ncdu
     screen
     nixfmt-tree
@@ -17,11 +16,11 @@
     killall
     # fontforge
     gparted
-    # prismlauncher
+    prismlauncher
     mission-center
     ungoogled-chromium
     megasync
-    dotnet-sdk_8
+    # dotnet-sdk_8
     nuget-to-json
     vlc
     filezilla
@@ -29,7 +28,6 @@
     krita
     jq
     sublime-merge
-    blender
     # rustdesk
     # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })
@@ -38,6 +36,7 @@
     kdePackages.kdenlive
     kicad-unstable
     gcc
+    signal-desktop
 
     inkscape
     immich-cli
@@ -51,6 +50,7 @@
     pigz
     heroic
     unzip
+    argocd
 
     wineWowPackages.waylandFull
     # winetricks
@@ -91,6 +91,7 @@
     busybox
     libqalculate
     coppwr
+    mqtt-explorer
 
   ];
 
@@ -100,5 +101,6 @@
   nixpkgs.config.permittedInsecurePackages = [
     "libxml2-2.13.8" # For unityhub
     "libsoup-2.74.3" # Unityhub
+    "segger-jlink-qt4-874"
   ];
 }

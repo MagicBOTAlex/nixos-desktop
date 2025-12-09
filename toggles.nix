@@ -4,10 +4,12 @@
   wezterm.enable = true;
 
   discord = {
-    limit = true;
+    limit = false;
     extended = false;
     allowedTime = 60;
   };
+
+  blender.version = "5.0.0";
 
   kernel.useCachyOS = true;
   boot = {

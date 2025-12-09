@@ -78,8 +78,8 @@ let
   #   });
 
   freecadAppImageSrc = pkgs.fetchurl {
-    url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.11.05/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage";
-    sha256 = "sha256-aYL4PVKqklGun/53uBoZ/txcg4KqCHTCEFd0aVR6vAE=";
+    url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.11.26/FreeCAD_weekly-2025.11.26-Linux-x86_64-py311.AppImage";
+    sha256 = "sha256-THtOFjyJZZ5OpumD2Wz5jWCD2iZBNTWpHLc1vESWy9c=";
   };
 
   freecadAppImage = pkgs.stdenvNoCC.mkDerivation {
@@ -116,13 +116,13 @@ in
     # (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
     # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { })
     # pkgs.orca-slicer
-    orcaSlicerDesktopItem
-    orcaPkg
+    # orcaSlicerDesktopItem
+    # orcaPkg
     freecadAppImage
     freecadWrapper
     freecadDesktop
-    nanum
-    nanum-gothic-coding
+    # nanum
+    # nanum-gothic-coding
   ];
   # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 

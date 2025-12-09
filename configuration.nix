@@ -30,7 +30,11 @@ flake-overlays:
     ./modules/spotify.nix
     ./modules/printing3d.nix
     ./modules/customPackages/oscd.nix
-    ./modules/roblox.nix
+    ./modules/flatpak.nix
+    ./modules/pigz.nix
+    ./modules/nrf.nix
+    ./modules/brotherPrinter.nix
+    ./modules/blender.nix
 
     ./modules/fishShell.nix
 
