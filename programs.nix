@@ -28,6 +28,7 @@
     krita
     jq
     sublime-merge
+    python313Packages.fonttools
     # rustdesk
     # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })

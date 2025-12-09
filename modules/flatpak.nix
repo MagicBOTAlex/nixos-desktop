@@ -24,14 +24,23 @@
         ];
 
         Environment = {
-          "__GLX_VENDOR_LIBRARY_NAME" = "mesa";
-          "__EGL_VENDOR_LIBRARY_FILENAMES" = "/usr/lib/x86_64-linux-gnu/GL/default/share/glvnd/egl_vendor.d/50_mesa.json";
+          "LC_ALL" = "C";
           "MESA_LOADER_DRIVER_OVERRIDE" = "zink";
+          "WEBKIT_DISABLE_DMABUF_RENDERER" = "1";
+          "__EGL_VENDOR_LIBRARY_FILENAMES" = "${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json";
           "GALLIUM_DRIVER" = "zink";
-          "WEBKIT_DISABLE_DMABUF_RENDERER" = 1;
         };
       };
     };
   };
 }
 
+
+# flatpak override --user \
+#   --env=LC_ALL=C \
+#   --env=MESA_LOADER_DRIVER_OVERRIDE=zink \
+#   --env=WEBKIT_DISABLE_DMABUF_RENDERER=1 \
+#   --env=__EGL_VENDOR_LIBRARY_FILENAMES=/usr/lib/x86_64-linux-gnu/GL/default/share/glvnd/egl_vendor.d/50_mesa.json \
+#   --env=GALLIUM_DRIVER=zink \
+#   io.github.softfever.OrcaSlicer
+#

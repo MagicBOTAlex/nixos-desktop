@@ -77,6 +77,20 @@ let
   #     };
   #   });
 
+  orca-slicer-gitfix = pkgs.symlinkJoin {
+    name = "orca-slicer";
+    paths = [ pkgs.orca-slicer ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/orca-slicer \
+        --prefix LC_ALL : C \
+        --prefix MESA_LOADER_DRIVER_OVERRIDE : zink \
+        --prefix WEBKIT_DISABLE_DMABUF_RENDERER : 1 \
+        --prefix __EGL_VENDOR_LIBRARY_FILENAMES : ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json \
+        --prefix GALLIUM_DRIVER : zink
+    '';
+  };
+
   freecadAppImageSrc = pkgs.fetchurl {
     url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.11.26/FreeCAD_weekly-2025.11.26-Linux-x86_64-py311.AppImage";
     sha256 = "sha256-THtOFjyJZZ5OpumD2Wz5jWCD2iZBNTWpHLc1vESWy9c=";
@@ -118,6 +132,7 @@ in
     # pkgs.orca-slicer
     # orcaSlicerDesktopItem
     # orcaPkg
+    # orca-slicer-gitfix
     freecadAppImage
     freecadWrapper
     freecadDesktop
