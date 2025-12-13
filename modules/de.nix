@@ -43,11 +43,7 @@
       remap = [{
         input = [ "KEY_LEFTALT" "KEY_LEFTCTRL" ];
         output = [ "KEY_RIGHTALT" ];
-      }
-        {
-          input = [ "KEY_LEFTMETA" "KEY_LEFTCTRL" ];
-          output = [ "KEY_LEFTCTRL" "KEY_LEFTALT" ];
-        }];
+      }];
     };
   };
 

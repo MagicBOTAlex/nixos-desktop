@@ -84,6 +84,7 @@ in
       ninja
       pkg-config
       yarn
+      nixfmt
       texlivePackages.latex
       tree-sitter
     ];

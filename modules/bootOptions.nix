@@ -14,6 +14,7 @@ in
         efiSupport = true;
         devices = [ "nodev" ]; # UEFI: don’t write to a disk MBR
         default = "0";
+        useOSProber = true;
       };
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.efi.efiSysMountPoint = "/boot";
@@ -22,7 +23,7 @@ in
 
     # CachyOS kernel
     (
-      lib.mkIf (toggles.kernel.useCachy or false) {
+      lib.mkIf (toggles.kernel.useCachyOS) {
         boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
       }
     )

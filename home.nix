@@ -1,16 +1,18 @@
 { pkgs, lib, ... }:
 let toggles = import ./toggles.nix;
-in {
+in
+{
   imports = [
     ./modules/nvim.nix
     ./configs/plasma6.nix
+    ./configs/ydotoolShortcuts.nix
     ./homeModules/btop.nix
     ./homeModules/firefox.nix
 
     # Do not disable under here =========================== Disable in toggles.nix
     ./homeModules/vr.nix
   ] ++ lib.optional (toggles.vscode.enable) ./homeModules/vscode.nix
-    ++ lib.optional (toggles.wezterm.enable or false) ./homeModules/wezterm.nix;
+  ++ lib.optional (toggles.wezterm.enable or false) ./homeModules/wezterm.nix;
 
   # packages only for this user
   home.packages = [ ];

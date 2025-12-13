@@ -56,6 +56,8 @@ in
       plasmashell."kill window" = "Shift+Alt+F4";
       kwin = { "Window Maximize" = "Meta+Up"; };
       "kaccess"."Toggle Screen Reader On and Off" = "none,Meta+Alt+S,Toggle Screen Reader On and Off";
+      "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = ",Meta+Alt+L,Switch to Last-Used Keyboard Layout";
+      "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = ",Meta+Alt+K,Switch to Next Keyboard Layout";
 
     };
 
@@ -138,6 +140,7 @@ in
         };
       }
     ];
+
     configFile = {
       # Naw, screw the volume change sound notification
       "plasmaparc"."General"."AudioFeedback" = false;
@@ -152,6 +155,12 @@ in
       "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
       "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
       "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
+
+      "kxkbrc"."Layout"."Use" = true;
+      "kxkbrc"."Layout"."DisplayNames" = ",";
+      "kxkbrc"."Layout"."LayoutList" = "dk,cn";
+      "kxkbrc"."Layout"."VariantList" = "winkeys,";
+      "kwinrc"."Wayland"."InputMethod" = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;

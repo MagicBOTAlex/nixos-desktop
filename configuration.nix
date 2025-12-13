@@ -13,6 +13,7 @@ flake-overlays:
     ./hardware-configuration.nix
     ./aliases.nix
     ./docker.nix
+    # ./modules/k8s.nix
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
     ./modules/drivers/amdcpu.nix
@@ -35,6 +36,9 @@ flake-overlays:
     ./modules/nrf.nix
     ./modules/brotherPrinter.nix
     ./modules/blender.nix
+    ./modules/ydotool.nix
+    ./modules/rust.nix
+    ./modules/chinese-keyboard.nix
 
     ./modules/fishShell.nix
 
