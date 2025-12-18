@@ -29,6 +29,7 @@
     jq
     sublime-merge
     python313Packages.fonttools
+    kiwix
     # rustdesk
     # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })

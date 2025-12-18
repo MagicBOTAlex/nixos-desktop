@@ -51,6 +51,7 @@ let
     libclang
     libxkbcommon
     openssl
+    openvr
     openxr-loader
     pango
     pipewire
@@ -120,6 +121,7 @@ in
       [
         motoc # Quest to PC tracking calibration
         # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
+        selectedWlx
         wayvr-dashboard
         # (pkgs.callPackage ./submodules/vrcft.nix { })
         modded-oscavmgr
@@ -127,7 +129,6 @@ in
         # inputs.avalonia.packages.x86_64-linux.default
         eepyxr
         bs-manager
-        selectedWlx
         openvr
         # wivrn
       ] ++ randomLibs;

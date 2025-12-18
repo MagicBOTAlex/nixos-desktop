@@ -7,7 +7,7 @@ in
     {
       hardware.enableRedistributableFirmware = true;
       boot.initrd.kernelModules = [ "amdgpu" ];
-      boot.kernelParams = [ "quiet" "splash" "usbcore.autosuspend=120" ];
+      boot.kernelParams = [ "quiet" "splash" "usbcore.autosuspend=120" "nr_hugepages=4096" ];
       # boot.consoleLogLevel = 0;
       boot.loader.grub = {
         enable = true;

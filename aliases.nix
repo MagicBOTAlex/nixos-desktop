@@ -89,7 +89,7 @@
 
       function boost
         powerprofilesctl set performance
-        sudo cpupower frequency-set -u 5.0GHz
+        sudo cpupower frequency-set -u 5.5GHz
         sudo systemctl stop xmrig -f &
         sudo systemctl stop monero -f &
         sudo systemctl stop p2pool -f &
@@ -99,14 +99,14 @@
         sudo systemctl start p2pool
         sudo systemctl start xmrig
         powerprofilesctl set power-saver
-        sudo cpupower frequency-set -u 3.0GHz
+        sudo cpupower frequency-set -u 3.5GHz
       end
       function mine-tty
         sudo systemctl start monero
         sudo systemctl start p2pool
         sudo systemctl start xmrig
         powerprofilesctl set power-saver
-        sudo cpupower frequency-set -u 3.0GHz
+        sudo cpupower frequency-set -u 3.5GHz
         tty
       end
     '';
