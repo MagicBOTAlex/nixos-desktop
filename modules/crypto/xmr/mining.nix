@@ -1,9 +1,10 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     # xmrig
-    (
-      pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }
-    )
+    # (
+    #   pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }
+    # )
+    p2pool
     monero-cli
     # (pkgs.callPackage ../../customPackages/xmrig-cuda/xmrig-cuda.nix { })
     # (pkgs.callPackage ../../customPackages/gminer/gminer.nix { })

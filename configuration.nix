@@ -39,11 +39,13 @@ flake-overlays:
     ./modules/ydotool.nix
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
+    ./modules/ledfx.nix
 
     ./modules/fishShell.nix
 
     ./users.nix
     ./modules/ollama.nix
+    ./modules/meshroom.nix
 
     ./modules/de.nix
 
@@ -98,7 +100,7 @@ flake-overlays:
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
+  # Enable networkinrg
   networking.networkmanager.enable = true;
 
   # Set your time zone.

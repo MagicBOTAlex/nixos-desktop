@@ -65,6 +65,15 @@
       device = "/dev/disk/by-partuuid/5cf85b3a-ea07-47a3-a0f7-0c3cb939467b";
       # randomEncryption.enable = true;
     }
+    {
+      device = "/dev/nvme1n1p1";
+    }
+    {
+      device = "/dev/sdc2";
+    }
+    {
+      device = "/dev/sdd1";
+    }
     # {
     #   device = "/swapfile";
     #   size = 64 * 1024;

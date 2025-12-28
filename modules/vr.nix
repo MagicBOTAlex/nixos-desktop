@@ -62,20 +62,21 @@ let
     xorg.libxcb
   ];
 
+  selectedWlx = pkgs.wlx-overlay-s;
 
-  selectedWlx = pkgs.wlx-overlay-s.overrideAttrs (final: old: {
-    buildInputs = randomLibs;
-    src = pkgs.fetchFromGitHub {
-      owner = "MagicBOTAlex";
-      repo = "wlx-overlay-s";
-      rev = "main";
-      hash = "sha256-RCJWi5NGyS7wWb3XDrG8XRNizuiitRc06eksxfLvyws=";
-    };
+  # selectedWlx = pkgs.wlx-overlay-s.overrideAttrs (final: old: {
+  #   buildInputs = randomLibs;
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "MagicBOTAlex";
+  #     repo = "wlx-overlay-s";
+  #     rev = "main";
+  #     hash = "sha256-RCJWi5NGyS7wWb3XDrG8XRNizuiitRc06eksxfLvyws=";
+  #   };
+  #
+  #   postPatch = ''
+  # '';
 
-    postPatch = ''
-  '';
-
-  });
+  # });
   # selectedWlx = pkgs.wlx-overlay-s.overrideAttrs (final: old: {
   #   buildInputs = randomLibs;
   #   src = pkgs.fetchFromGitHub {

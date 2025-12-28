@@ -5,6 +5,7 @@ let
 in
 {
   environment.systemPackages = with pkgs; [
+    (pkgs.callPackage ./customPackages/meshroom/meshroom.nix { })
   ];
 }
 

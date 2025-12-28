@@ -9,7 +9,7 @@
     ncdu
     screen
     nixfmt-tree
-    ffmpeg-full
+    ffmpeg
 
     ### Desktop programs
     wl-clipboard
@@ -94,6 +94,7 @@
     libqalculate
     coppwr
     mqtt-explorer
+    ledfx
 
   ];
 
@@ -104,5 +105,6 @@
     "libxml2-2.13.8" # For unityhub
     "libsoup-2.74.3" # Unityhub
     "segger-jlink-qt4-874"
+    "qtwebengine-5.15.19"
   ];
 }
