@@ -4,9 +4,9 @@
   wezterm.enable = true;
 
   discord = {
-    limit = false;
+    limit = true;
     extended = false;
-    allowedTime = 60;
+    allowedTime = 180;
   };
 
   blender.version = "5.0.0";

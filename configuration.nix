@@ -3,8 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 # All overlays given by flakes
-flake-overlays:
-
 { config, pkgs, lib, inputs, ... }:
 
 {
@@ -23,6 +21,7 @@ flake-overlays:
     ./networking/openvpn-work.nix
     ./networking/networkSetup.nix
 
+    ./overlays.nix
 
     ./programs.nix
     ./modules/python.nix
@@ -72,13 +71,6 @@ flake-overlays:
       "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
     ];
   };
-
-  nixpkgs.overlays = [
-    (final: prev:
-      {
-        # Your own overlays...
-      })
-  ] ++ flake-overlays;
   environment.systemPackages = with pkgs; [ ];
   nixpkgs.config.allowBroken = true;
 

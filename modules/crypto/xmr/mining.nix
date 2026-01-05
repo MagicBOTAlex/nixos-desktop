@@ -57,7 +57,8 @@
       SendSIGKILL = true; # make sure SIGKILL is sent
 
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 5";
-      ExecStart = "${ (pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }) }/bin/p2pool --rpc-login alex:alexalexalex --host 0.0.0.0 --stratum 0.0.0.0:3333 --wallet ${"$"}{XMR_WALLET}";
+      # ExecStart = "${ (pkgs.callPackage ../../customPackages/p2pool/p2pool.nix { }) }/bin/p2pool --rpc-login alex:alexalexalex --host 0.0.0.0 --stratum 0.0.0.0:3333 --wallet ${"$"}{XMR_WALLET}";
+      ExecStart = "${ pkgs.p2pool }/bin/p2pool --rpc-login alex:alexalexalex --host 0.0.0.0 --stratum 0.0.0.0:3333 --wallet ${"$"}{XMR_WALLET}";
       Restart = "always";
       RestartSec = 5;
       EnvironmentFile = "/etc/nixos/.env";

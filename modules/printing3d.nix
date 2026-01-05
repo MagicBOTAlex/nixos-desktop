@@ -92,8 +92,8 @@ let
   };
 
   freecadAppImageSrc = pkgs.fetchurl {
-    url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.11.26/FreeCAD_weekly-2025.11.26-Linux-x86_64-py311.AppImage";
-    sha256 = "sha256-THtOFjyJZZ5OpumD2Wz5jWCD2iZBNTWpHLc1vESWy9c=";
+    url = "https://github.com/FreeCAD/FreeCAD/releases/download/weekly-2025.12.31/FreeCAD_weekly-2025.12.31-Linux-x86_64-py311.AppImage";
+    sha256 = "sha256-cKTEzSYHzRMGnWAuHFikALWGQceaFWi0uHgbYBQ3QZ0=";
   };
 
   freecadAppImage = pkgs.stdenvNoCC.mkDerivation {
