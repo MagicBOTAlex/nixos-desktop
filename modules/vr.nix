@@ -131,6 +131,7 @@ in
         eepyxr
         bs-manager
         openvr
+        slimevr
         # wivrn
       ] ++ randomLibs;
 
@@ -163,6 +164,16 @@ in
 
       defaultRuntime = true;
     };
+
+    services.udev.extraRules = ''
+      # SlimeVR Dongle (1209:7690)
+      SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
+      KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
+
+      # SlimeVR Tracker via USB (1209:7692) - Needed for wired connection/debugging
+      SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
+      KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
+    '';
 
     # # Root oneshot that grants CAP_SYS_NICE to vrcompositor-launcher
     # systemd.services.steamvr-cap-sys-nice = {

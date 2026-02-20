@@ -4,8 +4,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-xr.url = "github:nix-community/nixpkgs-xr";
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
-    nix-meshroom.url = "github:hesiod/nixpkgs/meshroom";
-    nix-alice.url = "github:hesiod/nixpkgs/alice-vision";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
@@ -33,15 +31,38 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    alice-vision-pr.url = "github:NixOS/nixpkgs/pull/256115/head";
+    alice-vision-pr.inputs.nixpkgs.follows = "nixpkgs-stable";
+
+    microvm = {
+      url = "github:astro/microvm.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self, nixpkgs-xr, spicetify-nix, nixpkgs, flatpaks, chaotic, nix-cachyos-kernel, minemouth, nix-meshroom, nix-alice, ... }@inputs:
+    { self, nixpkgs-xr, microvm, spicetify-nix, nixpkgs, flatpaks, chaotic, nix-cachyos-kernel, minemouth, alice-vision-pr, ... }@inputs:
     let
       flake-overlays = [
         (final: prev: {
           libsForQt5 = (prev.libsForQt5 or { }) // {
             layer-shell-qt = prev.kdePackages.layer-shell-qt;
+            libsForQt5 = prev.libsForQt5 // {
+              qt5 = prev.libsForQt5.qt5 // {
+                qtwebengine = prev.libsForQt5.qt5.qtwebengine.overrideAttrs (old: {
+                  postPatch = (old.postPatch or "") + ''
+                    target="src/3rdparty/chromium/third_party/perfetto/include/perfetto/ext/tracing/core/trace_packet.h"
+                    if [ -f "$target" ] && ! grep -q '^#include <cstdint>$' "$target"; then
+                    sed -i '/^#include "perfetto\/ext\/tracing\/core\/slice\.h"$/a #include <cstdint>' "$target"
+                    fi
+                  '';
+                });
+              };
+            };
+
           };
         })
         inputs.nix-cachyos-kernel.overlays.default
@@ -73,6 +94,9 @@
 
             # home manager part 2
             inputs.home-manager.nixosModules.default
+
+            inputs.microvm.nixosModules.host
+
 
             inputs.chaotic.nixosModules.default
             {

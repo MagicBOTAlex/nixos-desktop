@@ -31,10 +31,13 @@
       cpu =
         "sudo turbostat --quiet --show PkgWatt --interval 1 --num_iterations 1 | awk 'NR==2{print $1}'";
       vr = "~/Desktop/startvr.sh";
-      dm = "sudo systemctl start display-manager.service";
+      dm = "sudo systemctl start display-manager.service && sleep 10 && systemctl --user restart ledfx";
       tty = "powerprofilesctl set power-saver && sudo systemctl stop display-manager.service";
       btop = "sudo /home/botmain/.nix-profile/bin/btop";
       yaaumma-server = "ssh zhen@188.245.106.241";
+      kube-desk =
+        "ssh -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no' -p 2223 root@localhost";
+
     };
 
     interactiveShellInit = ''
@@ -90,14 +93,22 @@
       function boost
         powerprofilesctl set performance
         sudo cpupower frequency-set -u 5.5GHz
-        sudo systemctl stop xmrig -f &
-        sudo systemctl stop monero -f &
-        sudo systemctl stop p2pool -f &
+        echo 1 | sudo tee /sys/devices/system/cpu/cpufreq/policy*/boost
+        # sudo systemctl stop xmrig -f &
+        # sudo systemctl stop monero -f &
+        # sudo systemctl stop p2pool -f &
+      end
+      function save
+        powerprofilesctl set power-saver
+        sudo cpupower frequency-set -u 0.1GHz
+        echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/policy*/boost
+        systemctl --user stop ledfx
       end
       function mine
         sudo systemctl start monero
         sudo systemctl start p2pool
         sudo systemctl start xmrig
+        echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/policy*/boost
         powerprofilesctl set power-saver
         sudo cpupower frequency-set -u 3.5GHz
       end
@@ -106,6 +117,7 @@
         sudo systemctl start p2pool
         sudo systemctl start xmrig
         powerprofilesctl set power-saver
+        echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/policy*/boost
         sudo cpupower frequency-set -u 3.5GHz
         tty
       end

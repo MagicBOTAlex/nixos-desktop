@@ -26,6 +26,7 @@ let
   '';
 in
 {
+  imports = [ ./../homeModules/chinese-keyboard.nix ];
   programs.plasma = {
     enable = true;
     overrideConfig = true;
@@ -155,12 +156,6 @@ in
       "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
       "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
       "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
-
-      "kxkbrc"."Layout"."Use" = true;
-      "kxkbrc"."Layout"."DisplayNames" = ",";
-      "kxkbrc"."Layout"."LayoutList" = "dk,cn";
-      "kxkbrc"."Layout"."VariantList" = "winkeys,";
-      "kwinrc"."Wayland"."InputMethod" = "/run/current-system/sw/share/applications/fcitx5-wayland-launcher.desktop";
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;

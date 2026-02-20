@@ -1,12 +1,13 @@
 { pkgs, lib, ... }:
 let toggles = import ./../toggles.nix;
-in {
+in
+{
   config = lib.mkIf (toggles.vscode.enable or false) {
     programs.vscode = {
       enable = true;
       extensions = [ ];
     };
 
-    home.packages = with pkgs; [ texliveFull];
+    home.packages = with pkgs; [ texliveFull ];
   };
 }

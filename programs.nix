@@ -36,9 +36,13 @@
     borgbackup
     pinta
     kdePackages.kdenlive
-    kicad-unstable
+    kicad
+    qemu
     gcc
     signal-desktop
+    kubectl
+    pulseaudioFull
+    kdiskmark
 
     inkscape
     immich-cli
@@ -95,7 +99,7 @@
     coppwr
     mqtt-explorer
     ledfx
-
+    openscad-unstable
   ];
 
   programs.noisetorch.enable = true;

@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "alice-vision-pr": {
+      "locked": {
+        "lastModified": 1708015727,
+        "narHash": "sha256-w3RP5D6Itp7XnwEzNnsJIrKC/H4TqPiUsl+ks8D/lbg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "933edf09bb99b5303de47520c251030d4310f55c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/256115/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "cachyos-kernel": {
       "flake": false,
       "locked": {
@@ -253,6 +269,27 @@
         "type": "github"
       }
     },
+    "microvm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "spectrum": "spectrum"
+      },
+      "locked": {
+        "lastModified": 1768682386,
+        "narHash": "sha256-mKrMf7eG9TM2AM3pTuhIiCGmZ/JwDegCQH3ThVqcTuc=",
+        "owner": "astro",
+        "repo": "microvm.nix",
+        "rev": "f469c1dfede623bbbf1ac605f6359316fd4002ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "astro",
+        "repo": "microvm.nix",
+        "type": "github"
+      }
+    },
     "minegrub-world-sel-theme": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -309,22 +346,6 @@
       "original": {
         "owner": "Davi-S",
         "repo": "sddm-theme-minesddm",
-        "type": "github"
-      }
-    },
-    "nix-alice": {
-      "locked": {
-        "lastModified": 1684873023,
-        "narHash": "sha256-4r/kCoSGUrypeuCfi08Bg4Vvo/c2UE213ERdqbESU7Q=",
-        "owner": "hesiod",
-        "repo": "nixpkgs",
-        "rev": "d7f0ec3fc685f95c71a7c6e337d5ba594e336440",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hesiod",
-        "ref": "alice-vision",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -393,22 +414,6 @@
         "type": "github"
       }
     },
-    "nix-meshroom": {
-      "locked": {
-        "lastModified": 1680437767,
-        "narHash": "sha256-43/Of5OFAjjgkwvAmZWNjl8MWdQlHV8MU04tRoWW77o=",
-        "owner": "hesiod",
-        "repo": "nixpkgs",
-        "rev": "897f0a404c5f9a577808c29d44f1bdae8b77620f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hesiod",
-        "ref": "meshroom",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1764950072,
@@ -452,6 +457,22 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1720535198,
+        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-23.11",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -528,11 +549,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1767379071,
-        "narHash": "sha256-EgE0pxsrW9jp9YFMkHL9JMXxcqi/OoumPJYwf+Okucw=",
+        "lastModified": 1766651565,
+        "narHash": "sha256-QEhk0eXgyIqTpJ/ehZKg9IKS7EtlWxF3N7DXy42zPfU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fb7944c166a3b630f177938e478f0378e64ce108",
+        "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
         "type": "github"
       },
       "original": {
@@ -560,11 +581,11 @@
     },
     "nixpkgs_7": {
       "locked": {
-        "lastModified": 1762363567,
-        "narHash": "sha256-YRqMDEtSMbitIMj+JLpheSz0pwEr0Rmy5mC7myl17xs=",
+        "lastModified": 1770197578,
+        "narHash": "sha256-AYqlWrX09+HvGs8zM6ebZ1pwUqjkfpnv8mewYwAo+iM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ae814fd3904b621d8ab97418f1d0f2eb0d3716f4",
+        "rev": "00c21e4c93d963c50d4c0c89bfa84ed6e0694df2",
         "type": "github"
       },
       "original": {
@@ -628,17 +649,18 @@
     },
     "root": {
       "inputs": {
+        "alice-vision-pr": "alice-vision-pr",
         "chaotic": "chaotic",
         "flatpaks": "flatpaks",
         "home-manager": "home-manager_2",
+        "microvm": "microvm",
         "minegrub-world-sel-theme": "minegrub-world-sel-theme",
         "minemouth": "minemouth",
         "minesddm": "minesddm",
-        "nix-alice": "nix-alice",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-index-database": "nix-index-database",
-        "nix-meshroom": "nix-meshroom",
         "nixpkgs": "nixpkgs_5",
+        "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-xr": "nixpkgs-xr",
         "plasma-manager": "plasma-manager",
         "spicetify-nix": "spicetify-nix"
@@ -665,17 +687,33 @@
         "type": "github"
       }
     },
+    "spectrum": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759482047,
+        "narHash": "sha256-H1wiXRQHxxPyMMlP39ce3ROKCwI5/tUn36P8x6dFiiQ=",
+        "ref": "refs/heads/main",
+        "rev": "c5d5786d3dc938af0b279c542d1e43bce381b4b9",
+        "revCount": 996,
+        "type": "git",
+        "url": "https://spectrum-os.org/git/spectrum"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://spectrum-os.org/git/spectrum"
+      }
+    },
     "spicetify-nix": {
       "inputs": {
         "nixpkgs": "nixpkgs_7",
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1762718300,
-        "narHash": "sha256-oOQimZTaV1jCw0OBmmK2g7Rdj3E8YGVpkJYD32BWKRQ=",
+        "lastModified": 1771209550,
+        "narHash": "sha256-svwIVz6OENbSEHFgDRWqgQiCGqq5sHB9epQOaaBu+EE=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "c7175bd485ed5052df5075fcdde395b631316e94",
+        "rev": "97bcf7010237914b84c71f58f1714f40421ba30b",
         "type": "github"
       },
       "original": {

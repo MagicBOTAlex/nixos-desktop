@@ -3,8 +3,10 @@
   vscode.enable = true;
   wezterm.enable = true;
 
+  chinese-keyboard.enable = false;
+
   discord = {
-    limit = true;
+    limit = false;
     extended = false;
     allowedTime = 180;
   };
