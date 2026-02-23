@@ -25,9 +25,9 @@
     #media-session.enable = true;
   };
 
+  services.libinput.enable = true;
   services.xserver = {
     enable = true;
-    libinput.enable = true;
 
     # Configure keymap in X11
     xkb = {

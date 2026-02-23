@@ -58,7 +58,7 @@
     unzip
     argocd
 
-    wineWowPackages.waylandFull
+    wineWow64Packages.waylandFull
     # winetricks
     vulkan-loader
     vulkan-validation-layers

@@ -66,13 +66,16 @@
       # randomEncryption.enable = true;
     }
     {
-      device = "/dev/nvme1n1p1";
+      device = "/dev/nvme1n1p9";
     }
     {
       device = "/dev/sdc2";
     }
     {
       device = "/dev/sdd1";
+    }
+    {
+      device = "/dev/sda2";
     }
     # {
     #   device = "/swapfile";

@@ -5,7 +5,6 @@ in
   config = lib.mkIf (toggles.vscode.enable or false) {
     programs.vscode = {
       enable = true;
-      extensions = [ ];
     };
 
     home.packages = with pkgs; [ texliveFull ];

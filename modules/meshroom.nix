@@ -2,7 +2,7 @@
 
 let
   stablePkgs = import inputs.nixpkgs-stable {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
   };
 

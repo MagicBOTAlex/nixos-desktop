@@ -8,10 +8,10 @@
     fontconfig
     glib
     libGL
-    xorg.libX11
-    xorg.libxcb
-    xorg.libXext
-    xorg.libXrandr
+    libX11
+    libxcb
+    libXext
+    libXrandr
     libxkbcommon
     openxr-loader
     pipewire
@@ -23,11 +23,11 @@
     cairo
     gdk-pixbuf
     gtk3
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libXi
-    xorg.libXrandr
-    xorg.libXext
+    libX11
+    libXcursor
+    libXi
+    libXrandr
+    libXext
 
     wayland
     wayland-protocols

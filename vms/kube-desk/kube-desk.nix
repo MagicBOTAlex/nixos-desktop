@@ -106,5 +106,5 @@
   ];
 
 
-  system.stateVersion = "24.11";
+  stdenv.hostPlatform.system.stateVersion = "24.11";
 }

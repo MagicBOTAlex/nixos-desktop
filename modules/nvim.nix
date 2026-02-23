@@ -60,13 +60,14 @@ in
     nvim-depends-library
     nvim-depends-pkgconfig
     ripgrep
+    neovim-unwrapped
   ];
   home.extraOutputsToInstall = [ "nvim-depends" ];
   home.shellAliases.nvim = (concatStringsSep " " buildEnv)
     + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
 
   programs.neovim = {
-    enable = true;
+    # enable = true;
     package = pkgs.neovim-unwrapped;
 
     withNodeJs = true;

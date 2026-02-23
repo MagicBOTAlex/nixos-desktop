@@ -10,7 +10,7 @@ in
     ./homeModules/firefox.nix
 
     # Do not disable under here =========================== Disable in toggles.nix
-    ./homeModules/vr.nix
+    # ./homeModules/vr.nix
   ] ++ lib.optional (toggles.vscode.enable) ./homeModules/vscode.nix
   ++ lib.optional (toggles.wezterm.enable or false) ./homeModules/wezterm.nix;
 

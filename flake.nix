@@ -80,6 +80,11 @@
           };
           modules = [
             # import configuration
+            {
+              nixpkgs.hostPlatform = "x86_64-linux";
+              system.stateVersion = "25.05";
+              nixpkgs.config.replaceStdenv = { pkgs }: pkgs.stdenv;
+            }
             (import ./configuration.nix flake-overlays)
             spicetify-nix.nixosModules.default
 
@@ -101,7 +106,7 @@
             inputs.chaotic.nixosModules.default
             {
               home-manager.sharedModules =
-                [ inputs.plasma-manager.homeManagerModules.plasma-manager ];
+                [ inputs.plasma-manager.homeModules.plasma-manager ];
             }
 
             inputs.minesddm.nixosModules.default

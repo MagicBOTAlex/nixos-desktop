@@ -56,13 +56,13 @@ let
     pango
     pipewire
     wayland
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrandr
-    xorg.libxcb
+    libX11
+    libXext
+    libXrandr
+    libxcb
   ];
 
-  selectedWlx = pkgs.wlx-overlay-s;
+  selectedWlx = pkgs.wayvr;
 
   # selectedWlx = pkgs.wlx-overlay-s.overrideAttrs (final: old: {
   #   buildInputs = randomLibs;
@@ -123,7 +123,6 @@ in
         motoc # Quest to PC tracking calibration
         # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
         selectedWlx
-        wayvr-dashboard
         # (pkgs.callPackage ./submodules/vrcft.nix { })
         modded-oscavmgr
         vrcadvert
@@ -133,12 +132,11 @@ in
         openvr
         slimevr
         # wivrn
+        android-tools
       ] ++ randomLibs;
 
-    programs.adb.enable = true;
-
-    systemd.user.services.wlx-overlay-s = {
-      description = "wlx-overlay-s (user service)";
+    systemd.user.services.wayvr = {
+      description = "wayvr";
 
       # Start in the user session
       wantedBy = [ "default.target" ];
@@ -148,7 +146,7 @@ in
       startLimitBurst = 0;
 
       serviceConfig = {
-        ExecStart = "${selectedWlx}/bin/wlx-overlay-s";
+        ExecStart = "${pkgs.wayvr}/bin/wayvr";
         Restart = "always";
         RestartSec = 1;
       };
