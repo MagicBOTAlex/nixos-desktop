@@ -5,7 +5,14 @@
 # All overlays given by flakes
 flake-overlays:
 
-{ config, stdenv, pkgs, lib, inputs, ... }:
+{
+  config,
+  stdenv,
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -45,6 +52,7 @@ flake-overlays:
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
     ./modules/ledfx.nix
+    ./modules/mineIcons.nix
 
     ./modules/fishShell.nix
 
@@ -79,7 +87,8 @@ flake-overlays:
   };
 
   nixpkgs.overlays = [
-  ] ++ flake-overlays;
+  ]
+  ++ flake-overlays;
   environment.systemPackages = with pkgs; [ ];
   nixpkgs.config.allowBroken = true;
 
@@ -92,7 +101,6 @@ flake-overlays:
   # '';
 
   environment.variables.EDITOR = "nvim";
-
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -130,11 +138,17 @@ flake-overlays:
     settings = {
       nix-path = lib.mapAttrsToList (n: _: "${n}=flake:${n}") inputs;
       flake-registry = ""; # optional, ensures flakes are truly self-contained
-      experimental-features = [ "nix-command" "flakes" "pipe-operators" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operators"
+      ];
     };
   };
 
-  services.openssh = { enable = true; };
+  services.openssh = {
+    enable = true;
+  };
 
   programs.neovim = {
     enable = true;
@@ -145,14 +159,18 @@ flake-overlays:
   home-manager = {
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs; };
-    users = { "botmain" = import ./home.nix; };
+    users = {
+      "botmain" = import ./home.nix;
+    };
   };
 
   # Root uses the exact same module
-  home-manager.users.root = { pkgs, ... }: {
-    home.stateVersion = "24.05";
-    imports = [ ./modules/nvim.nix ];
-  };
+  home-manager.users.root =
+    { pkgs, ... }:
+    {
+      home.stateVersion = "24.05";
+      imports = [ ./modules/nvim.nix ];
+    };
 
   # Configure console keymap
   console.keyMap = "dk-latin1";
@@ -201,4 +219,3 @@ flake-overlays:
   # system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

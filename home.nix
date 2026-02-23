@@ -1,5 +1,6 @@
 { pkgs, lib, ... }:
-let toggles = import ./toggles.nix;
+let
+  toggles = import ./toggles.nix;
 in
 {
   imports = [
@@ -11,7 +12,8 @@ in
 
     # Do not disable under here =========================== Disable in toggles.nix
     # ./homeModules/vr.nix
-  ] ++ lib.optional (toggles.vscode.enable) ./homeModules/vscode.nix
+  ]
+  ++ lib.optional (toggles.vscode.enable) ./homeModules/vscode.nix
   ++ lib.optional (toggles.wezterm.enable or false) ./homeModules/wezterm.nix;
 
   # env variables for this user
