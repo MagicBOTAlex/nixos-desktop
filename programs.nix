@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   environment.systemPackages = with pkgs; [
     neovim
     wget
@@ -103,12 +104,19 @@
   ];
 
   programs.noisetorch.enable = true;
-  programs.nix-ld.enable = true;
   programs.starship.enable = true;
   nixpkgs.config.permittedInsecurePackages = [
     "libxml2-2.13.8" # For unityhub
     "libsoup-2.74.3" # Unityhub
     "segger-jlink-qt4-874"
     "qtwebengine-5.15.19"
+  ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    libgbm
+    xorg.libX11
+    libglvnd
+    vulkan-loader
   ];
 }

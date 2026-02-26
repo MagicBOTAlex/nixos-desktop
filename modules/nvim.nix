@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 with lib;
 let
@@ -61,10 +66,13 @@ in
     nvim-depends-pkgconfig
     ripgrep
     neovim-unwrapped
+    fd
   ];
   home.extraOutputsToInstall = [ "nvim-depends" ];
-  home.shellAliases.nvim = (concatStringsSep " " buildEnv)
-    + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so " + "nvim";
+  home.shellAliases.nvim =
+    (concatStringsSep " " buildEnv)
+    + " SQLITE_CLIB_PATH=${pkgs.sqlite.out}/lib/libsqlite3.so "
+    + "nvim";
 
   programs.neovim = {
     # enable = true;
