@@ -9,7 +9,6 @@ let
     hash = "sha256-bvwUuWclgAo3aBmG2H65YRUIFgh2xjiHMsICcZQOQf8=";
   };
 
-
   # wrapper that reads /etc/nixos/.env at runtime (impure) ChatGPT, because i don't care if it works
   haScene = pkgs.writeShellScriptBin "ha-scene" ''
     set -euo pipefail
@@ -42,8 +41,7 @@ in
       powerButtonAction = "shutDown";
     };
 
-    session.sessionRestore.restoreOpenApplicationsOnLogin =
-      "startWithEmptySession";
+    session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
 
     kscreenlocker = {
       #         lockOnStartup = false;
@@ -55,10 +53,14 @@ in
     shortcuts = {
       plasmashell."activate application launcher" = "Meta+S";
       plasmashell."kill window" = "Shift+Alt+F4";
-      kwin = { "Window Maximize" = "Meta+Up"; };
+      kwin = {
+        "Window Maximize" = "Meta+Up";
+      };
       "kaccess"."Toggle Screen Reader On and Off" = "none,Meta+Alt+S,Toggle Screen Reader On and Off";
-      "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" = ",Meta+Alt+L,Switch to Last-Used Keyboard Layout";
-      "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" = ",Meta+Alt+K,Switch to Next Keyboard Layout";
+      "KDE Keyboard Layout Switcher"."Switch to Last-Used Keyboard Layout" =
+        ",Meta+Alt+L,Switch to Last-Used Keyboard Layout";
+      "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" =
+        ",Meta+Alt+K,Switch to Next Keyboard Layout";
 
     };
 
@@ -149,13 +151,13 @@ in
       "kded5rc"."Module-browserintegrationreminder"."autoload" = false;
       # Fuck the hot corner thingy that makes overview
       "kwinrc"."Effect-overview"."BorderActivate" = 9;
-      "kdeglobals"."General"."fixed" =
-        "CozetteVector-nerd,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,nerd";
+      "kdeglobals"."General"."fixed" = "CozetteVector-nerd,10,-1,5,500,0,0,0,0,0,0,0,0,0,0,1,nerd";
       "kdeglobals"."General"."TerminalApplication" = "wezterm start --cwd .";
       "kdeglobals"."General"."TerminalService" = "org.wezfurlong.wezterm.desktop";
       "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
       "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
       "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
+      "kcminputrc"."Keyboard"."RepeatRate" = 50;
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;
@@ -196,7 +198,9 @@ in
       After = [ "graphical-session-pre.target" ];
       PartOf = [ "graphical-session.target" ];
     };
-    Install = { WantedBy = [ "graphical-session.target" ]; };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
     Service = {
       ExecStart = "${pkgs.xbindkeys}/bin/xbindkeys -n";
       Restart = "on-failure";

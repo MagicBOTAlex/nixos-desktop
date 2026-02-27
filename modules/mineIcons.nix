@@ -21,6 +21,11 @@ let
     # Run 'nix build', get the hash, and paste it here
     hash = "sha256-V/9vAV3Ln1gyDGmkBkRGieOfdsnLyMk1OrYJh27dMSc=";
   };
+  pistonIcon = pkgs.fetchurl {
+    name = "piston.png";
+    url = "https://static.wikia.nocookie.net/minecraft/images/6/62/Piston.png/revision/latest/scale-to-width/360?cb=20190925183243";
+    hash = "sha256-Ssjj0kJMke3XDv7df4I5h+WlvXWwYOnjvl7Ngtey1uE=";
+  };
 
 in
 {
@@ -37,6 +42,27 @@ in
           sed -i 's|^Icon=.*|Icon=${jukeboxIcon}|' $out/share/applications/spotify.desktop
         '';
       });
+      steam = prev.steam.override {
+        steam-unwrapped = prev.steam-unwrapped.overrideAttrs (old: {
+          postInstall = (old.postInstall or "") + ''
+            # 1. Update the .desktop file Icon path
+            DESKTOP_FILE="$out/share/applications/steam.desktop"
+            if [ -f "$DESKTOP_FILE" ]; then
+              sed -i "s|^Icon=.*|Icon=${pistonIcon}|" "$DESKTOP_FILE"
+            fi
+
+            # 2. Overwrite the icon theme files (the "Force" method)
+            # This ensures the 'steam' icon name points to your pistonIcon
+            for size in 16 32 48 128 256; do
+              mkdir -p "$out/share/icons/hicolor/''${size}x''${size}/apps"
+              cp -f "${pistonIcon}" "$out/share/icons/hicolor/''${size}x''${size}/apps/steam.png"
+            done
+
+            mkdir -p "$out/share/icons/hicolor/scalable/apps"
+            cp -f "${pistonIcon}" "$out/share/icons/hicolor/scalable/apps/steam.svg" 2>/dev/null || true
+          '';
+        });
+      };
 
       vscodium = prev.vscodium.overrideAttrs (old: {
         # We use postInstall to append to the existing installation logic
