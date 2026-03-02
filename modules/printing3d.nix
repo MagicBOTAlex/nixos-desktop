@@ -1,20 +1,17 @@
 { pkgs, fetchurl, ... }:
 let
   orcaLogo = pkgs.fetchurl {
-    url =
-      "https://raw.githubusercontent.com/SoftFever/OrcaSlicer/main/resources/images/OrcaSlicer.png";
+    url = "https://raw.githubusercontent.com/SoftFever/OrcaSlicer/main/resources/images/OrcaSlicer.png";
     sha256 = "02438fvggqsglxgpc4pvyjdr0la51j0ak99g8lz7b3a8hqdg3wpw";
   };
-  orcaPkg =
-    pkgs.orca-slicer;
+  orcaPkg = pkgs.orca-slicer;
   # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { });
   orcaSlicerDesktopItem = pkgs.makeDesktopItem {
     name = "orca-slicer-dri";
     desktopName = "OrcaSlicer (DRI)";
     genericName = "3D Printing Software";
     icon = orcaLogo;
-    exec =
-      "env __GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink WEBKIT_DISABLE_DMABUF_RENDERER=1  ${orcaPkg}/bin/orca-slicer %U";
+    exec = "env __GLX_VENDOR_LIBRARY_NAME=mesa __EGL_VENDOR_LIBRARY_FILENAMES=/run/opengl-driver/share/glvnd/egl_vendor.d/50_mesa.json MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink WEBKIT_DISABLE_DMABUF_RENDERER=1  ${orcaPkg}/bin/orca-slicer %U";
     terminal = false;
     type = "Application";
     mimeTypes = [
@@ -25,7 +22,11 @@ let
       "application/x-amf"
       "x-scheme-handler/orcaslicer"
     ];
-    categories = [ "Graphics" "3DGraphics" "Engineering" ];
+    categories = [
+      "Graphics"
+      "3DGraphics"
+      "Engineering"
+    ];
     keywords = [
       "3D"
       "Printing"
@@ -60,9 +61,7 @@ let
     application/x-amf=orca-slicer-dri.desktop;
   '';
 
-  orcaSlicerMimeappsList =
-    pkgs.writeText "orca-slicer-mimeapps.list" mimeappsListContent;
-
+  orcaSlicerMimeappsList = pkgs.writeText "orca-slicer-mimeapps.list" mimeappsListContent;
 
   # freecad-nightly = pkgs.freecad.overrideAttrs
   #   (fina: prev: {
@@ -109,6 +108,12 @@ let
     '';
   };
 
+  craftingTable = pkgs.fetchurl {
+    name = "CraftingTable.png";
+    url = "https://deprived.dev/assets/zhen/nixos/CraftingTable.png";
+    hash = "sha256-7665bl6HOBBp32ixgiS10wMBR3xBjNv6JK/Lmag0BwU=";
+  };
+
   freecadWrapper = pkgs.writeShellScriptBin "freecad-weekly" ''
     exec ${pkgs.appimage-run}/bin/appimage-run \
       ${freecadAppImage}/opt/freecad-weekly/FreeCAD_weekly-2025.11.05-Linux-x86_64-py311.AppImage "$@"
@@ -119,8 +124,12 @@ let
     desktopName = "FreeCAD";
     comment = "FreeCAD 1.1 weekly preview (2025-11-05)";
     exec = "freecad-weekly";
-    icon = "freecad";
-    categories = [ "Graphics" "3DGraphics" "Engineering" ];
+    icon = "${craftingTable}";
+    categories = [
+      "Graphics"
+      "3DGraphics"
+      "Engineering"
+    ];
     terminal = false;
   };
 in

@@ -26,6 +26,26 @@ let
     url = "https://static.wikia.nocookie.net/minecraft/images/6/62/Piston.png/revision/latest/scale-to-width/360?cb=20190925183243";
     hash = "sha256-Ssjj0kJMke3XDv7df4I5h+WlvXWwYOnjvl7Ngtey1uE=";
   };
+  chestIcon = pkgs.fetchurl {
+    name = "chest.png";
+    url = "https://deprived.dev/assets/zhen/nixos/Chest.png";
+    hash = "sha256-v3hP7D6b9b3qVOef4VlC4kHytaefdXYlFxAj2iaFxuo=";
+  };
+  beaconIcon = pkgs.fetchurl {
+    name = "beacon.png";
+    url = "https://deprived.dev/assets/zhen/nixos/Beacon.png";
+    hash = "sha256-K06YsB5qV+sJJnh51umBXgP4wHQ+aZGvuXs5+Imb5/Y=";
+  };
+  printerIcon = pkgs.fetchurl {
+    name = "3DPrinterOC.png";
+    url = "https://deprived.dev/assets/zhen/nixos/3DPrinterOC.png";
+    hash = "sha256-nJGy/nq/a6HN29oNcT9ghpwvbDTbJYqsouJevK/xFec=";
+  };
+  copperBlock = pkgs.fetchurl {
+    name = "blockOfCopper.png";
+    url = "https://deprived.dev/assets/zhen/nixos/blockOfCopper.png";
+    hash = "sha256-ZrUVW3BtlcI1jEFNlXPp7vJ+cMyTJTDLZzEOPMuw8ns=";
+  };
 
 in
 {
@@ -34,12 +54,17 @@ in
       firefox = prev.firefox.overrideAttrs (old: {
         buildCommand = old.buildCommand + ''
           # This runs at the very end of the Firefox build
-          sed -i "s|^Icon=.*|Icon=${compassIcon}|" $out/share/applications/firefox.desktop
+          sed -i "s|^Icon=.*|Icon=${beaconIcon}|" $out/share/applications/firefox.desktop
         '';
       });
       spotify = prev.spotify.overrideAttrs (old: {
         postInstall = (old.postInstall or "") + ''
           sed -i 's|^Icon=.*|Icon=${jukeboxIcon}|' $out/share/applications/spotify.desktop
+        '';
+      });
+      blender = prev.blender.overrideAttrs (old: {
+        postInstall = (old.postInstall or "") + ''
+          sed -i 's|^Icon=.*|Icon=${copperBlock}|' $out/share/applications/blender.desktop
         '';
       });
       steam = prev.steam.override {
@@ -113,12 +138,12 @@ in
       kdePackages = prev.kdePackages // {
         dolphin = prev.kdePackages.dolphin.overrideAttrs (old: {
           postInstall = (old.postInstall or "") + ''
-            sed -i "s|^Icon=.*|Icon=${bookIcon}|" $out/share/applications/org.kde.dolphin.desktop
+            sed -i "s|^Icon=.*|Icon=${chestIcon}|" $out/share/applications/org.kde.dolphin.desktop
           '';
         });
       };
     })
   ];
 
-  # environment.systemPackages = with pkgs; [ discord ];
+  # environment.systemPackages = with pkgs; [ orcaSlicerDesktop ];
 }

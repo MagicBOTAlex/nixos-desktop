@@ -157,7 +157,7 @@ in
       "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
       "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
       "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
-      "kcminputrc"."Keyboard"."RepeatRate" = 50;
+      "kcminputrc"."Keyboard"."RepeatRate" = 64;
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;

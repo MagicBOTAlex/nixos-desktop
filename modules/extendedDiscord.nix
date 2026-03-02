@@ -26,10 +26,16 @@ let
     hash = "sha256-rfB2hg4jYsikmTRczE3KuVqtsuXmLTrIhqelHB87iXg=";
   };
 
+  diamondOreIcon = pkgs.fetchurl {
+    name = "diamond-ore.png";
+    url = "https://deprived.dev/assets/zhen/nixos/DiamondOre.png";
+    hash = "sha256-0DNaraiDEv25AVHUWYtt1JRDxyd0UTwKn5JFvDEyKwk=";
+  };
+
   modDiscord = pkgs.makeDesktopItem {
     name = "discord";
     desktopName = "Discord";
-    icon = chatIcon;
+    icon = diamondOreIcon;
     exec =
       if limit then "${limitedDiscordBin}/bin/limited-discord %U" else "${pkgs.discord}/bin/discord %U";
     terminal = false;

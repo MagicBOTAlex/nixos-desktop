@@ -53,6 +53,7 @@ flake-overlays:
     ./modules/chinese-keyboard.nix
     ./modules/ledfx.nix
     ./modules/mineIcons.nix
+    ./modules/fonts.nix
 
     ./modules/fishShell.nix
 

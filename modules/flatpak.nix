@@ -1,4 +1,11 @@
 { pkgs, flatpaks, ... }:
+let
+  printerIcon = pkgs.fetchurl {
+    name = "3DPrinterOC.png";
+    url = "https://deprived.dev/assets/zhen/nixos/3DPrinterOC.png";
+    hash = "sha256-nJGy/nq/a6HN29oNcT9ghpwvbDTbJYqsouJevK/xFec=";
+  };
+in
 
 {
 
@@ -10,10 +17,12 @@
     };
 
     packages = [
-      ":${pkgs.fetchurl {
-        url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/nightly-builds/OrcaSlicer-Linux-flatpak_nightly_x86_64.flatpak";
-        sha256 = "sha256:0d805andch8bmx0l5h7wnn7z9f92ryrhzrw9w0bghfccipnpnd2x";
-      }}"
+      ":${
+        pkgs.fetchurl {
+          url = "https://github.com/OrcaSlicer/OrcaSlicer/releases/download/nightly-builds/OrcaSlicer-Linux-flatpak_nightly_x86_64.flatpak";
+          sha256 = "sha256:0d805andch8bmx0l5h7wnn7z9f92ryrhzrw9w0bghfccipnpnd2x";
+        }
+      }"
       "flathub:app/org.vinegarhq.Sober//stable"
     ];
 
@@ -22,6 +31,10 @@
         Context.filesystems = [
           "/mnt/win"
         ];
+
+        "Desktop Entry" = {
+          "Icon" = "${printerIcon}";
+        };
 
         Environment = {
           "LC_ALL" = "C";
@@ -34,7 +47,6 @@
     };
   };
 }
-
 
 # flatpak override --user \
 #   --env=LC_ALL=C \

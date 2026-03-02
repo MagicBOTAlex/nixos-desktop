@@ -1,15 +1,18 @@
 { pkgs, ... }:
 let
   toggles = import ./../toggles.nix;
-  blender = pkgs.blender.overrideAttrs (old: rec {
-    version = toggles.blender.version;
-
-    src = pkgs.fetchzip {
-      name = "blender-${version}-src";
-      url = "https://download.blender.org/source/blender-${version}.tar.xz";
-      hash = "sha256-UUHsylDmMWRcr1gGiXuYnno7D6uMjLqTYd9ak4FnZis=";
-    };
-  });
+  blender =
+    (pkgs.blender.override {
+      cudaSupport = true;
+    }).overrideAttrs
+      (old: rec {
+        version = toggles.blender.version;
+        src = pkgs.fetchzip {
+          name = "blender-${version}-src";
+          url = "https://download.blender.org/source/blender-${version}.tar.xz";
+          hash = "sha256-UUHsylDmMWRcr1gGiXuYnno7D6uMjLqTYd9ak4FnZis=";
+        };
+      });
   blenderConfigVersion = builtins.substring 0 3 toggles.blender.version;
 
   st2-addon = pkgs.stdenvNoCC.mkDerivation {
@@ -28,9 +31,11 @@ let
   };
 in
 {
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
     blender
     st2-addon
+    cudaPackages.cudnn
+    cudaPackages.cuda_cccl
   ];
 
   systemd.tmpfiles.rules = [
