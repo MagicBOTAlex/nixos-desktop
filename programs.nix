@@ -37,7 +37,6 @@
     borgbackup
     pinta
     kdePackages.kdenlive
-    kicad
     qemu
     gcc
     signal-desktop
@@ -101,6 +100,10 @@
     mqtt-explorer
     ledfx
     openscad-unstable
+    platformio
+
+    efibootmgr
+    brave
   ];
 
   programs.noisetorch.enable = true;
@@ -115,7 +118,7 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libgbm
-    xorg.libX11
+    libX11
     libglvnd
     vulkan-loader
   ];

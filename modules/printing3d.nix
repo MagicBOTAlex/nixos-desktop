@@ -123,7 +123,7 @@ let
     name = "freecad-weekly";
     desktopName = "FreeCAD";
     comment = "FreeCAD 1.1 weekly preview (2025-11-05)";
-    exec = "freecad-weekly";
+    exec = "${freecadWrapper}/bin/freecad-weekly";
     icon = "${craftingTable}";
     categories = [
       "Graphics"
@@ -142,8 +142,8 @@ in
     # orcaSlicerDesktopItem
     # orcaPkg
     # orca-slicer-gitfix
-    freecadAppImage
-    freecadWrapper
+    # freecadAppImage
+    # freecadWrapper
     freecadDesktop
     # nanum
     # nanum-gothic-coding

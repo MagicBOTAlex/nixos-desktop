@@ -31,9 +31,6 @@ in
       config.enable_wayland = false
       config.color_scheme = 'Catppuccin Mocha'
 
-      -- Optional: Ensure the window itself uses the icon (though Desktop Entry usually handles this)
-      -- config.window_icon = "${customLogo}" 
-
       return config
     '';
 
@@ -57,7 +54,10 @@ in
     # Point directly to the custom logo path
     icon = customLogo;
     exec = "wezterm start --cwd .";
-    categories = [ "System" "TerminalEmulator" ];
+    categories = [
+      "System"
+      "TerminalEmulator"
+    ];
     terminal = false;
 
     # 3. Critical: Link the running window to this icon

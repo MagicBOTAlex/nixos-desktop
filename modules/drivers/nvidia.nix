@@ -5,7 +5,7 @@
   # nixpkgs.config.cudaSupport = true;
   nixpkgs.config.cudaVersion = "12.0";
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia-drm.modeset=1" ];
 
   hardware.graphics = {
     enable = true;

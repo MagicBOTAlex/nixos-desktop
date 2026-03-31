@@ -35,16 +35,30 @@
     alice-vision-pr.url = "github:NixOS/nixpkgs/pull/256115/head";
     alice-vision-pr.inputs.nixpkgs.follows = "nixpkgs-stable";
 
+    android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
+
+
     microvm = {
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self, nixpkgs-xr, microvm, spicetify-nix, nixpkgs, flatpaks, chaotic, nix-cachyos-kernel, minemouth, alice-vision-pr, ... }@inputs:
+    { self
+    , nixpkgs-xr
+    , microvm
+    , spicetify-nix
+    , nixpkgs
+    , flatpaks
+    , chaotic
+    , nix-cachyos-kernel
+    , minemouth
+    , alice-vision-pr
+    , android-nixpkgs
+    , ...
+    }@inputs:
     let
       flake-overlays = [
         (final: prev: {
@@ -65,7 +79,7 @@
 
           };
         })
-        inputs.nix-cachyos-kernel.overlays.default
+        inputs.nix-cachyos-kernel.overlays.pinned
       ];
     in
     {
@@ -82,7 +96,6 @@
             # import configuration
             {
               nixpkgs.hostPlatform = "x86_64-linux";
-              system.stateVersion = "25.05";
               nixpkgs.config.replaceStdenv = { pkgs }: pkgs.stdenv;
             }
             (import ./configuration.nix flake-overlays)
@@ -102,11 +115,9 @@
 
             inputs.microvm.nixosModules.host
 
-
             inputs.chaotic.nixosModules.default
             {
-              home-manager.sharedModules =
-                [ inputs.plasma-manager.homeModules.plasma-manager ];
+              home-manager.sharedModules = [ inputs.plasma-manager.homeModules.plasma-manager ];
             }
 
             inputs.minesddm.nixosModules.default

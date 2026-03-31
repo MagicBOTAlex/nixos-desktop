@@ -38,6 +38,7 @@
     openssh
     ripgrep
     dig
+    wireguard-tools
   ];
 
   systemd.services."load-br_netfilter" = {
@@ -96,7 +97,7 @@
     volumes = [{
       image = "/var/lib/microvms/kube-desk/kube-desk.img";
       mountPoint = "/";
-      size = 512 * 4; # Size in MB
+      size = 1048 * 50; # Size in MB
     }];
   };
   systemd.tmpfiles.rules = [
@@ -106,5 +107,5 @@
   ];
 
 
-  stdenv.hostPlatform.system.stateVersion = "24.11";
+  system.stateVersion = "24.11";
 }

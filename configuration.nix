@@ -5,13 +5,12 @@
 # All overlays given by flakes
 flake-overlays:
 
-{
-  config,
-  stdenv,
-  pkgs,
-  lib,
-  inputs,
-  ...
+{ config
+, stdenv
+, pkgs
+, lib
+, inputs
+, ...
 }:
 
 {
@@ -33,6 +32,7 @@ flake-overlays:
     ./overlays.nix
 
     # ./vms/kube-desk
+
     ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix
 
@@ -51,9 +51,10 @@ flake-overlays:
     ./modules/ydotool.nix
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
-    ./modules/ledfx.nix
+    # ./modules/ledfx.nix
     ./modules/mineIcons.nix
     ./modules/fonts.nix
+    ./modules/kicad.nix
 
     ./modules/fishShell.nix
 

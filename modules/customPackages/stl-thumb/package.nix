@@ -1,5 +1,17 @@
-{ lib, fetchFromGitHub, libXcursor, libXrandr, libXi, rustPlatform, xorg
-, wayland, libGL, cmake, pkg-config, fontconfig, }:
+{ lib
+, fetchFromGitHub
+, libXcursor
+, libXrandr
+, libXi
+, rustPlatform
+, xorg
+, wayland
+, libGL
+, cmake
+, pkg-config
+, fontconfig
+,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "stl-thumb";
   version = "0.5.0";

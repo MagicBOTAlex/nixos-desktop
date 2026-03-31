@@ -1,8 +1,7 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, ...
 }:
 
 with lib;
@@ -24,7 +23,6 @@ let
     zstd
     glib
     libcxx
-    unzip
   ];
 
   makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
@@ -65,8 +63,6 @@ in
     nvim-depends-library
     nvim-depends-pkgconfig
     ripgrep
-    neovim-unwrapped
-    fd
   ];
   home.extraOutputsToInstall = [ "nvim-depends" ];
   home.shellAliases.nvim =
@@ -75,7 +71,7 @@ in
     + "nvim";
 
   programs.neovim = {
-    # enable = true;
+    enable = true;
     package = pkgs.neovim-unwrapped;
 
     withNodeJs = true;
@@ -93,18 +89,24 @@ in
       ninja
       pkg-config
       yarn
-      nixfmt
       texlivePackages.latex
       tree-sitter
+      fd
     ];
 
-    extraLuaPackages = ls: with ls; [ luarocks ];
+    plugins = with pkgs.vimPlugins;
+      [
+        nvim-treesitter.withAllGrammars
+      ];
+
+    # extraLuaPackages = ls: with ls;
+    #   [ luarocks pkgs.vimPlugins.nvim-treesitter-textobjects ];
   };
 
-  # # Screw declarative here
+  # Screw declarative here
   # xdg.configFile."nvim".source = builtins.fetchGit {
   #   url = "https://github.com/MagicBOTAlex/NVimConfigs";
-  #   ref = "master";   # change if the default branch is different
+  #   ref = "master"; # change if the default branch is different
   #   # submodules = true;  # uncomment if needed
   # };
 

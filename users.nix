@@ -3,7 +3,7 @@
     isNormalUser = true;
     description = "botmain";
     extraGroups =
-      [ "networkmanager" "wheel" "docker" "udev" "dialout" "wheel" "sensors" "plugdev" "android-udev" ];
+      [ "networkmanager" "kvm" "adbusers" "wheel" "docker" "udev" "dialout" "wheel" "sensors" "plugdev" "android-udev" ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhiPhFbCi64NduuV794omgS8mctBLXtqxbaEJyUo6lg botalex@DESKTOPSKTOP-ENDVV0V"

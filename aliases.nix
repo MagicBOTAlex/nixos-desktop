@@ -37,6 +37,7 @@
       yaaumma-server = "ssh zhen@188.245.106.241";
       kube-desk =
         "ssh -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no' -p 2223 root@localhost";
+      windows = "sudo efibootmgr -n $(sudo efibootmgr | grep -i 'Windows Boot Manager' | head -n1 | cut -c5-8) && sudo reboot -f";
 
     };
 
