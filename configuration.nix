@@ -19,7 +19,6 @@ flake-overlays:
     ./hardware-configuration.nix
     ./aliases.nix
     ./docker.nix
-    # ./modules/k8s.nix
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
     ./modules/drivers/amdcpu.nix
@@ -32,6 +31,7 @@ flake-overlays:
     ./overlays.nix
 
     # ./vms/kube-desk
+    ./modules/kubernetes.nix
 
     ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix
@@ -126,7 +126,7 @@ flake-overlays:
     LC_MEASUREMENT = "da_DK.UTF-8";
     LC_MONETARY = "da_DK.UTF-8";
     LC_NAME = "da_DK.UTF-8";
-    LC_NUMERIC = "da_DK.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
     LC_PAPER = "da_DK.UTF-8";
     LC_TELEPHONE = "da_DK.UTF-8";
     LC_TIME = "da_DK.UTF-8";
