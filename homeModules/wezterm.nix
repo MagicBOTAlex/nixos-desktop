@@ -26,6 +26,11 @@ in
         { key = 'v', mods = 'CTRL', action = act.PasteFrom('Clipboard') },
         { key = 'Backspace', mods = 'CTRL', action = act.SendKey({ key = 'w', mods = 'CTRL' }) },
         { key = 'v', mods = 'CTRL|SHIFT', action = act.SendKey { key = 'v', mods = 'CTRL' } },
+        {
+          key = 'D',
+          mods = 'CTRL|SHIFT',
+          action = act.DetachDomain 'CurrentPaneDomain',
+        }
       }
 
       config.enable_wayland = false

@@ -38,11 +38,14 @@
     pinta
     kdePackages.kdenlive
     qemu
+    wireguard-tools
+    tesseract
     gcc
     signal-desktop
     kubectl
     pulseaudioFull
     kdiskmark
+    ibus
 
     inkscape
     immich-cli

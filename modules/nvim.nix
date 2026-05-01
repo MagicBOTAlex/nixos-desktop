@@ -92,6 +92,9 @@ in
       texlivePackages.latex
       tree-sitter
       fd
+      stdenv.cc.libc
+      glibc.dev
+      glibc
     ];
 
     plugins = with pkgs.vimPlugins;

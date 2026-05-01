@@ -48,6 +48,12 @@
     fsType = "ext4";
   };
 
+  fileSystems."/gaming/fast2" = {
+    device = "/dev/disk/by-uuid/16868dc5-5753-4c83-985f-77c3ce85f9df";
+    fsType = "ext4";
+  };
+
+
   # fileSystems."/server" = {
   #   device = "botserver@192.168.50.82:/home/botserver";
   #   fsType = "sshfs";

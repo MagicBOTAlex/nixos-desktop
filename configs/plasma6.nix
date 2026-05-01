@@ -26,6 +26,12 @@ let
 in
 {
   imports = [ ./../homeModules/chinese-keyboard.nix ];
+
+  # # Plasma clipboard bad
+  # services.copyq = {
+  #   enable = true;
+  # };
+
   programs.plasma = {
     enable = true;
     overrideConfig = true;
@@ -115,6 +121,11 @@ in
         key = "Meta+F9";
         command = "ha-scene scene.off_lights";
       };
+      # "copyq-start" = {
+      #   name = "start copyq";
+      #   key = "Meta+V";
+      #   command = "copyq showAt";
+      # };
     };
 
     spectacle.shortcuts.launch = "";

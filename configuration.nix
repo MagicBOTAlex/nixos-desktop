@@ -31,7 +31,7 @@ flake-overlays:
     ./overlays.nix
 
     # ./vms/kube-desk
-    ./modules/kubernetes.nix
+    # ./modules/kubernetes.nix
 
     ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix

@@ -17,6 +17,7 @@ in
 
   # packages for administration tasks
   environment.systemPackages = with pkgs; [ kompose kubectl kubernetes ];
+  services.resolved.enable = true;
 
   systemd.services.kube-networking-fix = {
     description = "fucking, networking - IP cleanup and WireGuard start";

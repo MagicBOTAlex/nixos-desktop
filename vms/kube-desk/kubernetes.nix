@@ -12,7 +12,9 @@ in
     ${kubeMasterIP} ${kubeMasterHostname}
     10.0.0.2 kube-daddy
     10.0.0.4 kube-desk
-    10.0.0.5 kube-snorre'';
+    10.0.0.5 kube-snorre
+    10.0.0.8 kube-metal
+    '';
   networking.firewall.enable = false;
 
   # packages for administration tasks
