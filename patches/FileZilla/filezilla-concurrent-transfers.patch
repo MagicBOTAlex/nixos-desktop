@@ -1,0 +1,15 @@
+diff --git a/src/interface/settings/optionspage_transfer.cpp b/src/interface/settings/optionspage_transfer.cpp
+index 5f78a1f4..97754b5e 100644
+--- a/src/interface/settings/optionspage_transfer.cpp
++++ b/src/interface/settings/optionspage_transfer.cpp
+@@ -93,8 +93,8 @@ bool COptionsPageTransfer::Validate()
+ 	wxTextCtrl* pCtrl;
+ 
+ 	pCtrl = XRCCTRL(*this, "ID_NUMTRANSFERS", wxTextCtrl);
+-	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 1 || tmp > 10)
+-		return DisplayError(pCtrl, _("Please enter a number between 1 and 10 for the number of concurrent transfers."));
++	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 1 || tmp > 100)
++		return DisplayError(pCtrl, _("Please enter a number between 1 and 100 for the number of concurrent transfers."));
+ 
+ 	pCtrl = XRCCTRL(*this, "ID_NUMDOWNLOADS", wxTextCtrl);
+ 	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 0 || tmp > 10)

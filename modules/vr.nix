@@ -160,7 +160,7 @@ in
       # package = (pkgs.callPackage ./customPackages/wivrn/wivrn.nix { }).overrideAttrs (oldAttrs: {
       package = selectedWivrn;
 
-      defaultRuntime = true;
+      # defaultRuntime = true;
     };
 
     services.udev.extraRules = ''

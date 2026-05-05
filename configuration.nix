@@ -36,6 +36,8 @@ flake-overlays:
     ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix
 
+    ./modules/impersonateGitUsers.nix
+
     ./programs.nix
     ./modules/python.nix
     ./modules/nodejs.nix
@@ -57,6 +59,8 @@ flake-overlays:
     ./modules/kicad.nix
 
     ./modules/fishShell.nix
+
+    ./patches/FileZilla
 
     ./users.nix
     ./modules/ollama.nix

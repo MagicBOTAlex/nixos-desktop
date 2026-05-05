@@ -1,48 +1,29 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   toggles = import ./../toggles.nix;
-  blender =
-    (pkgs.blender.override {
-      cudaSupport = true;
-    }).overrideAttrs
-      (old: rec {
-        version = toggles.blender.version;
-        src = pkgs.fetchzip {
-          name = "blender-${version}-src";
-          url = "https://download.blender.org/source/blender-${version}.tar.xz";
-          hash = "sha256-UUHsylDmMWRcr1gGiXuYnno7D6uMjLqTYd9ak4FnZis=";
-        };
-      });
-  blenderConfigVersion = builtins.substring 0 3 toggles.blender.version;
+  
+  # 1. Use lib.versions for the config path
+  blenderMajorMinor = lib.versions.majorMinor toggles.blender.version;
 
-  st2-addon = pkgs.stdenvNoCC.mkDerivation {
-    pname = "st2-addon";
-    version = "0.18b";
-
-    src = pkgs.fetchzip {
-      url = "https://coldtype.xyz/st2/releases/ST2-v0-18b.zip";
-      hash = "sha256-D3VDx2d+SEgl7Un2y5QC2Pxg1xZwO7egiTAwQffIaCQ=";
-    };
-
-    installPhase = ''
-      mkdir -p $out
-      cp -r ./* $out/
-    '';
+  # 2. Extract the addon to its own let-binding
+  st2-addon = pkgs.fetchzip {
+    name = "st2-addon";
+    url = "https://coldtype.xyz/st2/releases/ST2-v0-18b.zip";
+    hash = "sha256-D3VDx2d+SEgl7Un2y5QC2Pxg1xZwO7egiTAwQffIaCQ=";
   };
+
+  # 3. Simple Blender override (Assuming the version in nixpkgs is close enough)
+  customBlender = pkgs.blender.override { cudaSupport = true; };
 in
 {
-  environment.systemPackages = with pkgs; [
-    blender
-    st2-addon
-    cudaPackages.cudnn
-    cudaPackages.cuda_cccl
+  environment.systemPackages = [
+    customBlender
+    pkgs.cudaPackages.cudnn
+    pkgs.cudaPackages.cuda_cccl
   ];
 
+  # Using systemd.tmpfiles if you aren't using Home Manager
   systemd.tmpfiles.rules = [
-    # Ensure directory exists
-    "d /home/botmain/.config/blender/${blenderConfigVersion}/scripts/addons 0755 botmain users -"
-    # Symlink addon dir to Nix store
-    "L+ /home/botmain/.config/blender/${blenderConfigVersion}/scripts/addons/ST2 - - - - ${st2-addon}"
+    "L+ /home/botmain/.config/blender/${blenderMajorMinor}/scripts/addons/ST2 - - - - ${st2-addon}"
   ];
-
 }

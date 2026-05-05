@@ -13,7 +13,7 @@
 
   blender.version = "5.0.0";
 
-  kernel.useCachyOS = true;
+  kernel.useCachyOS = false;
   boot = {
     mineboot.enable = true;
   };
