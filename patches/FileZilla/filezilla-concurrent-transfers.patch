@@ -1,15 +1,25 @@
-diff --git a/src/interface/settings/optionspage_transfer.cpp b/src/interface/settings/optionspage_transfer.cpp
-index 5f78a1f4..97754b5e 100644
 --- a/src/interface/settings/optionspage_transfer.cpp
 +++ b/src/interface/settings/optionspage_transfer.cpp
-@@ -93,8 +93,8 @@ bool COptionsPageTransfer::Validate()
- 	wxTextCtrl* pCtrl;
+@@ -48,10 +48,10 @@ bool COptionsPageTransfer::CreateControls(wxWindow* parent)
+ 		auto [box, inner] = lay.createStatBox(main, _("Concurrent transfers"), 3);
+ 		inner->Add(new wxStaticText(box, nullID, _("Maximum simultaneous &transfers:")), lay.valign);
+ 		impl_->transfers_ = new wxSpinCtrlEx(box, nullID, wxString(), wxDefaultPosition, wxSize(lay.dlgUnits(26), -1));
+-		impl_->transfers_->SetRange(1, 10);
+-		impl_->transfers_->SetMaxLength(2);
++		impl_->transfers_->SetRange(1, 100);
++		impl_->transfers_->SetMaxLength(3);
+ 		inner->Add(impl_->transfers_, lay.valign);
+-		inner->Add(new wxStaticText(box, nullID, _("(1-10)")), lay.valign);
++		inner->Add(new wxStaticText(box, nullID, _("(1-100)")), lay.valign);
+ 		inner->Add(new wxStaticText(box, nullID, _("Limit for concurrent &downloads:")), lay.valign);
+ 		impl_->downloads_ = new wxSpinCtrlEx(box, nullID, wxString(), wxDefaultPosition, wxSize(lay.dlgUnits(26), -1));
+ 		impl_->downloads_->SetRange(0, 10);
+@@ -179,7 +179,7 @@ bool COptionsPageTransfer::SavePage()
  
- 	pCtrl = XRCCTRL(*this, "ID_NUMTRANSFERS", wxTextCtrl);
--	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 1 || tmp > 10)
--		return DisplayError(pCtrl, _("Please enter a number between 1 and 10 for the number of concurrent transfers."));
-+	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 1 || tmp > 100)
-+		return DisplayError(pCtrl, _("Please enter a number between 1 and 100 for the number of concurrent transfers."));
+ bool COptionsPageTransfer::Validate()
+ {
+-	if (impl_->transfers_->GetValue() < 1 || impl_->transfers_->GetValue() > 10) {
++	if (impl_->transfers_->GetValue() < 1 || impl_->transfers_->GetValue() > 100) {
+ 		return DisplayError(impl_->transfers_, _("Please enter a number between 1 and 10 for the number of concurrent transfers."));
+ 	}
  
- 	pCtrl = XRCCTRL(*this, "ID_NUMDOWNLOADS", wxTextCtrl);
- 	if (!pCtrl->GetValue().ToLong(&tmp) || tmp < 0 || tmp > 10)
