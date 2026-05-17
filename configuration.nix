@@ -33,7 +33,7 @@ flake-overlays:
     # ./vms/kube-desk
     # ./modules/kubernetes.nix
 
-    ./modules/audio/receiver-udp.nix
+    # ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix
 
     ./modules/impersonateGitUsers.nix
@@ -57,6 +57,8 @@ flake-overlays:
     ./modules/mineIcons.nix
     ./modules/fonts.nix
     ./modules/kicad.nix
+
+    ./modules/devcam.nix
 
     ./modules/fishShell.nix
 

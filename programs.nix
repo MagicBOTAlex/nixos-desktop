@@ -46,6 +46,7 @@
     pulseaudioFull
     kdiskmark
     ibus
+    osc
 
     inkscape
     immich-cli

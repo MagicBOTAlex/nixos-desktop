@@ -7,7 +7,7 @@
         "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
       nrbs =
         "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
-      nrbr = "nrb && sudo reboot now";
+      nrbr = "nrb && sudo reboot -f";
       ni = "nvim /etc/nixos/configuration.nix";
       bat =
         "upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E 'state|percentage'";

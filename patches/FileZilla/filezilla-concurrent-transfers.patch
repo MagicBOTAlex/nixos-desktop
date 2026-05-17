@@ -1,3 +1,15 @@
+--- a/src/interface/Options.cpp
++++ b/src/interface/Options.cpp
+@@ -42,7 +42,7 @@ static unsigned int register_interface_options()
+ 		{ "Cache directory", L"", option_flags::predefined_priority | option_flags::platform },
+ 
+ 		// Normal UI options
+-		{ "Number of Transfers", 2, option_flags::numeric_clamp, 1, 10 },
++		{ "Number of Transfers", 3, option_flags::numeric_clamp, 1, 100 },
+ 		{ "Language Code", L"", option_flags::normal, 50 },
+ 		{ "Concurrent download limit", 0, option_flags::numeric_clamp, 0, 10 },
+ 		{ "Concurrent upload limit", 0, option_flags::numeric_clamp, 0, 10 },
+
 --- a/src/interface/settings/optionspage_transfer.cpp
 +++ b/src/interface/settings/optionspage_transfer.cpp
 @@ -48,10 +48,10 @@ bool COptionsPageTransfer::CreateControls(wxWindow* parent)

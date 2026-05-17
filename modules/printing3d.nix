@@ -147,7 +147,25 @@ in
     freecadDesktop
     # nanum
     # nanum-gothic-coding
+    (pkgs.writeTextDir "share/mime/packages/freecad.xml" ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+        <mime-type type="application/x-freecad">
+          <comment>FreeCAD Document</comment>
+          <glob pattern="*.FCStd" priority="100"/>
+          <sub-class-of type="application/zip"/>
+        </mime-type>
+      </mime-info>
+    '')
   ];
+
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "application/x-freecad" = [ "org.freecad.FreeCAD.desktop" ];
+    };
+  };
+
   # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 
   # nixpkgs.config.permittedInsecurePackages = [ "libsoup-2.74.3" ];
