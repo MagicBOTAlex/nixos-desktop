@@ -23,6 +23,8 @@ let
     zstd
     glib
     libcxx
+    libxcrypt
+
   ];
 
   makePkgConfigPath = x: makeSearchPathOutput "dev" "lib/pkgconfig" x;
@@ -63,6 +65,13 @@ in
     nvim-depends-library
     nvim-depends-pkgconfig
     ripgrep
+    texliveFull
+    libxcrypt
+    markdown-toc
+    markdownlint-cli2
+    nixfmt
+    shfmt
+    stylua
   ];
   home.extraOutputsToInstall = [ "nvim-depends" ];
   home.shellAliases.nvim =

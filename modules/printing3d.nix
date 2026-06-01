@@ -145,8 +145,8 @@ in
     # freecadAppImage
     # freecadWrapper
     freecadDesktop
-    # nanum
-    # nanum-gothic-coding
+    nanum
+    nanum-gothic-coding
     (pkgs.writeTextDir "share/mime/packages/freecad.xml" ''
       <?xml version="1.0" encoding="UTF-8"?>
       <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">

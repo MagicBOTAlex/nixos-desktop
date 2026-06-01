@@ -31,6 +31,10 @@
     device = "/dev/disk/by-uuid/DCFE4455FE4429DA";
     fsType = "ntfs";
   };
+  fileSystems."/mnt/forgor" = {
+    device = "/dev/disk/by-uuid/6d331095-e573-451a-a45a-64c269df9cd5";
+    fsType = "ext4";
+  };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-partuuid/42fea704-ae86-4a29-905c-4bc7eaa62da0";

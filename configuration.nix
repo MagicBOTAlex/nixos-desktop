@@ -5,12 +5,13 @@
 # All overlays given by flakes
 flake-overlays:
 
-{ config
-, stdenv
-, pkgs
-, lib
-, inputs
-, ...
+{
+  config,
+  stdenv,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }:
 
 {
@@ -35,6 +36,7 @@ flake-overlays:
 
     # ./modules/audio/receiver-udp.nix
     # ./modules/audio/receiver.nix
+    ./modules/audio/notch-therapy.nix
 
     ./modules/impersonateGitUsers.nix
 

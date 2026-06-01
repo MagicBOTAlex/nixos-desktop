@@ -56,6 +56,13 @@
     SUBSYSTEM=="hwmon",    KERNEL=="hwmon*", ATTR{power*_input}=="*", MODE="0444", GROUP="sensors"
   '';
 
+  users.groups."starr" = { };
+  users.users.starr = {
+    isNormalUser = true;
+    description = "For jellyfin";
+    extraGroups = [ "starr" ];
+  };
+
   security.sudo.extraConfig = ''
     Defaults        timestamp_timeout=300
   '';
