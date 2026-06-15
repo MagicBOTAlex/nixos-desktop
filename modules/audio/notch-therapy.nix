@@ -1,4 +1,12 @@
 { pkgs, ... }:
+let
+  # Frequency where the reduction starts (Hz)
+  freq = 200;
+  # How much to reduce the bass (in dB). -10 is a noticeable cut.
+  gain = -10;
+  # Q factor for the shelf (usually 0.707 for a neutral slope)
+  Q = 0.707;
+in
 {
   services.pipewire = {
     alsa.enable = true;
@@ -6,46 +14,47 @@
     pulse.enable = true;
     jack.enable = true;
 
-    # This injects our notch filter module directly into PipeWire's configuration
-    extraConfig.pipewire."99-notch-filter" = {
+    extraConfig.pipewire."99-bass-minimizer" = {
       "context.modules" = [
         {
           name = "libpipewire-module-filter-chain";
           args = {
-            "node.description" = "Notch Filter (6400Hz)";
-            "media.name" = "Notch Filter (6400Hz)";
+            "node.description" = "Bass Minimizer (${toString freq}Hz)";
+            "media.name" = "Bass Minimizer";
             "filter.graph" = {
               nodes = [
                 {
                   type = "builtin";
-                  name = "notch_L";
-                  label = "bq_notch";
+                  name = "lowshelf_L";
+                  label = "bq_lowshelf";
                   control = {
-                    Freq = 6500.0;
-                    Q = 5.0;
+                    Freq = toString freq;
+                    Gain = toString gain;
+                    Q = toString Q;
                   };
                 }
                 {
                   type = "builtin";
-                  name = "notch_R";
-                  label = "bq_notch";
+                  name = "lowshelf_R";
+                  label = "bq_lowshelf";
                   control = {
-                    Freq = 6400.0;
-                    Q = 5.0;
+                    Freq = toString freq;
+                    Gain = toString gain;
+                    Q = toString Q;
                   };
                 }
               ];
               inputs = [
-                "notch_L:In"
-                "notch_R:In"
+                "lowshelf_L:In"
+                "lowshelf_R:In"
               ];
               outputs = [
-                "notch_L:Out"
-                "notch_R:Out"
+                "lowshelf_L:Out"
+                "lowshelf_R:Out"
               ];
             };
             "capture.props" = {
-              "node.name" = "effect.notch_6400_input";
+              "node.name" = "effect.bass_minimizer_input";
               "media.class" = "Audio/Sink";
               "audio.channels" = 2;
               "audio.position" = [
@@ -54,7 +63,7 @@
               ];
             };
             "playback.props" = {
-              "node.name" = "effect.notch_6400_output";
+              "node.name" = "effect.bass_minimizer_output";
               "node.passive" = true;
               "audio.channels" = 2;
               "audio.position" = [

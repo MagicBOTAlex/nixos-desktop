@@ -108,6 +108,7 @@
 
     efibootmgr
     brave
+    rpi-imager
   ];
 
   programs.noisetorch.enable = true;

@@ -23,6 +23,7 @@ flake-overlays:
     ./modules/drivers/nvidia.nix
     ./modules/drivers/bluetooth.nix
     ./modules/drivers/amdcpu.nix
+    ./modules/drivers/razor.nix
 
     # ./modules/crypto/xmr/mining.nix
 

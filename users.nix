@@ -1,9 +1,23 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   users.users.botmain = {
     isNormalUser = true;
     description = "botmain";
-    extraGroups =
-      [ "projects" "networkmanager" "kvm" "adbusers" "wheel" "docker" "udev" "dialout" "wheel" "sensors" "plugdev" "android-udev" ];
+    extraGroups = [
+      "projects"
+      "networkmanager"
+      "kvm"
+      "adbusers"
+      "wheel"
+      "docker"
+      "udev"
+      "dialout"
+      "wheel"
+      "sensors"
+      "plugdev"
+      "android-udev"
+      "openrazer"
+    ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDya8UyKVEOimjHyiZOsRicB2aZsko8bOoDyamFzo4+n u0_a430@localhost"
@@ -33,8 +47,14 @@
   users.users.test = {
     isNormalUser = true;
     description = "testing";
-    extraGroups =
-      [ "networkmanager" "wheel" "docker" "udev" "dialout" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "udev"
+      "dialout"
+      "wheel"
+    ];
 
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAhiPhFbCi64NduuV794omgS8mctBLXtqxbaEJyUo6lg botalex@DESKTOPSKTOP-ENDVV0V"

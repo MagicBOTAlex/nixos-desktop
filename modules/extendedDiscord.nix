@@ -47,6 +47,9 @@ let
     keywords = [
       "discord"
       "chat"
+      "dis"
+      "di"
+      "disc"
     ];
     startupNotify = false;
   };
