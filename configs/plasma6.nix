@@ -170,6 +170,8 @@ in
       "klaunchrc"."FeedbackStyle"."TaskbarButton" = false;
       "kcminputrc"."Keyboard"."RepeatRate" = 128;
       "kcminputrc"."Keyboard"."RepeatDelay" = 300;
+      "klipperrc"."General"."IgnoreImages" = false;
+      "klipperrc"."General"."MaxClipItems" = 200;
 
       # # Dolphin shit
       # "dolphinrc"."General"."GlobalViewProps" = false;

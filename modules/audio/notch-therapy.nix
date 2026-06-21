@@ -3,7 +3,7 @@ let
   # Frequency where the reduction starts (Hz)
   freq = 200;
   # How much to reduce the bass (in dB). -10 is a noticeable cut.
-  gain = -10;
+  gain = -15;
   # Q factor for the shelf (usually 0.707 for a neutral slope)
   Q = 0.707;
 in

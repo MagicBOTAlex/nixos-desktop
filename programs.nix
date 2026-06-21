@@ -109,6 +109,8 @@
     efibootmgr
     brave
     rpi-imager
+    grub2
+    busybox
   ];
 
   programs.noisetorch.enable = true;

@@ -1,16 +1,14 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.fish = {
     enable = true;
 
     shellAliases = {
-      nrb =
-        "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
-      nrbs =
-        "boost && sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
-      nrbr = "nrb && sudo reboot -f";
+      nrb = "boost ;; sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback && fish";
+      nrbs = "boost ;; sudo nixos-rebuild switch --flake /etc/nixos --impure --fallback -j 1 && fish";
+      nrbr = "nrb ;; sudo reboot -f";
       ni = "nvim /etc/nixos/configuration.nix";
-      bat =
-        "upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E 'state|percentage'";
+      bat = "upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E 'state|percentage'";
       gpu = "nvidia-smi -q | grep -i 'draw.*W'";
       wifi = "sudo nmtui";
       all = "sudo chmod -R a+rwx ./*";
@@ -28,15 +26,13 @@
       fed = "nvim flake.nix";
       r = "nix run";
       cdn = "cd /etc/nixos";
-      cpu =
-        "sudo turbostat --quiet --show PkgWatt --interval 1 --num_iterations 1 | awk 'NR==2{print $1}'";
+      cpu = "sudo turbostat --quiet --show PkgWatt --interval 1 --num_iterations 1 | awk 'NR==2{print $1}'";
       vr = "~/Desktop/startvr.sh";
       dm = "sudo systemctl start display-manager.service && sleep 10 && systemctl --user restart ledfx";
       tty = "powerprofilesctl set power-saver && sudo systemctl stop display-manager.service";
       btop = "sudo /home/botmain/.nix-profile/bin/btop";
       yaaumma-server = "ssh zhen@188.245.106.241";
-      kube-desk =
-        "ssh -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no' -p 2223 root@localhost";
+      kube-desk = "ssh -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no' -p 2223 root@localhost";
       windows = "sudo efibootmgr -n $(sudo efibootmgr | grep -i 'Windows Boot Manager' | head -n1 | cut -c5-8) && sudo reboot -f";
       metal = "ssh metal@192.168.50.59";
 
@@ -125,7 +121,6 @@
       end
     '';
   };
-
 
   security.sudo.extraRules = [
     {
