@@ -60,6 +60,7 @@ flake-overlays:
     ./modules/mineIcons.nix
     ./modules/fonts.nix
     ./modules/kicad.nix
+    ./modules/libreTranslate.nix
 
     ./modules/devcam.nix
 

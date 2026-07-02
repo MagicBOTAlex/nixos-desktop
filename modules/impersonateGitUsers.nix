@@ -1,31 +1,47 @@
 { config, pkgs, ... }:
 
 let
-  impersonationList = [ "kaitlyn" "laibah" "alex" "abdulla" ];
+  impersonationList = [
+    "kaitlyn"
+    "laibah"
+    "alex"
+    "abdulla"
+    "thomas"
+  ];
 in
 {
   users.groups.projects = { };
 
   # 1. Create the users
-  users.users = builtins.listToAttrs (map
-    (name: {
+  users.users = builtins.listToAttrs (
+    map (name: {
       name = name;
       value = {
         isNormalUser = true;
         shell = pkgs.fish;
         initialPassword = "1111";
-        extraGroups = [ "networkmanager" "projects" ];
+        extraGroups = [
+          "networkmanager"
+          "projects"
+        ];
       };
-    })
-    impersonationList);
+    }) impersonationList
+  );
 
   # 2. Enable Fish and create the aliases
   programs.fish = {
-    shellAliases = builtins.listToAttrs (map
-      (name: {
+    shellAliases = builtins.listToAttrs (
+      map (name: {
         name = name; # The command you type (e.g., 'kaitlyn')
         value = "su - ${name}"; # The command that executes
-      })
-      impersonationList);
+      }) impersonationList
+    );
   };
+
+  systemd.tmpfiles.rules = [
+    # Type  Path                                         Mode  User     Group     Age  Argument
+    "d      /home/botmain/Desktop/projects/school        2775  botmain  projects  -    -"
+    "Z      /home/botmain/Desktop/projects/school        2775  botmain  projects  -    -"
+    "a+ /home/botmain/Desktop/projects/school - - - - default:group:projects:rwx"
+  ];
 }

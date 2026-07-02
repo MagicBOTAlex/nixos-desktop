@@ -3,7 +3,7 @@
   vscode.enable = true;
   wezterm.enable = true;
 
-  chinese-keyboard.enable = false;
+  chinese-keyboard.enable = true;
 
   discord = {
     limit = false;

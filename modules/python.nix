@@ -12,6 +12,7 @@
         uvicorn
         tqdm
         bleak
+        pyyaml
       ]
     ))
   ];

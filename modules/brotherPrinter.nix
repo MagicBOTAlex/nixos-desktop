@@ -1,9 +1,17 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.printing.enable = true;
-  services.printing.drivers = with pkgs; [ pkgs.brlaser brscan5 sane-airscan simple-scan ];
+  services.printing.drivers = with pkgs; [
+    pkgs.brlaser
+    brscan5
+    sane-airscan
+    simple-scan
+  ];
   services.ipp-usb.enable = true;
 
   boot.kernelModules = [ "nf_conntrack_ftp" ];
+
+  security.pam.services.vsftpd.enable = true;
 
   services.vsftpd = {
     enable = true;
@@ -15,7 +23,7 @@
     extraConfig = ''
       # 1. Write Permissions
       write_enable=YES
-      
+
       # 2. Lock user to their folder (Chroot)
       chroot_local_user=YES
       # REQUIRED: Allow the user to write to their own locked folder
@@ -36,5 +44,8 @@
     group = "users";
   };
 
-  networking.firewall.allowedTCPPorts = [ 20 21 ];
+  networking.firewall.allowedTCPPorts = [
+    20
+    21
+  ];
 }
