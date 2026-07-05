@@ -111,6 +111,7 @@
     rpi-imager
     grub2
     busybox
+    nvitop
   ];
 
   programs.noisetorch.enable = true;
