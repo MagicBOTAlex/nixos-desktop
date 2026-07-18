@@ -37,7 +37,6 @@
 
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
 
-
     microvm = {
       url = "github:astro/microvm.nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,18 +45,19 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
   outputs =
-    { self
-    , nixpkgs-xr
-    , microvm
-    , spicetify-nix
-    , nixpkgs
-    , flatpaks
-    , chaotic
-    , nix-cachyos-kernel
-    , minemouth
-    , alice-vision-pr
-    , android-nixpkgs
-    , ...
+    {
+      self,
+      nixpkgs-xr,
+      microvm,
+      spicetify-nix,
+      nixpkgs,
+      flatpaks,
+      chaotic,
+      nix-cachyos-kernel,
+      minemouth,
+      alice-vision-pr,
+      android-nixpkgs,
+      ...
     }@inputs:
     let
       flake-overlays = [
@@ -96,7 +96,6 @@
             # import configuration
             {
               nixpkgs.hostPlatform = "x86_64-linux";
-              nixpkgs.config.replaceStdenv = { pkgs }: pkgs.stdenv;
             }
             (import ./configuration.nix flake-overlays)
             spicetify-nix.nixosModules.default

@@ -1,11 +1,20 @@
-{ config, pkgs, lib, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+{
   nixpkgs.config.nvidia.acceptLicense = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   nixpkgs.config.allowUnfree = true;
-  # nixpkgs.config.cudaSupport = true;
+  nixpkgs.config.cudaSupport = true;
   nixpkgs.config.cudaVersion = "12.0";
 
-  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" "nvidia-drm.modeset=1" ];
+  boot.kernelParams = [
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia-drm.modeset=1"
+  ];
 
   hardware.graphics = {
     enable = true;
@@ -65,9 +74,12 @@
         # Remove NVIDIA VGA/3D controller devices
         ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
       '';
-      boot.blacklistedKernelModules =
-        [ "nouveau" "nvidia" "nvidia_drm" "nvidia_modeset" ];
+      boot.blacklistedKernelModules = [
+        "nouveau"
+        "nvidia"
+        "nvidia_drm"
+        "nvidia_modeset"
+      ];
     };
   };
 }
-

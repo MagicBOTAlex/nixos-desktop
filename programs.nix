@@ -26,7 +26,7 @@
     vlc
     filezilla
     arduino-ide
-    krita
+    # krita
     jq
     sublime-merge
     python313Packages.fonttools

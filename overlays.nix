@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   nixpkgs.overlays = [
     (final: prev: {
       zenmonitor = prev.zenmonitor.overrideAttrs (oldAttrs: {
