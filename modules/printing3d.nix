@@ -139,8 +139,9 @@ in
     # (pkgs.callPackage ./customPackages/freecad/freecad.nix { })
     # (pkgs.callPackage ./customPackages/orcaslicer/orcaslicer.nix { })
     # pkgs.orca-slicer
-    # orcaSlicerDesktopItem
-    # orcaPkg
+    orcaSlicerDesktopItem
+    orcaPkg
+    # bambu-studio
     # orca-slicer-gitfix
     # freecadAppImage
     # freecadWrapper
@@ -165,6 +166,19 @@ in
       "application/x-freecad" = [ "org.freecad.FreeCAD.desktop" ];
     };
   };
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      bambu-studio = prev.bambu-studio.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [
+          final.cudaPackages.cuda_nvcc
+        ];
+        buildInputs = (oldAttrs.buildInputs or [ ]) ++ [
+          final.cudaPackages.cuda_cudart
+        ];
+      });
+    })
+  ];
 
   # environment.variables = { QT_QPA_PLATFORM = "xcb"; };
 
