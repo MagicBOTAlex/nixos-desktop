@@ -11,6 +11,7 @@ flake-overlays:
   pkgs,
   lib,
   inputs,
+  nixpkgs-stable,
   ...
 }:
 
@@ -52,7 +53,7 @@ flake-overlays:
     ./modules/pigz.nix
     ./modules/nrf.nix
     ./modules/brotherPrinter.nix
-    ./modules/blender.nix
+    # ./modules/blender.nix
     ./modules/ydotool.nix
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
@@ -70,7 +71,7 @@ flake-overlays:
 
     ./users.nix
     ./modules/ollama.nix
-    ./modules/meshroom.nix
+    # ./modules/meshroom.nix
 
     ./modules/de.nix
 
@@ -90,15 +91,20 @@ flake-overlays:
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
       "https://cache.deprived.dev"
+      "https://cache.nixos-cuda.org"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
   };
 
   nixpkgs.overlays = [
+    (final: prev: {
+      calligra = nixpkgs-stable.legacyPackages.${prev.system}.calligra;
+    })
   ]
   ++ flake-overlays;
   environment.systemPackages = with pkgs; [ ];

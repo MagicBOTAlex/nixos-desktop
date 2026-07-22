@@ -31,7 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     alice-vision-pr.url = "github:NixOS/nixpkgs/pull/256115/head";
     alice-vision-pr.inputs.nixpkgs.follows = "nixpkgs-stable";
 
@@ -51,6 +51,7 @@
       microvm,
       spicetify-nix,
       nixpkgs,
+      nixpkgs-stable,
       flatpaks,
       chaotic,
       nix-cachyos-kernel,

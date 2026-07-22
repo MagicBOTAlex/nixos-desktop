@@ -85,7 +85,6 @@
     kdePackages.kdegraphics-thumbnailers # new
     kdePackages.kdegraphics-mobipocket # new
     kdePackages.kimageformats # new
-    kdePackages.calligra # new
     kdePackages.qtimageformats # new
     kdePackages.ffmpegthumbs # new
     kdePackages.taglib # new
@@ -103,7 +102,7 @@
     coppwr
     mqtt-explorer
     ledfx
-    openscad-unstable
+    openscad
     platformio
 
     efibootmgr
