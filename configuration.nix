@@ -66,6 +66,7 @@ flake-overlays:
     ./modules/devcam.nix
 
     ./modules/fishShell.nix
+    ./modules/wg-countr.nix
 
     ./patches/FileZilla
 

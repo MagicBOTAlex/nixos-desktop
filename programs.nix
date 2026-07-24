@@ -103,6 +103,7 @@
     mqtt-explorer
     ledfx
     openscad
+    unrar
     platformio
 
     efibootmgr
