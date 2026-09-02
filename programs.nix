@@ -34,6 +34,7 @@
     # rustdesk
     # (pkgs.callPackage ./modules/customPackages/rustdesk/rustdesk.nix { })
     (pkgs.callPackage ./modules/customPackages/shreddit/shreddit.nix { })
+    (pkgs.callPackage ./modules/customPackages/rexit { })
     borgbackup
     pinta
     kdePackages.kdenlive

@@ -36,6 +36,7 @@
     alice-vision-pr.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
+    impermanence.url = "github:nix-community/impermanence";
 
     microvm = {
       url = "github:astro/microvm.nix";
@@ -58,6 +59,7 @@
       minemouth,
       alice-vision-pr,
       android-nixpkgs,
+      impermanence,
       ...
     }@inputs:
     let
@@ -109,6 +111,8 @@
             #     boot.kernelPackages = nixpkgs.cachyosKernels.linuxPackages-cachyos-latest;
             #   }
             # )
+
+            impermanence.nixosModules.impermanence
 
             # home manager part 2
             inputs.home-manager.nixosModules.default

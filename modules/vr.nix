@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   modded-oscavmgr = pkgs.oscavmgr.overrideAttrs (old: {
     src = pkgs.fetchFromGitHub {
@@ -31,7 +37,10 @@ let
       if [[ -f "$binary" && -x "$binary" ]]; then
       wrapProgram "$binary" \
       --prefix LD_LIBRARY_PATH : "${
-        lib.makeLibraryPath [ pkgs.systemd pkgs.udev ]
+        lib.makeLibraryPath [
+          pkgs.systemd
+          pkgs.udev
+        ]
       }"
       fi
       done
@@ -112,13 +121,12 @@ let
   #
   # });
 
-
-
 in
 {
 
   config = lib.mkIf toggles.vr.enable {
-    environment.systemPackages = with pkgs;
+    environment.systemPackages =
+      with pkgs;
       [
         motoc # Quest to PC tracking calibration
         # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
@@ -133,24 +141,25 @@ in
         slimevr
         # wivrn
         android-tools
-      ] ++ randomLibs;
+      ]
+      ++ randomLibs;
 
-    systemd.user.services.wayvr = {
-      description = "wayvr";
-
-      # Start in the user session
-      wantedBy = [ "default.target" ];
-
-      # Unlimited restarts
-      startLimitIntervalSec = 0;
-      startLimitBurst = 0;
-
-      serviceConfig = {
-        ExecStart = "${pkgs.wayvr}/bin/wayvr";
-        Restart = "always";
-        RestartSec = 1;
-      };
-    };
+    # systemd.user.services.wayvr = {
+    #   description = "wayvr";
+    #
+    #   # Start in the user session
+    #   wantedBy = [ "default.target" ];
+    #
+    #   # Unlimited restarts
+    #   startLimitIntervalSec = 0;
+    #   startLimitBurst = 0;
+    #
+    #   serviceConfig = {
+    #     ExecStart = "${pkgs.wayvr}/bin/wayvr";
+    #     Restart = "always";
+    #     RestartSec = 1;
+    #   };
+    # };
 
     services.wivrn = {
       enable = true;

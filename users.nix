@@ -17,6 +17,7 @@
       "plugdev"
       "android-udev"
       "openrazer"
+      "clash"
     ];
 
     openssh.authorizedKeys.keys = [

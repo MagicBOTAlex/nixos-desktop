@@ -68,6 +68,8 @@ flake-overlays:
     ./modules/fishShell.nix
     ./modules/wg-countr.nix
 
+    ./modules/mediaNfs.nix
+    ./modules/clashVerge.nix
     ./patches/FileZilla
 
     ./users.nix

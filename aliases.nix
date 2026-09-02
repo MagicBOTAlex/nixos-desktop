@@ -35,6 +35,7 @@
       kube-desk = "ssh -o 'UserKnownHostsFile=/dev/null' -o 'StrictHostKeyChecking=no' -p 2223 root@localhost";
       windows = "sudo efibootmgr -n $(sudo efibootmgr | grep -i 'Windows Boot Manager' | head -n1 | cut -c5-8) && sudo reboot -f";
       metal = "ssh metal@192.168.50.59";
+      countr = "ssh mjid@198.18.0.2";
 
     };
 
