@@ -68,6 +68,11 @@ in
       "KDE Keyboard Layout Switcher"."Switch to Next Keyboard Layout" =
         ",Meta+Alt+K,Switch to Next Keyboard Layout";
 
+      "services/org.kde.krunner.desktop"."_launch" = [
+        "Search"
+        "Alt+F2"
+      ];
+
     };
 
     hotkeys.commands = {

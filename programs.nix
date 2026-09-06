@@ -53,6 +53,7 @@
     immich-cli
     drawio
     sg3_utils
+    opencode
     # linuxKernel.packages.linux_6_12.turbostat
     unityhub
     cheese

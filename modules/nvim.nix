@@ -100,7 +100,6 @@ in
       pkg-config
       yarn
       texlivePackages.latex
-      tree-sitter
       fd
       stdenv.cc.libc
       glibc.dev
@@ -108,7 +107,6 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
-      nvim-treesitter.withAllGrammars
     ];
 
     # extraLuaPackages = ls: with ls;
