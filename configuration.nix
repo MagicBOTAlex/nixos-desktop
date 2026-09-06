@@ -34,6 +34,7 @@ flake-overlays:
     ./overlays.nix
 
     # ./vms/kube-desk
+    ./vms/opencode-vm
     # ./modules/kubernetes.nix
 
     # ./modules/audio/receiver-udp.nix
@@ -63,7 +64,7 @@ flake-overlays:
     ./modules/kicad.nix
     # ./modules/libreTranslate.nix
 
-    ./modules/devcam.nix
+    # ./modules/devcam.nix
 
     ./modules/fishShell.nix
     ./modules/wg-countr.nix

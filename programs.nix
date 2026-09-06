@@ -123,6 +123,7 @@
     "libsoup-2.74.3" # Unityhub
     "segger-jlink-qt4-874"
     "qtwebengine-5.15.19"
+    "segger-jlink-qt4-952"
   ];
 
   programs.nix-ld.enable = true;

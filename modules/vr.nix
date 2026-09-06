@@ -132,7 +132,7 @@ in
         # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
         selectedWlx
         # (pkgs.callPackage ./submodules/vrcft.nix { })
-        modded-oscavmgr
+        # modded-oscavmgr
         vrcadvert
         # inputs.avalonia.packages.x86_64-linux.default
         eepyxr
