@@ -27,6 +27,7 @@
   };
   imports = [ ];
   environment.systemPackages = with pkgs; [
+    opencode
     neovim
     git
     wget

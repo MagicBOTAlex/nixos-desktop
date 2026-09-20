@@ -45,12 +45,6 @@
     fsType = "ntfs";
     options = [ "nofail" ];
   };
-  fileSystems."/mnt/forgor" = {
-    device = "/dev/disk/by-uuid/6d331095-e573-451a-a45a-64c269df9cd5";
-    fsType = "ext4";
-    options = [ "nofail" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/E7C3-8CF7";
     fsType = "vfat";
@@ -91,20 +85,7 @@
 
   swapDevices = [
     {
-      device = "/dev/disk/by-partuuid/5cf85b3a-ea07-47a3-a0f7-0c3cb939467b";
-      # randomEncryption.enable = true;
-    }
-    {
       device = "/dev/nvme1n1p9";
-    }
-    {
-      device = "/dev/sdc2";
-    }
-    {
-      device = "/dev/sdd1";
-    }
-    {
-      device = "/dev/sda2";
     }
     # {
     #   device = "/swapfile";

@@ -9,28 +9,25 @@ in
 
 {
 
-  services.flatpak = {
-    enable = true;
-  };
+  security.polkit.enable = true;
 
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = [ "multi-user.target" ];
-  #   after = [ "network-online.target" ];
-  #   wants = [ "network-online.target" ];
-  #   path = [ pkgs.flatpak ];
-  #   serviceConfig = {
-  #     Type = "oneshot";
-  #     Restart = "on-failure";
-  #     RestartSec = "5s";
-  #   };
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+  services.flatpak.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    # If not using a full DE like GNOME or KDE, enable gtk portal:
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/flatpak"
     ];
+    users.botmain = {
+      directories = [
+        ".local/share/flatpak"
+        ".var/app"
+      ];
+    };
   };
 
 }

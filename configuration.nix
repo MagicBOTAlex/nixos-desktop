@@ -34,7 +34,7 @@ flake-overlays:
     ./overlays.nix
 
     # ./vms/kube-desk
-    ./vms/opencode-vm
+    # ./vms/opencode-vm
     # ./modules/kubernetes.nix
 
     # ./modules/audio/receiver-udp.nix
@@ -58,10 +58,11 @@ flake-overlays:
     ./modules/ydotool.nix
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
-    # ./modules/ledfx.nix
+    ./modules/ledfx.nix
     ./modules/mineIcons.nix
     ./modules/fonts.nix
     ./modules/kicad.nix
+    ./modules/obs.nix
     # ./modules/libreTranslate.nix
 
     # ./modules/devcam.nix
@@ -94,13 +95,13 @@ flake-overlays:
     substituters = [
       "https://cache.nixos.org"
       "https://nix-community.cachix.org"
-      "https://cache.deprived.dev"
+      # "https://cache.deprived.dev"
       "https://cache.nixos-cuda.org"
     ];
     trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
+      # "cache.deprived.dev:B5o97KpSrgbN7OxZCLu0LQYxg+Bj0pB1WiKY5n0HfLY="
       "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
     ];
   };

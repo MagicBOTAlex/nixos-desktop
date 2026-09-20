@@ -14,38 +14,11 @@ let
       hash = "sha256-mY2CPtEGktmIlVto/UaNLtRyT9A88cS+KcRYKVlV394=";
     };
   });
-  toggles = import ./../toggles.nix;
 
   steamUser = "botmain"; # Target linux user
   vrPath = "/home/${steamUser}/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher";
 
-  selectedWivrn = pkgs.wivrn.overrideAttrs (oldAttrs: {
-    cmakeFlags = oldAttrs.cmakeFlags ++ [
-      (lib.cmakeBool "WIVRN_FEATURE_DEBUG_GUI" true)
-      (lib.cmakeBool "XRT_FEATURE_OPENXR_LAYER_COLOR_SCALE_BIAS" true)
-    ];
-    buildInputs = oldAttrs.buildInputs ++ [
-      pkgs.sdl2-compat
-      pkgs.systemd
-      #
-    ];
-    nativeBuildInputs = oldAttrs.nativeBuildInputs ++ [ pkgs.makeWrapper ];
-
-    postInstall = (oldAttrs.postInstall or "") + ''
-      # Wrap all executables with proper library path
-                for binary in $out/bin/*; do
-      if [[ -f "$binary" && -x "$binary" ]]; then
-      wrapProgram "$binary" \
-      --prefix LD_LIBRARY_PATH : "${
-        lib.makeLibraryPath [
-          pkgs.systemd
-          pkgs.udev
-        ]
-      }"
-      fi
-      done
-    '';
-  });
+  selectedWivrn = (pkgs.wivrn.override { cudaSupport = true; });
 
   randomLibs = with pkgs; [
     alsa-lib
@@ -123,83 +96,93 @@ let
 
 in
 {
+  networking.firewall.allowedUDPPorts = [
+    5353
+    9757
+  ];
+  networking.firewall.allowedTCPPorts = [
+    5353
+    9757
+  ];
 
-  config = lib.mkIf toggles.vr.enable {
-    environment.systemPackages =
-      with pkgs;
-      [
-        motoc # Quest to PC tracking calibration
-        # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
-        selectedWlx
-        # (pkgs.callPackage ./submodules/vrcft.nix { })
-        # modded-oscavmgr
-        vrcadvert
-        # inputs.avalonia.packages.x86_64-linux.default
-        eepyxr
-        bs-manager
-        openvr
-        slimevr
-        # wivrn
-        android-tools
-      ]
-      ++ randomLibs;
+  environment.systemPackages =
+    with pkgs;
+    [
+      motoc # Quest to PC tracking calibration
+      # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
+      selectedWlx
+      # (pkgs.callPackage ./submodules/vrcft.nix { })
+      # modded-oscavmgr
+      vrcadvert
+      # inputs.avalonia.packages.x86_64-linux.default
+      eepyxr
+      bs-manager
+      openvr
+      slimevr
+      # wivrn
+      android-tools
+    ]
+    ++ randomLibs;
 
-    # systemd.user.services.wayvr = {
-    #   description = "wayvr";
-    #
-    #   # Start in the user session
-    #   wantedBy = [ "default.target" ];
-    #
-    #   # Unlimited restarts
-    #   startLimitIntervalSec = 0;
-    #   startLimitBurst = 0;
-    #
-    #   serviceConfig = {
-    #     ExecStart = "${pkgs.wayvr}/bin/wayvr";
-    #     Restart = "always";
-    #     RestartSec = 1;
-    #   };
-    # };
+  # systemd.user.services.wayvr = {
+  #   description = "wayvr";
+  #
+  #   # Start in the user session
+  #   wantedBy = [ "default.target" ];
+  #
+  #   # Unlimited restarts
+  #   startLimitIntervalSec = 0;
+  #   startLimitBurst = 0;
+  #
+  #   serviceConfig = {
+  #     ExecStart = "${pkgs.wayvr}/bin/wayvr";
+  #     Restart = "always";
+  #     RestartSec = 1;
+  #   };
+  # };
 
-    services.wivrn = {
-      enable = true;
-      openFirewall = true;
-      highPriority = true;
-      autoStart = true;
-      # package = (pkgs.callPackage ./customPackages/wivrn/wivrn.nix { }).overrideAttrs (oldAttrs: {
-      package = selectedWivrn;
+  # services.wivrn = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   highPriority = true;
+  #   autoStart = true;
+  #   # package = (pkgs.callPackage ./customPackages/wivrn/wivrn.nix { }).overrideAttrs (oldAttrs: {
+  #   package = selectedWivrn;
+  #
+  #   # defaultRuntime = true;
+  # };
 
-      # defaultRuntime = true;
-    };
+  nixpkgs.config.cudaSupport = true;
 
-    services.udev.extraRules = ''
-      # SlimeVR Dongle (1209:7690)
-      SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
-      KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
+  # services.udev.extraRules = ''
+  #   # SlimeVR Dongle (1209:7690)
+  #   SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
+  #   KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7690", MODE="0666"
+  #
+  #   # SlimeVR Tracker via USB (1209:7692) - Needed for wired connection/debugging
+  #   SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
+  #   KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
+  # '';
 
-      # SlimeVR Tracker via USB (1209:7692) - Needed for wired connection/debugging
-      SUBSYSTEM=="tty", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
-      KERNEL=="hidraw*", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="7692", MODE="0666"
-    '';
+  services.udev.packages = [ pkgs.slimevr ];
 
-    # # Root oneshot that grants CAP_SYS_NICE to vrcompositor-launcher
-    # systemd.services.steamvr-cap-sys-nice = {
-    #   description = "Grant CAP_SYS_NICE to SteamVR vrcompositor-launcher";
-    #   after = [ "local-fs.target" ];
-    #   serviceConfig = {
-    #     Type = "oneshot";
-    #     ExecStart = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${vrPath}";
-    #   };
-    #   wantedBy = [ "multi-user.target" ];
-    # };
-    #
-    # # Re-run the service whenever the binary appears/changes
-    # systemd.paths.steamvr-cap-sys-nice = {
-    #   wantedBy = [ "multi-user.target" ];
-    #   pathConfig = {
-    #     PathExists = vrPath;
-    #     PathChanged = vrPath;
-    #   };
-    # };
-  };
+  # # Root oneshot that grants CAP_SYS_NICE to vrcompositor-launcher
+  # systemd.services.steamvr-cap-sys-nice = {
+  #   description = "Grant CAP_SYS_NICE to SteamVR vrcompositor-launcher";
+  #   after = [ "local-fs.target" ];
+  #   serviceConfig = {
+  #     Type = "oneshot";
+  #     ExecStart = "${pkgs.libcap}/bin/setcap CAP_SYS_NICE+eip ${vrPath}";
+  #   };
+  #   wantedBy = [ "multi-user.target" ];
+  # };
+  #
+  # # Re-run the service whenever the binary appears/changes
+  # systemd.paths.steamvr-cap-sys-nice = {
+  #   wantedBy = [ "multi-user.target" ];
+  #   pathConfig = {
+  #     PathExists = vrPath;
+  #     PathChanged = vrPath;
+  #   };
+  # };
 }

@@ -1,8 +1,8 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [ virtiofsd ];
-  microvm.autostart = [ "kube-desk" ];
-  microvm.vms."kube-desk" = {
-    config = ./kube-desk.nix;
+  microvm.autostart = [ "opencode-vm" ];
+  microvm.vms."opencode-vm" = {
+    config = ./opencode-vm.nix;
   };
 
   systemd.tmpfiles.rules = [
