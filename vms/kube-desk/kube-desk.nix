@@ -18,7 +18,7 @@
   };
 
   programs.fish = { enable = true; };
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = false;
 
   services.openssh = { enable = true; };
   imports = [ ./kubernetes.nix ];

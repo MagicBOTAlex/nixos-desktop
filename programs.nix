@@ -72,7 +72,7 @@
     conky
     gitoxide
 
-    libreoffice-fresh
+    libreoffice-stable
     hunspell
     hunspellDicts.da-dk
     appimage-run

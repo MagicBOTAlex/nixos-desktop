@@ -23,7 +23,7 @@ let
   };
 
   prPkgs = import inputs.alice-vision-pr {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config.allowUnfree = true;
     overlays = [ aliceVisionOverlay ];
   };

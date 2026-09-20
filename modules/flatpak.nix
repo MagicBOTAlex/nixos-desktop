@@ -21,6 +21,8 @@ in
   environment.persistence."/persist" = {
     directories = [
       "/var/lib/flatpak"
+      # Keep uid/gid mappings stable across reboots (silences the impermanence warning).
+      "/var/lib/nixos"
     ];
     users.botmain = {
       directories = [

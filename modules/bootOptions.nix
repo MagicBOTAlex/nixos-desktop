@@ -9,12 +9,15 @@ in
       boot.initrd.kernelModules = [ "amdgpu" ];
       boot.kernelParams = [ "quiet" "splash" "usbcore.autosuspend=120" "nr_hugepages=4096" "ntsync" ];
       # boot.consoleLogLevel = 0;
+      boot.loader.timeout = 0; # boot immediately, no selection screen
       boot.loader.grub = {
         enable = true;
         efiSupport = true;
         devices = [ "nodev" ]; # UEFI: don’t write to a disk MBR
         default = "0";
         useOSProber = true;
+        timeoutStyle = "hidden"; # no GRUB menu drawn
+        configurationLimit = 10; # fewer entries = faster grub.cfg parsing
       };
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.efi.efiSysMountPoint = "/boot";
@@ -34,7 +37,7 @@ in
           enable = true;
           theme = "mc";
           themePackages = [
-            inputs.minemouth.packages.${pkgs.system}.plymouth-minecraft-theme
+            inputs.minemouth.packages.${pkgs.stdenv.hostPlatform.system}.plymouth-minecraft-theme
           ];
         };
 

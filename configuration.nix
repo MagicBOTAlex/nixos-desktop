@@ -107,8 +107,11 @@ flake-overlays:
   };
 
   nixpkgs.overlays = [
+    # Upstream sddm-theme-minesddm still reads `pkgs.system` (deprecated alias).
+    # Re-provide it as the real value so the deprecation warning is not emitted.
+    (final: prev: { system = final.stdenv.hostPlatform.system; })
     (final: prev: {
-      calligra = nixpkgs-stable.legacyPackages.${prev.system}.calligra;
+      calligra = nixpkgs-stable.legacyPackages.${prev.stdenv.hostPlatform.system}.calligra;
     })
   ]
   ++ flake-overlays;
@@ -239,6 +242,6 @@ flake-overlays:
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  # system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "26.11"; # Read the comment above before changing.
 
 }

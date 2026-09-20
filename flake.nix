@@ -33,7 +33,6 @@
 
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.11";
     alice-vision-pr.url = "github:NixOS/nixpkgs/pull/256115/head";
-    alice-vision-pr.inputs.nixpkgs.follows = "nixpkgs-stable";
 
     android-nixpkgs.url = "github:tadfisher/android-nixpkgs";
     impermanence.url = "github:nix-community/impermanence";

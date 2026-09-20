@@ -9,6 +9,9 @@ in
 {
   programs.firefox = {
     enable = true;
+    # Pin the legacy path explicitly to keep ~/.mozilla/firefox and silence the
+    # stateVersion < 26.05 migration warning. Adopt the XDG path later if wanted.
+    configPath = ".mozilla/firefox";
     # package = pkgs.firefox.overrideAttrs (oldAttrs: {
     #   postInstall = (oldAttrs.postInstall or "") + ''
     #     # 1. Replace the icon reference in the desktop file
