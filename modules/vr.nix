@@ -119,7 +119,7 @@ in
       bs-manager
       openvr
       slimevr
-      # wivrn
+      wivrn
       android-tools
     ]
     ++ randomLibs;

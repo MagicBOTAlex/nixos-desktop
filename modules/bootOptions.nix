@@ -1,4 +1,10 @@
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 let
   toggles = import ./../toggles.nix;
 in
@@ -7,7 +13,18 @@ in
     {
       hardware.enableRedistributableFirmware = true;
       boot.initrd.kernelModules = [ "amdgpu" ];
-      boot.kernelParams = [ "quiet" "splash" "usbcore.autosuspend=120" "nr_hugepages=4096" "ntsync" ];
+      # Silent, seamless handoff from GRUB/Plymouth to userspace.
+      # consoleLogLevel = 0 hides kernel messages (incl. the harmless Zen5
+      # "RDSEED32 is broken" erratum workaround) during the initrd phase.
+      boot.consoleLogLevel = 0;
+      boot.initrd.verbose = false;
+      boot.kernelParams = [
+        "quiet"
+        "splash"
+        "usbcore.autosuspend=120"
+        "nr_hugepages=4096"
+        "ntsync"
+      ];
       # boot.consoleLogLevel = 0;
       boot.loader.timeout = 0; # boot immediately, no selection screen
       boot.loader.grub = {
@@ -22,29 +39,29 @@ in
       boot.loader.efi.canTouchEfiVariables = true;
       boot.loader.efi.efiSysMountPoint = "/boot";
 
+      boot.kernelPackages = pkgs.linuxPackages_latest;
+
     }
 
     # CachyOS kernel
-    (
-      lib.mkIf (toggles.kernel.useCachyOS) {
-        boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
-      }
-    )
+    (lib.mkIf (toggles.kernel.useCachyOS) {
+      boot.kernelPackages = pkgs.linuxPackages_cachyos-lto;
+    })
 
-    (
-      lib.mkIf (toggles.boot.mineboot.enable or false) {
-        boot.plymouth = {
+    (lib.mkIf (toggles.boot.mineboot.enable or false) {
+      boot.plymouth = {
+        enable = true;
+        theme = "mc";
+        themePackages = [
+          inputs.minemouth.packages.${pkgs.stdenv.hostPlatform.system}.plymouth-minecraft-theme
+        ];
+      };
+
+      boot.loader.grub = {
+        minegrub-world-sel = {
           enable = true;
-          theme = "mc";
-          themePackages = [
-            inputs.minemouth.packages.${pkgs.stdenv.hostPlatform.system}.plymouth-minecraft-theme
-          ];
-        };
-
-        boot.loader.grub = {
-          minegrub-world-sel = {
-            enable = true;
-            customIcons = [{
+          customIcons = [
+            {
               name = "nixos";
               lineTop = "NixOS W";
               lineBottom = "Survival Mode, No Cheats, Version: 23.11";
@@ -53,14 +70,12 @@ in
               #   path = ./nixos-logo.png;
               #   name = "nixos-img";
               # };
-            }];
-          };
+            }
+          ];
         };
+      };
 
-        services.displayManager.sddm.settings.Theme.Current = "minesddm";
-      }
-    )
+      services.displayManager.sddm.settings.Theme.Current = "minesddm";
+    })
   ];
 }
-
-

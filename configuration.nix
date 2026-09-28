@@ -59,6 +59,7 @@ flake-overlays:
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
     ./modules/ledfx.nix
+    ./modules/notify.nix
     ./modules/mineIcons.nix
     ./modules/fonts.nix
     ./modules/kicad.nix

@@ -39,7 +39,7 @@
     #         sha256 = "sha256-KqcB2sGAp7IKbleMzNkB3tjUTlfWBYDwj50o3R//xvI=";
     #       };
     #     });
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     open = false;
     nvidiaSettings = true;
     dynamicBoost.enable = false;
