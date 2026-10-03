@@ -104,6 +104,7 @@
     coppwr
     mqtt-explorer
     ledfx
+    headsetcontrol
     openscad
     unrar
     platformio
