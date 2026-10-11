@@ -10,8 +10,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "MagicBOTAlex";
       repo = "oscavmgr";
-      rev = "b455883";
-      hash = "sha256-mY2CPtEGktmIlVto/UaNLtRyT9A88cS+KcRYKVlV394=";
+      rev = "ca33eb0";
+      hash = "sha256-R5ECgP4hZUnOSdKWsXiHChmDJ74CjDVhRxI7+ZUctHA=";
     };
   });
 
@@ -112,7 +112,8 @@ in
       # Requires "--fallback" in sudo nixos-rebuild switch --flake /etc/nixos --impure  --fallback
       selectedWlx
       # (pkgs.callPackage ./submodules/vrcft.nix { })
-      # modded-oscavmgr
+      modded-oscavmgr
+      # oscavmgr
       vrcadvert
       # inputs.avalonia.packages.x86_64-linux.default
       eepyxr

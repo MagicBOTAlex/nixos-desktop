@@ -58,7 +58,7 @@ flake-overlays:
     ./modules/ydotool.nix
     ./modules/rust.nix
     ./modules/chinese-keyboard.nix
-    ./modules/ledfx.nix
+    # ./modules/ledfx.nix
     ./modules/notify.nix
     ./modules/mineIcons.nix
     ./modules/fonts.nix
@@ -76,7 +76,7 @@ flake-overlays:
     ./patches/FileZilla
 
     ./users.nix
-    ./modules/ollama.nix
+    # ./modules/ollama.nix
     # ./modules/meshroom.nix
 
     ./modules/de.nix

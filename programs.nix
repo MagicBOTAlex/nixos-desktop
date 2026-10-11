@@ -18,6 +18,7 @@
     # fontforge
     gparted
     prismlauncher
+    openjdk25 # newer JVM for GTNH (better GC, lower memory than 17)
     mission-center
     ungoogled-chromium
     megasync
@@ -90,8 +91,6 @@
     kdePackages.qtimageformats # new
     kdePackages.ffmpegthumbs # new
     kdePackages.taglib # new
-    kdePackages.baloo # new
-    kdePackages.baloo-widgets # new
     resvg # new
     kdePackages.dolphin
     kdePackages.kio-extras
